@@ -26,7 +26,7 @@ Last updated 2026-10-09.
 - [ ] **Phase 6: polish.** Per-page OG images, sitemap, performance pass, link check.
 
 ## Nadir's answers (Phase 3)
-1. **Function:** the enclosure is both the power panel and the control panel for 3 dosing pumps. There is no PLC: it is hard-wired relay logic. Local and remote command, with status feedback to the site RTU; the door pilot lights are the local feedback. (The door has 19 devices: 10 pilot lights, 6 pushbuttons, a local/remote selector, an ON/OFF switch, an emergency stop.)
+1. **Function:** the skid doses a chemical corrosion inhibitor (Chimec) into a gas pipeline. The enclosure is both the power panel and the control panel for 3 dosing pumps. There is no PLC: it is hard-wired relay logic. Local and remote command, with status feedback to the site RTU; the door pilot lights are the local feedback. (The door has 19 devices: 10 pilot lights, 6 pushbuttons, a local/remote selector, an ON/OFF switch, an emergency stop.)
 2. **Ex marking, IP, maker:** only what the supplier documents state (`Consultation Atex System UCP\Fichiers reçus\Rev 4\`): Ex d IIB+H2 T5 Gb, Ex tb IIIC T100 °C Db, IP66 (quotation, p.1).
 3. **Period:** August to October 2024. No FAT/SAT, commissioning, delivery or site installation is claimed.
 4. **Proud of:** everything planned in EPLAN (Electric P8 + Pro Panel 3D layout) before the enclosure arrived; did everything alone, from sourcing to design to wiring. He also built a test-bench enclosure playing the RTU to test the remote operation (photos at the end of the gallery, video in `videos[]`).
@@ -37,7 +37,7 @@ Still open, for Nadir to confirm (listed in the build report):
 - Whether naming the enclosure maker is wanted (not named in the copy).
 - Photos 14 to 16 show a leg in trousers (no face). Photo 16 is a workshop shot, cropped to the enclosure and the test bench (background signage and the pump removed). Photo 01 is cropped above the title block of the printed drawing.
 - The three EPLAN Pro Panel 3D screenshots are small (about 500 x 750 px); larger exports would look better in the lightbox.
-- The hero is portrait (`1~2.mp4`), so the Clip frame pillarboxes it; portrait photos are centre-cropped in 4:3 thumbnails and the 8:5 cards.
+- The hero is `2202 building.mp4` (Nadir's LinkedIn edit: EPLAN first, then the build), with the EPLAN part (0 to 12.37 s) at 2x, encoded by hand with ffmpeg using the `encode_clip.py` settings because the tool has one speed for the whole clip. Its schematic frames show the remote system labelled "PLC" and instrument tag numbers. It is portrait, so the Clip frame pillarboxes it; portrait photos are centre-cropped in 4:3 thumbnails and the 8:5 cards.
 Schematics used: `D:\Nadir\Documents\Work\Proskid\NZO\2202\SCHEMAS ELECTRIQUES\2202 SKID GCB.pdf` (p.12 power, p.13-15 control, p.16-17 layout). Page 15 mentions a PLC and a site tag, so it is not published.
 
 ## Building on Nadir's PC
@@ -51,7 +51,7 @@ Schematics used: `D:\Nadir\Documents\Work\Proskid\NZO\2202\SCHEMAS ELECTRIQUES\2
 ## Media locations (Nadir's PC)
 | Project | Where | Notes |
 |---|---|---|
-| ATEX Ex "d" enclosure (2202) | `D:\Nadir\Documents\Work\Proskid\NZO\2202\Photos\` | ~75 photos. **`1~2.mp4` = timelapse of the panel build → hero clip** (20–30 s loop with `--speed`). 4 EPLAN Pro Panel screen recordings (`EPLAN Pro Panel 2022 - …mp4`), `2202 building*.mp4`, `Screenshot (11–26).png` = EPLAN 3D layout. Best shots seen: `1.jpg` (empty box + drawing), `10.jpg`, `15.jpg`, `21.jpg`, `24.jpg`, `PXL_20241030_144844635.jpg` (wiring close-up), `o1.jpg` (finished door, lights on), `p (13).jpg`, `p (17).jpg`, `p (5).jpg` |
+| ATEX Ex "d" enclosure (2202) | `D:\Nadir\Documents\Work\Proskid\NZO\2202\Photos\` | ~75 photos. **`2202 building.mp4` = Nadir's edit (EPLAN, then the build) → hero clip**, EPLAN part at 2x. `1~2.mp4` = timelapse of the panel build (not used). 4 EPLAN Pro Panel screen recordings (`EPLAN Pro Panel 2022 - …mp4`), `2202 building_1.mp4` (lower-quality copy), `Screenshot (11–26).png` = EPLAN 3D layout. Best shots seen: `1.jpg` (empty box + drawing), `10.jpg`, `15.jpg`, `21.jpg`, `24.jpg`, `PXL_20241030_144844635.jpg` (wiring close-up), `o1.jpg` (finished door, lights on), `p (13).jpg`, `p (17).jpg`, `p (5).jpg` |
 | Skid 3D animation (2204) | `…\Proskid\NZO\2204\Animation 3D\2204 Animation 3D.mp4` | 41 MB |
 | IFRI 5.4 MW rooftop (Akbou) | `D:\Nadir\Documents\Work\Freelance\Walid\Ifri\Photos\` (20), `Schemas Electriques\`, calepinage | Night works, string testing, rooftop rows |
 | At Pharma PV + BESS | `…\Freelance\Walid\At Pharma\Renders\` | 17 Blender renders |
@@ -75,6 +75,6 @@ Source notes: `LVR CPR\lvr-cpr\PROJECT_STATUS.md`, `3D Substation\substation-3d-
 ## Phase 3 brief (ATEX Ex "d" case study)
 1. Branch from `astro-site` (or `main` after merge).
 2. Pick ~15 photos telling the build story (empty enclosure + drawing → mounting rails → wiring → finished door lit). Pick 3–4 EPLAN Pro Panel screenshots for the drawings strip, and crop client title blocks. Process them with `prep_images.py <folder> atex-ex-d-enclosure`.
-3. Hero: the timelapse `1~2.mp4` → `encode_clip.py … projects/atex-ex-d-enclosure/hero --speed N`, as a 20–30 s loop under 6 MB. Optional extra videos: one EPLAN 3D layout recording, trimmed.
+3. Hero: `2202 building.mp4` with the EPLAN part at 2x (see the open points above), as a loop under 6 MB. Optional extra videos: one EPLAN 3D layout recording, trimmed.
 4. Write `index.md` / `index.fr.md` (Context / What I did / Result), facts (client GCB/ENGCB, role Lead Electrical Engineer, PROSKID, period, tools EPLAN Electric P8 + Pro Panel), `keyFigure`, `domains: [oil-gas, atex]`, `cvAnchor: atex-ex-d-enclosure`. Keep the copy factual and short. Nadir reviews before `draft: false`.
 5. Verify per `CLAUDE.md` (CV unchanged, EXIF stripped, screenshots at 1280/390 EN/FR). Open a PR.

@@ -2,7 +2,7 @@
 /**
  * /projects/<slug>/ template:
  * hero (clip or image) -> at a glance -> body (Context / What I did / Result, from the Markdown)
- * -> gallery (lightbox) -> drawings strip -> videos -> back link.
+ * -> drawings strip -> gallery (lightbox) -> videos -> back link.
  */
 import type { CollectionEntry } from 'astro:content';
 import { Picture, getImage } from 'astro:assets';
@@ -83,17 +83,17 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0;
       <div lang="fr" data-fallback={frFallback ? 'en' : undefined}><Prose><Fr /></Prose></div>
     </section>
 
-    {d.gallery.length > 0 && (
-      <section class="section" aria-labelledby="gallery">
-        <h2 class="sec-h" id="gallery"><Lang en="Photos" fr="Photos" /></h2>
-        <Gallery items={d.gallery} group="gallery" />
-      </section>
-    )}
-
     {d.drawings.length > 0 && (
       <section class="section" aria-labelledby="drawings">
         <h2 class="sec-h" id="drawings"><Lang en="Drawings" fr="Plans et schémas" /></h2>
         <DrawingStrip items={d.drawings} group="drawings" />
+      </section>
+    )}
+
+    {d.gallery.length > 0 && (
+      <section class="section" aria-labelledby="gallery">
+        <h2 class="sec-h" id="gallery"><Lang en="Photos" fr="Photos" /></h2>
+        <Gallery items={d.gallery} group="gallery" />
       </section>
     )}
 

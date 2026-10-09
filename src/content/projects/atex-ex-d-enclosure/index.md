@@ -6,8 +6,8 @@ title:
   en: Ex d flameproof enclosure for a three-pump dosing skid
   fr: Armoire antidéflagrante Ex d pour un skid de dosage à trois pompes
 summary:
-  en: Power and control enclosure for three dosing pumps, planned in EPLAN before it arrived, then wired by hand. Hard-wired relay logic, local and remote command.
-  fr: Armoire de puissance et de commande pour trois pompes doseuses, étudiée sous EPLAN avant son arrivée, puis câblée à la main. Logique à relais câblée, commande locale et à distance.
+  en: "Flameproof power and control enclosure for three dosing pumps: specified, designed in EPLAN, assembled, wired and tested in-house. Relay logic with local and remote control."
+  fr: "Armoire antidéflagrante de puissance et de commande pour trois pompes doseuses : spécifiée, étudiée sous EPLAN, montée, câblée et testée en interne. Logique à relais, commande locale et à distance."
 client: GCB / ENGCB
 role:
   en: Lead Electrical Engineer, PROSKID
@@ -17,10 +17,10 @@ location: Algeria
 domains: [oil-gas, atex]
 tools: [EPLAN Electric P8, EPLAN Pro Panel]
 keyFigure:
-  value: "19"
+  value: Ex d IIB+H2 T5 Gb
   label:
-    en: devices on the door, 10 of them pilot lights
-    fr: appareils en face avant, dont 10 voyants
+    en: flameproof rating, IP66
+    fr: marquage antidéflagrant, IP66
 cover: "@assets/projects/atex-ex-d-enclosure/cover.jpg"
 coverAlt:
   en: Door of the flameproof enclosure with labelled pushbuttons, a pump running light and the phase lights lit
@@ -147,8 +147,8 @@ drawings:
       en: Labelled 2D drawing of the enclosure door and of its cable-gland face, with the name of every light, pushbutton, selector and the emergency stop (labels in French)
       fr: Dessin 2D étiqueté de la porte de l'armoire et de sa face à presse-étoupes, avec le nom de chaque voyant, bouton, sélecteur et de l'arrêt d'urgence
     caption:
-      en: Door layout in EPLAN, 19 devices (labels in French).
-      fr: Implantation de la porte sous EPLAN, 19 appareils.
+      en: Door layout drawn in EPLAN (labels in French).
+      fr: Implantation de la porte dessinée sous EPLAN.
   - image: "@assets/projects/atex-ex-d-enclosure/02-power-schematic.jpg"
     alt:
       en: Power schematic page with the three-phase supply, three motor feeders for pumps A, B and C, and a 230 VAC to 24 VDC supply
@@ -193,19 +193,23 @@ cvAnchor: atex-ex-d-enclosure
 
 ## Context
 
-GCB (ENGCB) needed one enclosure that is both the power panel and the control panel for the three dosing pumps of a corrosion inhibitor skid built by PROSKID. The enclosure is rated for explosive atmospheres: the maker's quotation gives Ex d IIB+H2 T5 Gb, Ex tb IIIC T100 °C Db, IP66. The maker supplied the enclosure; the wiring and integration were left to PROSKID.
+PROSKID built a chemical injection skid for GCB (ENGCB) that doses a corrosion inhibitor (Chimec) into a gas pipeline. Its three dosing pumps are supplied and controlled from a single flameproof enclosure mounted on the skid, rated Ex d IIB+H2 T5 Gb, Ex tb IIIC T100 °C Db, IP66.
 
-The logic is hard-wired relays. Each pump is started and stopped locally from the door, or a selector hands command to the site RTU, which also receives the status of each pump. The pilot lights on the door give the local feedback.
+The enclosure maker machines the door and the cable entries and fits the certified door devices to the buyer's layout. A flameproof enclosure cannot be drilled afterwards without losing its certification, so the layout had to be final before the order. The internal equipment, its mounting and all the wiring were in PROSKID's scope.
+
+The control is hard-wired relay logic, without a PLC. In local mode each pump is started and stopped from the door. In remote mode the commands come from the site RTU, which also receives the pump statuses. The pilot lights on the door give the local feedback.
 
 ## What I did
 
-- I did the whole job alone, from sourcing the parts to the design to the wiring.
-- I drew the power schematics, the control schematics and the door layout in EPLAN Electric P8.
-- I laid out the mounting plate and the door in EPLAN Pro Panel 3D before the enclosure arrived, so the position of every component was settled before anything was mounted.
-- I wired the control as relay logic: a start and a stop pushbutton per pump, a self-holding contactor contact, a local or remote selector and an emergency stop.
-- I mounted and wired the components on the plate and behind the door by hand.
-- I built a test-bench enclosure that plays the RTU, to try the remote operation.
+I handled the enclosure from specification to testing:
+
+- Specification and sourcing: enclosure, door devices and cable entries defined with the maker, internal components sourced.
+- Electrical design in EPLAN Electric P8: power schematics, control schematics and door layout.
+- 3D layout in EPLAN Pro Panel before delivery: mounting plate, wiring ducts, DIN rails and terminal strips positioned in the model, which the assembly then followed.
+- Relay control logic: start and stop per pump with a self-holding contactor, local or remote selection, emergency stop, and status signals to the RTU.
+- Assembly and wiring of the mounting plate and of the door.
+- A test bench standing in for the RTU, built to check the remote commands and the status feedback.
 
 ## Result
 
-A complete flameproof power and control enclosure for three pumps, designed in EPLAN before the hardware arrived and wired by hand. Its door carries 19 devices: 10 pilot lights, 6 pushbuttons, a local or remote selector, an ON/OFF switch and an emergency stop. The lights show the presence of each phase, the running and fault state of each pump, and a low liquid level. The remote operation was tried on the RTU test bench.
+The enclosure was assembled and wired to the EPLAN model, then powered up and tested, including remote operation through the RTU test bench. From the door, the operator starts and stops each pump, selects local or remote control, and reads phase presence, pump running, pump fault and low liquid level.
