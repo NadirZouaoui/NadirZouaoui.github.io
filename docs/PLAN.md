@@ -19,8 +19,8 @@ Last updated 2026-10-09.
 ## Status
 - [x] **Phase 1: scaffold + CV port.** Draft PR #1 (`astro-site`). CV verified 1:1 (screen EN/FR at 1280/390 px, print PDF; only the portrait re-encode differs).
 - [x] **Phase 2: content model, components, media tools.** In the same PR. Draft samples: `sample-project`, `sample-simulator`.
-- [ ] **Go live:** Settings → Pages → Source: **GitHub Actions**, THEN merge PR #1. (Merging first would serve the raw Astro source.)
-- [x] **Phase 3: ATEX Ex "d" case study (the pilot).** Reviewed in five rounds; Nadir approved the result on 2026-10-09. Published (`draft: false`) and PR #2 (`phase-3-atex`) merged into `astro-site` on 2026-10-09. It goes live with PR #1. Content in `src/content/projects/atex-ex-d-enclosure/`, media in `src/assets/projects/atex-ex-d-enclosure/` and `public/media/projects/atex-ex-d-enclosure/`. Branch `phase-3-atex`, draft PR into `astro-site`.
+- [x] **Go live:** done 2026-10-09. Pages source set to **GitHub Actions**, then PR #1 merged into `main`. Live checks passed: `/`, `/?lang=fr`, both CV PDFs and `/og.png` (byte-identical to the build), `/projects/`, the ATEX page and its media; sample pages and source files return 404. New work now branches from `main`, one PR per change.
+- [x] **Phase 3: ATEX Ex "d" case study (the pilot).** Reviewed in five rounds; Nadir approved the result on 2026-10-09. Published (`draft: false`) and PR #2 (`phase-3-atex`) merged into `astro-site` on 2026-10-09; live since PR #1 was merged the same day. Content in `src/content/projects/atex-ex-d-enclosure/`, media in `src/assets/projects/atex-ex-d-enclosure/` and `public/media/projects/atex-ex-d-enclosure/`. Branch `phase-3-atex`, draft PR into `astro-site`.
 - [ ] **Phase 4: Simulators.** Waiting for clips.
 - [ ] **Phase 5: more case studies** as media arrives.
 - [ ] **Phase 6: polish.** Per-page OG images, sitemap, performance pass, link check.
