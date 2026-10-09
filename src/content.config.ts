@@ -55,6 +55,9 @@ export const collections = {
         keyFigure: z.object({ value: z.string(), label: bi }).optional(),
         cover: image(),
         coverAlt: biLoose,
+        /** Optional large image at the top of the project page; `cover` stays the card / share image and is the fallback. */
+        hero: image().optional(),
+        heroAlt: biLoose,
         heroClip: videoRef.optional(),
         /** Up to two landscape pictures stacked beside a portrait `heroClip`, so that the hero reads as one landscape block. */
         heroSide: z.array(picture).max(2).default([]),
