@@ -27,10 +27,10 @@ export type Lang = 'en' | 'fr';
  * so the page never shows an empty French view.
  */
 export async function renderBilingual(section: 'projects' | 'simulators', id: string) {
-  const en = await getEntry(section, id as never);
+  const en = (await getEntry(section as "projects", id)) as CollectionEntry<"projects"> | undefined;
   const fr = await getEntry((section + 'Fr') as 'projectsFr' | 'simulatorsFr', id);
   if (!en) throw new Error(`No ${section} entry "${id}"`);
-  const EnContent = (await render(en as never)).Content;
+  const EnContent = (await render(en)).Content;
   if (!fr) {
     console.warn(`[content] ${section}/${id}: no index.fr.md, French view falls back to English.`);
     return { En: EnContent, Fr: EnContent, frFallback: true };
@@ -45,3 +45,22 @@ export function warnMissingAlt(where: string, items: { alt: { en: string; fr: st
     if (!it.alt.en.trim() || !it.alt.fr.trim()) console.warn(`[a11y] ${where}: item ${i + 1} has empty alt text (en/fr).`);
   });
 }
+
+export const DOMAINS = ['oil-gas', 'atex', 'solar-pv', 'automation', 'scada'] as const;
+export type Domain = (typeof DOMAINS)[number];
+
+/** Display names (also used for the filter chips on /projects/). */
+export const DOMAIN_LABELS: Record<Domain, { en: string; fr: string }> = {
+  'oil-gas': { en: 'Oil & Gas', fr: 'Oil & Gas' },
+  atex: { en: 'ATEX', fr: 'ATEX' },
+  'solar-pv': { en: 'Solar PV', fr: 'Solaire PV' },
+  automation: { en: 'Automation', fr: 'Automatisation' },
+  scada: { en: 'SCADA', fr: 'SCADA' },
+};
+
+export const STATUS_LABELS = {
+  delivered: { en: 'Delivered', fr: 'Livré' },
+  'in-development': { en: 'In development', fr: 'En développement' },
+} as const;
+
+export const CONTACT_EMAIL = 'nadir.zouaoui@hotmail.com';

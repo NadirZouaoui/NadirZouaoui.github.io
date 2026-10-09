@@ -1,0 +1,20 @@
+---
+/**
+ * /projects/ (index) and /projects/<slug>/ (detail) from one route file, so that NO page at all is
+ * generated while there is no visible project (production today: the site is the CV only).
+ */
+import ProjectsIndex from '../../views/ProjectsIndex.astro';
+import ProjectDetail from '../../views/ProjectDetail.astro';
+import { getProjects } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  if (projects.length === 0) return [];
+  return [
+    { params: { slug: undefined }, props: { project: undefined } },
+    ...projects.map((project) => ({ params: { slug: project.id }, props: { project } })),
+  ];
+}
+const { project } = Astro.props;
+---
+{project ? <ProjectDetail project={project} /> : <ProjectsIndex />}

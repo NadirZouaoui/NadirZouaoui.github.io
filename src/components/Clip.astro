@@ -1,0 +1,106 @@
+---
+/**
+ * Short looping clip (muted, no audio). Plays only while it is in the viewport (IntersectionObserver)
+ * and is paused when scrolled away. With prefers-reduced-motion it never autoplays: a Play button is
+ * shown instead. A Play/Pause button is always available (WCAG 2.2.2). Files come from
+ * tools/media/encode_clip.py (public/media/...). `preload="none"`: nothing is downloaded until needed.
+ */
+import Lang from './Lang.astro';
+
+export interface Props {
+  src: string;
+  poster: string;
+  title?: { en: string; fr: string };
+  caption?: { en: string; fr: string };
+  /** free text, e.g. "0:12" */
+  duration?: string;
+  /** CSS aspect-ratio of the frame, e.g. "16 / 9" (use the real ratio of the encoded clip) */
+  ratio?: string;
+  id?: string;
+}
+const { src, poster, title, caption, duration, ratio = '16 / 9', id } = Astro.props;
+const hasText = (t?: { en: string; fr: string }) => !!t && (t.en.trim() !== '' || t.fr.trim() !== '');
+---
+<figure class="clip" id={id} data-clip data-state="idle" style={`--ratio:${ratio}`}>
+  <div class="frame">
+    <video muted loop playsinline preload="none" poster={poster} src={src} disablepictureinpicture></video>
+    <button type="button" class="toggle" data-clip-toggle aria-label="Play video" data-label-en="Play video" data-label-fr="Lire la vidéo">
+      <span class="icon" aria-hidden="true"></span>
+    </button>
+  </div>
+  {(hasText(title) || hasText(caption) || duration) && (
+    <figcaption>
+      {hasText(title) && <strong><Lang en={title!.en} fr={title!.fr} /></strong>}
+      {hasText(caption) && <span class="text"><Lang en={caption!.en} fr={caption!.fr} /></span>}
+      {duration && <span class="dur">{duration}</span>}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .clip{margin:0}
+  .frame{position:relative;aspect-ratio:var(--ratio);background:#e9ecef;border:1px solid var(--rule)}
+  video{display:block;width:100%;height:100%;object-fit:contain;background:#e9ecef}
+  .toggle{position:absolute;left:.6rem;bottom:.6rem;width:2.5rem;height:2.5rem;padding:0;border:1px solid var(--accent);border-radius:50%;background:rgba(255,255,255,.92);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--accent)}
+  .toggle:hover{background:#fff}
+  /* play = triangle, pause = two bars */
+  .icon{display:block;width:0;height:0;border-style:solid;border-width:.5rem 0 .5rem .8rem;border-color:transparent transparent transparent currentColor;margin-left:.15rem}
+  [data-state="playing"] .icon{width:.85rem;height:1rem;border:0;margin:0;background:linear-gradient(90deg,currentColor 0 36%,transparent 36% 64%,currentColor 64% 100%)}
+  /* paused on purpose (reduced motion, or the visitor pressed pause): a large play button in the middle */
+  [data-state="paused"] .toggle{left:50%;top:50%;bottom:auto;transform:translate(-50%,-50%);width:3.5rem;height:3.5rem}
+  figcaption{margin-top:.5rem;font-size:.9rem;color:var(--muted);line-height:1.45}
+  figcaption strong{display:block;color:var(--ink);font-weight:600;font-size:.95rem}
+  .dur{margin-left:.5rem;white-space:nowrap}
+  .dur::before{content:"· "}
+</style>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const lang = () => (document.documentElement.dataset.lang === 'fr' ? 'fr' : 'en');
+  const LABELS = {
+    play: { en: 'Play video', fr: 'Lire la vidéo' },
+    pause: { en: 'Pause video', fr: 'Mettre la vidéo en pause' },
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-clip]').forEach((fig) => {
+    const video = fig.querySelector('video') as HTMLVideoElement;
+    const btn = fig.querySelector('[data-clip-toggle]') as HTMLButtonElement;
+    let userPaused = false;
+
+    function label(kind: 'play' | 'pause') {
+      btn.dataset.labelEn = LABELS[kind].en;
+      btn.dataset.labelFr = LABELS[kind].fr;
+      btn.setAttribute('aria-label', LABELS[kind][lang()]);
+    }
+    function setState(s: 'idle' | 'playing' | 'paused') {
+      fig.dataset.state = s;
+      label(s === 'playing' ? 'pause' : 'play');
+    }
+    function play() {
+      video.play().then(() => setState('playing')).catch(() => setState('paused'));
+    }
+    function pause(byUser: boolean) {
+      video.pause();
+      setState(byUser ? 'paused' : 'idle');
+    }
+
+    if (reduce.matches) setState('paused'); // no autoplay: show the play button
+
+    btn.addEventListener('click', () => {
+      if (video.paused) { userPaused = false; play(); }
+      else { userPaused = true; pause(true); }
+    });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            if (!reduce.matches && !userPaused && video.paused) play();
+          } else if (!video.paused) {
+            pause(false);
+          }
+        });
+      }, { threshold: 0.4 }).observe(fig);
+    }
+  });
+</script>

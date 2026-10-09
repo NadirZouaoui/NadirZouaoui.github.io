@@ -1,0 +1,90 @@
+---
+/**
+ * /simulators/<slug>/ template:
+ * intro + learning goal -> clip grid -> under the hood -> status -> "Request a live demo".
+ */
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Lang from '../components/Lang.astro';
+import Clip from '../components/Clip.astro';
+import Prose from '../components/Prose.astro';
+import { renderBilingual, STATUS_LABELS, CONTACT_EMAIL } from '../lib/content';
+import '../styles/content.css';
+
+export interface Props {
+  simulator: CollectionEntry<'simulators'>;
+}
+const { simulator } = Astro.props;
+const d = simulator.data;
+const { En, Fr, frFallback } = await renderBilingual('simulators', simulator.id);
+const demoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Live demo request: ' + d.title.en)}`;
+---
+<Base
+  current="simulators"
+  wide
+  titles={{ en: `${d.title.en}, Nadir Zouaoui`, fr: `${d.title.fr}, Nadir Zouaoui` }}
+  description={`${d.summary.en} / ${d.summary.fr}`}
+  ogTitle={`${d.title.en}, Nadir Zouaoui`}
+  ogDescription={d.summary.en}
+  ogType="article"
+  noindex={d.draft}
+>
+  <main class="wrap">
+    {d.draft && <p class="draft-banner noprint">Draft preview: this simulator is not published.</p>}
+    <p class="crumb noprint"><a href="/simulators/"><Lang en="← All simulators" fr="← Tous les simulateurs" /></a></p>
+
+    <header>
+      <h1><Lang en={d.title.en} fr={d.title.fr} /></h1>
+      <p class="lead"><Lang en={d.summary.en} fr={d.summary.fr} /></p>
+      <p class="status-line"><Lang en={STATUS_LABELS[d.status].en} fr={STATUS_LABELS[d.status].fr} />{d.tech.length > 0 && ` · ${d.tech.join(', ')}`}</p>
+    </header>
+
+    <section class="section" aria-labelledby="intro">
+      <h2 class="sec-h" id="intro"><Lang en="About this module" fr="À propos de ce module" /></h2>
+      <div lang="en"><Prose><En /></Prose></div>
+      <div lang="fr" data-fallback={frFallback ? 'en' : undefined}><Prose><Fr /></Prose></div>
+      <aside class="goal" aria-labelledby="goal">
+        <h3 id="goal"><Lang en="Learning goal" fr="Objectif pédagogique" /></h3>
+        <p><Lang en={d.learningGoal.en} fr={d.learningGoal.fr} /></p>
+      </aside>
+    </section>
+
+    {d.clips.length > 0 && (
+      <section class="section" aria-labelledby="clips">
+        <h2 class="sec-h" id="clips"><Lang en="In action" fr="En action" /></h2>
+        <div class="clips">
+          {d.clips.map((c) => (
+            <Clip id={`clip-${c.slug}`} src={c.src} poster={c.poster} title={c.title} caption={c.caption} duration={c.duration} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {d.underTheHood.length > 0 && (
+      <section class="section" aria-labelledby="hood">
+        <h2 class="sec-h" id="hood"><Lang en="Under the hood" fr="Sous le capot" /></h2>
+        <ul class="hood">
+          {d.underTheHood.map((b) => <li><Lang en={b.en} fr={b.fr} /></li>)}
+        </ul>
+      </section>
+    )}
+
+    <section class="section" aria-labelledby="status">
+      <h2 class="sec-h" id="status"><Lang en="Status" fr="Statut" /></h2>
+      <p><strong><Lang en={STATUS_LABELS[d.status].en} fr={STATUS_LABELS[d.status].fr} /></strong></p>
+      <p class="demo noprint"><a class="btn" href={demoHref}><Lang en="Request a live demo" fr="Demander une démonstration en direct" /></a></p>
+    </section>
+
+    <p class="backlink noprint"><a href="/simulators/"><Lang en="← Back to all simulators" fr="← Retour à tous les simulateurs" /></a></p>
+  </main>
+</Base>
+
+<style>
+  .status-line{margin-top:.5rem;font-size:.95rem;color:var(--muted)}
+  .goal{margin-top:1.5rem;max-width:46rem;padding:.75rem 1rem;border-left:3px solid var(--accent);background:#f7f8fa}
+  .goal h3{font-size:.95rem;font-weight:600;color:var(--accent);margin:0 0 .25rem}
+  .clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(20rem,1fr));gap:1.5rem}
+  .hood{margin:0;padding-left:1.15rem;max-width:46rem}
+  .hood li{margin:.35rem 0}
+  .demo{margin-top:1rem!important}
+</style>

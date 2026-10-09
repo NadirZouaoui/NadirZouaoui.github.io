@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import Lang from '../components/Lang.astro';
+import '../styles/content.css';
+---
+<Base
+  titles={{ en: 'Page not found, Nadir Zouaoui', fr: 'Page introuvable, Nadir Zouaoui' }}
+  wide={false}
+  noindex
+>
+  <main class="wrap" style="max-width:46rem">
+    <h1><Lang en="Page not found" fr="Page introuvable" /></h1>
+    <p class="lead"><Lang en="This page does not exist." fr="Cette page n'existe pas." /></p>
+    <p class="backlink"><a href="/"><Lang en="← Back to the CV" fr="← Retour au CV" /></a></p>
+  </main>
+</Base>

@@ -22,7 +22,7 @@ const biLoose = z
 /** Folder name = slug. `*\/index.md` only (the French sibling is its own collection). */
 const slugFromFolder = ({ entry }: { entry: string }) => entry.split('/')[0];
 
-const DOMAINS = ['oil-gas', 'atex', 'solar-pv', 'automation', 'scada'] as const;
+const DOMAINS = ['oil-gas', 'atex', 'solar-pv', 'automation', 'scada'] as const; // keep in sync with DOMAINS in src/lib/content.ts
 
 const videoRef = z.object({
   /** Public URL of the encoded mp4, as printed by tools/media/encode_clip.py, e.g. /media/projects/<slug>/hero.mp4 */
@@ -45,7 +45,7 @@ export const collections = {
         summary: bi,
         client: z.string(),
         role: bi,
-        period: z.string(),
+        period: z.coerce.string(), // "2024" or "Mar 2025 - Jul 2025"; a bare YAML number is accepted
         location: z.string(),
         domains: z.array(z.enum(DOMAINS)).min(1),
         tools: z.array(z.string()).default([]),

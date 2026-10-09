@@ -1,0 +1,15 @@
+---
+/** Wrapper for rendered Markdown (entry bodies). Headings inside use the same style as the CV section titles. */
+---
+<div class="prose"><slot /></div>
+
+<style>
+  .prose{max-width:46rem}
+  .prose :global(h2){font-size:.95rem;font-weight:600;color:var(--accent);margin:2.25rem 0 1rem;padding-bottom:.4rem;border-bottom:1px solid var(--rule)}
+  .prose :global(h2:first-child){margin-top:0}
+  .prose :global(h3){font-size:1rem;font-weight:600;margin:1.5rem 0 .5rem}
+  .prose :global(p){margin:0 0 .85rem}
+  .prose :global(ul),.prose :global(ol){margin:.55rem 0 .85rem;padding-left:1.15rem}
+  .prose :global(li){margin:.3rem 0}
+  .prose :global(strong){font-weight:600}
+</style>

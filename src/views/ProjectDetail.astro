@@ -1,0 +1,119 @@
+---
+/**
+ * /projects/<slug>/ template:
+ * hero (clip or image) -> at a glance -> body (Context / What I did / Result, from the Markdown)
+ * -> gallery (lightbox) -> drawings strip -> videos -> back link.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { Picture, getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Lang from '../components/Lang.astro';
+import Facts from '../components/Facts.astro';
+import Clip from '../components/Clip.astro';
+import Gallery from '../components/Gallery.astro';
+import DrawingStrip from '../components/DrawingStrip.astro';
+import Lightbox from '../components/Lightbox.astro';
+import Prose from '../components/Prose.astro';
+import { renderBilingual, warnMissingAlt } from '../lib/content';
+import '../styles/content.css';
+
+export interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const d = project.data;
+const { En, Fr, frFallback } = await renderBilingual('projects', project.id);
+
+warnMissingAlt(`projects/${project.id} gallery`, d.gallery, d.draft);
+warnMissingAlt(`projects/${project.id} drawings`, d.drawings, d.draft);
+
+const og = await getImage({ src: d.cover, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+const coverAlt = d.coverAlt.en || d.title.en;
+const coverAltFr = d.coverAlt.fr || d.title.fr;
+const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0;
+---
+<Base
+  current="projects"
+  wide
+  titles={{ en: `${d.title.en}, Nadir Zouaoui`, fr: `${d.title.fr}, Nadir Zouaoui` }}
+  description={`${d.summary.en} / ${d.summary.fr}`}
+  ogTitle={`${d.title.en}, Nadir Zouaoui`}
+  ogDescription={d.summary.en}
+  ogType="article"
+  ogImage={new URL(og.src, Astro.site).href}
+  noindex={d.draft}
+>
+  <main class="wrap">
+    {d.draft && <p class="draft-banner noprint">Draft preview: this project is not published.</p>}
+    <p class="crumb noprint"><a href="/projects/"><Lang en="← All projects" fr="← Tous les projets" /></a></p>
+
+    <header>
+      <h1><Lang en={d.title.en} fr={d.title.fr} /></h1>
+      <p class="lead"><Lang en={d.summary.en} fr={d.summary.fr} /></p>
+    </header>
+
+    <div class="hero">
+      {d.heroClip ? (
+        <Clip src={d.heroClip.src} poster={d.heroClip.poster} />
+      ) : (
+        <Picture
+          src={d.cover}
+          alt={coverAlt}
+          data-alt-en={coverAlt}
+          data-alt-fr={coverAltFr}
+          widths={[800, 1200, 1600, 2000]}
+          sizes="(min-width: 72rem) 69rem, 100vw"
+          width={1600}
+          height={900}
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          loading="eager"
+          fetchpriority="high"
+        />
+      )}
+    </div>
+
+    <section class="section" aria-labelledby="glance">
+      <h2 class="sec-h" id="glance"><Lang en="At a glance" fr="En un coup d'œil" /></h2>
+      <Facts project={d} />
+    </section>
+
+    <section class="section" aria-label="Description">
+      <div lang="en"><Prose><En /></Prose></div>
+      <div lang="fr" data-fallback={frFallback ? 'en' : undefined}><Prose><Fr /></Prose></div>
+    </section>
+
+    {d.gallery.length > 0 && (
+      <section class="section" aria-labelledby="gallery">
+        <h2 class="sec-h" id="gallery"><Lang en="Photos" fr="Photos" /></h2>
+        <Gallery items={d.gallery} group="gallery" />
+      </section>
+    )}
+
+    {d.drawings.length > 0 && (
+      <section class="section" aria-labelledby="drawings">
+        <h2 class="sec-h" id="drawings"><Lang en="Drawings" fr="Plans et schémas" /></h2>
+        <DrawingStrip items={d.drawings} group="drawings" />
+      </section>
+    )}
+
+    {d.videos.length > 0 && (
+      <section class="section" aria-labelledby="videos">
+        <h2 class="sec-h" id="videos"><Lang en="Videos" fr="Vidéos" /></h2>
+        <div class="clips">
+          {d.videos.map((v) => <Clip src={v.src} poster={v.poster} caption={v.caption} />)}
+        </div>
+      </section>
+    )}
+
+    <p class="backlink noprint"><a href="/projects/"><Lang en="← Back to all projects" fr="← Retour à tous les projets" /></a></p>
+  </main>
+  {hasLightbox && <Lightbox />}
+</Base>
+
+<style>
+  .hero{margin-top:1.75rem;line-height:0}
+  .hero :global(img){width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border:1px solid var(--rule)}
+  .hero :global(.clip){line-height:1.6}
+  .clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(20rem,1fr));gap:1.5rem}
+</style>
