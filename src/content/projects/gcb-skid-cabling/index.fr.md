@@ -1,8 +1,8 @@
 ## Contexte
 
-Le skid d'injection chimique réalisé par PROSKID pour GCB (ENGCB) porte trois pompes doseuses alimentées et commandées depuis une seule armoire antidéflagrante, décrite dans [l'étude de cas de l'armoire](/projects/atex-ex-d-enclosure/). Sur un skid aussi compact, les câbles de puissance et de commande doivent aller de cette armoire à chaque pompe et chaque instrument, en contournant la cuve, le châssis et la tuyauterie de process.
+Le skid d'injection chimique réalisé par PROSKID pour GCB (ENGCB) porte trois pompes doseuses alimentées et commandées depuis une seule armoire antidéflagrante, décrite dans [l'étude de cas de l'armoire](/projects/atex-ex-d-enclosure/). Sur un skid aussi compact, les câbles de puissance et de commande doivent aller de cette armoire à chaque pompe et chaque instrument sans croiser la tuyauterie de process ni gêner l'accès.
 
-Le modèle mécanique du skid existait sous SolidWorks. L'implantation des chemins de câbles a été étudiée sur un modèle 3D du skid.
+Le modèle mécanique du skid existait sous SolidWorks. L'implantation des chemins de câbles a été étudiée sur un modèle 3D avant la fabrication.
 
 ## Ce que j'ai fait
 
@@ -13,4 +13,4 @@ Le modèle mécanique du skid existait sous SolidWorks. L'implantation des chemi
 
 ## Résultat
 
-Les chemins de câbles et leurs cheminements ont été étudiés dans le modèle 3D, de l'armoire jusqu'aux pompes et aux instruments. L'animation montre ces cheminements sur le skid entier et en vue rapprochée.
+Les chemins de câbles et leurs cheminements ont été étudiés dans le modèle 3D, de l'armoire jusqu'aux pompes et aux instruments, avant la fabrication. L'animation montre ces cheminements sur le skid entier et en vue rapprochée.

@@ -65,6 +65,20 @@ gallery:
     caption:
       en: Tray along the upper frame, with branches to the instruments.
       fr: Chemin de câbles le long du portique supérieur, avec des dérivations vers les instruments.
+  - image: "@assets/projects/gcb-skid-cabling/06-enclosure-cable-drop.jpg"
+    alt:
+      en: Close view under the flameproof enclosure, with one yellow cable dropping in front of a perforated tray to the skid base, and tubing in blue behind it
+      fr: Vue rapprochée sous l'armoire antidéflagrante, avec un câble jaune qui descend devant un chemin de câbles perforé jusqu'au châssis, et la tuyauterie en bleu derrière
+    caption:
+      en: One cable followed from the enclosure down to the base. The tubing is in blue.
+      fr: Un câble suivi depuis l'armoire jusqu'au châssis. La tuyauterie est en bleu.
+  - image: "@assets/projects/gcb-skid-cabling/07-pump-cable-and-tubing.jpg"
+    alt:
+      en: View of a dosing pump, shown transparent, with a yellow cable arriving at its motor from a tray on the base and the tubing in blue around it
+      fr: Vue d'une pompe doseuse, représentée en transparence, avec un câble jaune qui arrive à son moteur depuis un chemin de câbles du châssis et la tuyauterie en bleu autour
+    caption:
+      en: The same cable arriving at a pump motor, clear of the tubing.
+      fr: Le même câble à son arrivée au moteur d'une pompe, à l'écart de la tuyauterie.
 drawings:
   - image: "@assets/projects/gcb-skid-cabling/07-terminal-connection-diagram.jpg"
     alt:
@@ -91,9 +105,9 @@ videos:
 
 ## Context
 
-The chemical injection skid that PROSKID built for GCB (ENGCB) carries three dosing pumps supplied and controlled from one flameproof enclosure, described in [the enclosure case study](/projects/atex-ex-d-enclosure/). On a skid this compact, the power and control cables have to reach every pump and instrument from that enclosure, around the tank, the frame and the process piping.
+The chemical injection skid that PROSKID built for GCB (ENGCB) carries three dosing pumps supplied and controlled from one flameproof enclosure, described in [the enclosure case study](/projects/atex-ex-d-enclosure/). On a skid this compact, the power and control cables have to travel from that enclosure to every pump and instrument without crossing the process piping or blocking access.
 
-The mechanical model of the skid existed in SolidWorks. The tray layout was worked out on a 3D model of the skid.
+The mechanical model of the skid existed in SolidWorks. The tray layout was worked out on a 3D model before fabrication.
 
 ## What I did
 
@@ -104,4 +118,4 @@ The mechanical model of the skid existed in SolidWorks. The tray layout was work
 
 ## Result
 
-The trays and cable runs were laid out in the 3D model, from the enclosure to the pumps and instruments. The animation shows these runs on the whole skid and in close view.
+The trays and cable runs were laid out in the 3D model, from the enclosure to the pumps and instruments, before fabrication. The animation shows these runs on the whole skid and in close view.
