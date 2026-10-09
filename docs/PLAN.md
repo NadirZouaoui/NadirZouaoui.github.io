@@ -20,17 +20,33 @@ Last updated 2026-10-09.
 - [x] **Phase 1: scaffold + CV port.** Draft PR #1 (`astro-site`). CV verified 1:1 (screen EN/FR at 1280/390 px, print PDF; only the portrait re-encode differs).
 - [x] **Phase 2: content model, components, media tools.** In the same PR. Draft samples: `sample-project`, `sample-simulator`.
 - [ ] **Go live:** Settings → Pages → Source: **GitHub Actions**, THEN merge PR #1. (Merging first would serve the raw Astro source.)
-- [ ] **Phase 3: ATEX Ex "d" case study.** Waiting for Nadir's answers (see below).
+- [~] **Phase 3: ATEX Ex "d" case study.** Built as draft (`draft: true`), awaiting Nadir's review. Content in `src/content/projects/atex-ex-d-enclosure/`, media in `src/assets/projects/atex-ex-d-enclosure/` and `public/media/projects/atex-ex-d-enclosure/`. Branch `phase-3-atex`, draft PR into `astro-site`.
 - [ ] **Phase 4: Simulators.** Waiting for clips.
 - [ ] **Phase 5: more case studies** as media arrives.
 - [ ] **Phase 6: polish.** Per-page OG images, sitemap, performance pass, link check.
 
-## Open questions for Nadir (Phase 3)
-1. What does the enclosure do on the skid (PLC/control of the injection pumps)? What are the 18 pilot lights for?
-2. The Ex marking and rating (e.g. Ex d IIB T4 Gb, IP66), and the enclosure maker.
-3. Timeline (photos are dated Oct–Nov 2024), and whether it went through FAT/SAT at GCB.
-4. What he is proud of (wiring density, EPLAN Pro Panel 3D layout before cutting, etc.).
-Schematics that may answer some of this: `D:\Nadir\Documents\Work\Proskid\NZO\2202\SCHEMAS ELECTRIQUES\` (2202 SKID GCB.pdf, 2202-ELE-DIA-022, -GAD-053, -LIS-029, 2202-PLC-LIS-054).
+## Nadir's answers (Phase 3)
+1. **Function:** the enclosure is both the power panel and the control panel for 3 dosing pumps. There is no PLC: it is hard-wired relay logic. Local and remote command, with status feedback to the site RTU; the door pilot lights are the local feedback. (The door has 19 devices: 10 pilot lights, 6 pushbuttons, a local/remote selector, an ON/OFF switch, an emergency stop.)
+2. **Ex marking, IP, maker:** only what the supplier documents state (`Consultation Atex System UCP\Fichiers reçus\Rev 4\`): Ex d IIB+H2 T5 Gb, Ex tb IIIC T100 °C Db, IP66 (quotation, p.1).
+3. **Period:** August to October 2024. No FAT/SAT, commissioning, delivery or site installation is claimed.
+4. **Proud of:** everything planned in EPLAN (Electric P8 + Pro Panel 3D layout) before the enclosure arrived; did everything alone, from sourcing to design to wiring. He also built a test-bench enclosure playing the RTU to test the remote operation (photos at the end of the gallery, video in `videos[]`).
+
+Still open, for Nadir to confirm (listed in the build report):
+- The period shown (08/2024 - 10/2024) against the dates in the documents and photos (revisions from 2023, photos and EPLAN files up to Nov-Dec 2024), and the location "Algeria" (no document states it).
+- Enclosure dimensions differ between the supplier documents (CCF16G 550x800x245 in the technical sheet, CCF16BG 500x800x360 in the quotation), and the isolator rating differs (S0 16 A in the schematic, 32 A in the technical sheet). Neither is used in the copy.
+- Whether naming the enclosure maker is wanted (not named in the copy).
+- Photos 14 to 16 show a leg in trousers (no face). Photo 16 is a workshop shot, cropped to the enclosure and the test bench (background signage and the pump removed). Photo 01 is cropped above the title block of the printed drawing.
+- The three EPLAN Pro Panel 3D screenshots are small (about 500 x 750 px); larger exports would look better in the lightbox.
+- The hero is portrait (`1~2.mp4`), so the Clip frame pillarboxes it; portrait photos are centre-cropped in 4:3 thumbnails and the 8:5 cards.
+Schematics used: `D:\Nadir\Documents\Work\Proskid\NZO\2202\SCHEMAS ELECTRIQUES\2202 SKID GCB.pdf` (p.12 power, p.13-15 control, p.16-17 layout). Page 15 mentions a PLC and a site tag, so it is not published.
+
+## Building on Nadir's PC
+- Shell is Git Bash. Node 24 comes first in PATH; run npm as `node "$NPMCLI" run <script>`.
+- `ffmpeg`/`ffprobe` are not on PATH. They live in `/c/Program Files/Shutter Encoder/Library/`; run `export PATH="/c/Program Files/Shutter Encoder/Library:$PATH"` before `encode_clip.py`.
+- Python 3.13 with Pillow and PyMuPDF. Use `python -I -X utf8` when printing PDF text (accents otherwise raise UnicodeEncodeError). For multi-line files, use the editor tools instead of shell heredocs.
+- Screenshots: headless Microsoft Edge (`--screenshot`, `--window-size`), served from a local `http.server`. Stop the server afterwards.
+- Raw material is staged outside the repo in `D:\Nadir\Documents\Portfolio\media-src\<slug>\` and only the processed output is written into the repo.
+- Portrait media is a template limitation: `Clip` uses a fixed 16/9 frame (portrait video is pillarboxed), `Gallery` and `ProjectCard` crop to 4:3 and 8:5.
 
 ## Media locations (Nadir's PC)
 | Project | Where | Notes |
