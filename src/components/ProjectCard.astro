@@ -7,8 +7,11 @@ import { DOMAIN_LABELS } from '../lib/content';
 
 export interface Props {
   project: CollectionEntry<'projects'>;
+  /** first cards of the grid (above the fold): load at once; `priority` marks the likely LCP image */
+  eager?: boolean;
+  priority?: boolean;
 }
-const { project } = Astro.props;
+const { project, eager = false, priority = false } = Astro.props;
 const d = project.data;
 const coverAlt = d.coverAlt.en || d.title.en;
 const coverAltFr = d.coverAlt.fr || d.title.fr;
@@ -26,8 +29,9 @@ const coverAltFr = d.coverAlt.fr || d.title.fr;
       height={500}
       formats={['avif', 'webp']}
       fallbackFormat="jpg"
-      loading="lazy"
+      loading={eager ? 'eager' : 'lazy'}
       decoding="async"
+      fetchpriority={priority ? 'high' : undefined}
     />
   </div>
   <div class="body">

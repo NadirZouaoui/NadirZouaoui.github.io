@@ -9,6 +9,7 @@ import Lang from '../components/Lang.astro';
 import Clip from '../components/Clip.astro';
 import Prose from '../components/Prose.astro';
 import { renderBilingual, STATUS_LABELS, CONTACT_EMAIL } from '../lib/content';
+import { ogImageProps } from '../lib/og';
 import '../styles/content.css';
 
 export interface Props {
@@ -17,6 +18,7 @@ export interface Props {
 const { simulator } = Astro.props;
 const d = simulator.data;
 const { En, Fr, frFallback } = await renderBilingual('simulators', simulator.id);
+const og = await ogImageProps(d.cover, d.coverAlt.en || d.title.en, Astro.site);
 const demoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Live demo request: ' + d.title.en)}`;
 ---
 <Base
@@ -27,6 +29,7 @@ const demoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Live dem
   ogTitle={`${d.title.en}, Nadir Zouaoui`}
   ogDescription={d.summary.en}
   ogType="article"
+  {...og}
   noindex={d.draft}
 >
   <main class="wrap">

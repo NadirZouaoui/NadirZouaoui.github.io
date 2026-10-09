@@ -4,10 +4,13 @@ import Base from '../layouts/Base.astro';
 import Lang from '../components/Lang.astro';
 import SimulatorCard from '../components/SimulatorCard.astro';
 import { getSimulators } from '../lib/content';
+import { ogImageProps } from '../lib/og';
 import '../styles/content.css';
 
 const sims = await getSimulators();
 const anyDraft = sims.some((s) => s.data.draft);
+const firstCover = sims.find((s) => s.data.cover)?.data;
+const og = await ogImageProps(firstCover?.cover, firstCover ? firstCover.coverAlt.en || firstCover.title.en : '', Astro.site);
 ---
 <Base
   current="simulators"
@@ -15,6 +18,7 @@ const anyDraft = sims.some((s) => s.data.draft);
   titles={{ en: 'Simulators, Nadir Zouaoui', fr: 'Simulateurs, Nadir Zouaoui' }}
   description="3D training simulators for electrical competency: interactive first-person exercises built with Blender and Godot. / Simulateurs de formation 3D pour les compétences électriques : exercices interactifs à la première personne, réalisés avec Blender et Godot."
   ogType="website"
+  {...og}
   noindex={anyDraft}
 >
   <main class="wrap">
