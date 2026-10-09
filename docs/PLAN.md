@@ -48,7 +48,7 @@ Schematics used: `D:\Nadir\Documents\Work\Proskid\NZO\2202\SCHEMAS ELECTRIQUES\2
 - Python 3.13 with Pillow and PyMuPDF. Use `python -I -X utf8` when printing PDF text (accents otherwise raise UnicodeEncodeError). For multi-line files, use the editor tools instead of shell heredocs.
 - Screenshots: headless Microsoft Edge (`--screenshot`, `--window-size`), served from a local `http.server`. Stop the server afterwards.
 - Raw material is staged outside the repo in `D:\Nadir\Documents\Portfolio\media-src\<slug>\` and only the processed output is written into the repo.
-- Portrait media: `Clip` uses a 16/9 frame unless the entry gives `ratio` (printed by `encode_clip.py`; without it a portrait video is pillarboxed). `Gallery` and the project `videos` are justified rows that keep each item's ratio. `ProjectCard` crops to 8:5, so pick a landscape photo as `cover`.
+- Portrait media: `Clip` uses a 16/9 frame unless the entry gives `ratio` (printed by `encode_clip.py`; without it a portrait video is pillarboxed). `Gallery` is a strict grid whose tile shape follows the majority of the photos (portrait tiles here; landscape photos span two columns). Nadir tried justified rows (commit `b5122e9`) and found the strict grid more professional. The project `videos` keep each clip's ratio at one shared height. `ProjectCard` crops to 8:5, so pick a landscape photo as `cover`.
 - Local preview: a plain `http.server` lets the browser replay an old clip from its cache when a file is re-encoded under the same name. Serve with `Cache-Control: no-store` or hard-reload.
 
 ## Media locations (Nadir's PC)
