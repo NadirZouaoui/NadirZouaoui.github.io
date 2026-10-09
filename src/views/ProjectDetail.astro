@@ -146,6 +146,6 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0 || side.length
     .side li{aspect-ratio:3/2}
   }
   /* videos in justified rows, like the Gallery: each clip keeps its ratio and the clips of a row share one height */
-  .clips{display:flex;flex-wrap:wrap;gap:1.5rem;--h:16rem;--hmax:22rem}
+  .clips{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;--h:16rem;--hmax:22rem}
   .clips :global(.clip){min-width:0;flex-grow:calc(var(--ratio));flex-shrink:1;flex-basis:calc(var(--ratio) * var(--h));max-width:min(100%,calc(var(--ratio) * var(--hmax)))}
 </style>

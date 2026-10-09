@@ -101,8 +101,8 @@ After every production build the `prune-unpublished` integration deletes (a) `di
 
 ## Components worth knowing
 
-- `Gallery` is a strict grid of equal tiles. The tile shape follows the majority of the photos (portrait 3:4 or landscape 4:3); in a portrait grid a landscape photo spans two columns. Thumbnails are cropped to the tile, the lightbox shows the whole photo. On narrow screens a photo can move up one place to fill the cell a two-column photo left empty.
-- The `videos` of a project page sit in one row, each clip with its own `ratio`, at one shared height. `ProjectCard` crops to 8:5, so pick a landscape `cover`.
+- `Gallery` is a strict grid of equal tiles. The tile shape follows the majority of the photos (portrait 3:4 or landscape 4:3); in a portrait grid a landscape photo spans two columns. Thumbnails are cropped to the tile, the lightbox shows the whole photo. Photos stay in order; a row that is not full is centred.
+- The `videos` of a project page sit in one row, each clip with its own `ratio`, at one shared height; a row that is not full is centred too. `ProjectCard` crops to 8:5, so pick a landscape `cover`.
 - `Gallery` + `DrawingStrip` render `Thumb` buttons; one `<Lightbox />` per page opens them (native `<dialog>`, arrows/Home/End/Esc, focus trap, swipe, focus returns to the thumbnail).
 - `Clip`: `<video muted loop playsinline preload="none" poster>`; plays only while in the viewport (IntersectionObserver); with `prefers-reduced-motion` it never autoplays and shows a large Play button; there is always a Play/Pause button. Never add `autoplay` or audio.
 - Images use Astro `<Picture>` (AVIF/WebP + JPEG fallback, lazy). Hero images are `loading="eager"`.

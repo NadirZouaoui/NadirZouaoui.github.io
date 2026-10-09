@@ -4,7 +4,7 @@
  * The tile shape follows the majority of the photos: portrait (3:4) or landscape (4:3). In a portrait grid a
  * landscape photo spans two columns instead of being cropped to a sliver. Thumbnails are cropped to the tile
  * (object-fit: cover); the page's <Lightbox> shows the whole photo.
- * `grid-auto-flow: dense` fills the cell a two-column photo could not use, so a photo can move up by one place.
+ * Photos stay in order; a row that is not full is centred.
  */
 import type { ImageMetadata } from 'astro';
 import Thumb from './Thumb.astro';
@@ -40,8 +40,9 @@ const sizes = {
 </ul>
 
 <style>
-  .gallery{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:1.25rem var(--gap);grid-auto-flow:dense;container-type:inline-size;--gap:1.25rem;--cols:1}
-  li{margin:0;min-width:0}
+  /* flex row, so a row that is not full is centred. --w is one tile; the -.02px keeps rounding from pushing the last tile of a full row onto the next line */
+  .gallery{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:1.25rem var(--gap);container-type:inline-size;--gap:1.25rem;--cols:1;--w:calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols) - .02px)}
+  li{flex:none;width:var(--w);margin:0;min-width:0}
   .frame{aspect-ratio:4/3}
   .cap{margin:.4rem 0 0;font-size:.9rem;color:var(--muted)}
   @media (min-width:34rem){.gallery{--cols:2}}
@@ -49,9 +50,9 @@ const sizes = {
   @media (min-width:68rem){.gallery{--cols:4}}
 
   /* portrait grid: narrower tiles, one more column; a landscape photo takes two columns */
-  .portrait{--cols:2;--gap:.75rem;--w:calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols))}
+  .portrait{--cols:2;--gap:.75rem}
   .portrait .frame{aspect-ratio:3/4}
-  .portrait .wide{grid-column:span 2}
+  .portrait .wide{width:calc(2 * var(--w) + var(--gap))}
   .portrait .wide .frame{aspect-ratio:3/2}
   /* exact tile height from the column width, so a two-column photo is as tall as its neighbours */
   @supports (height:1cqw){.portrait .frame,.portrait .wide .frame{aspect-ratio:auto;height:calc(var(--w) * 4 / 3)}}
