@@ -75,9 +75,9 @@ To add a hook elsewhere: `<ProjectLink anchor="..." />` at the end of an `<li>` 
 1. Photos: `python tools/media/prep_images.py <raw_folder> <slug>` (writes `src/assets/projects/<slug>/`, prints YAML to paste).
 2. Clips (optional): `python tools/media/encode_clip.py <raw.mov> projects/<slug>/hero --start 5 --end 17` (writes `public/media/projects/<slug>/`).
 3. Create `src/content/projects/<slug>/index.md` (copy `sample-project`). Frontmatter fields: `draft`, `order`, `title{en,fr}`, `summary{en,fr}`, `client`,
-   `role{en,fr}`, `period`, `location`, `domains` (oil-gas, atex, solar-pv, automation, scada), `tools[]`, `keyFigure{value,label{en,fr}}`, `cover`, `coverAlt`,
-   `heroClip{src,poster}` (optional; replaces the cover as hero), `gallery[]`, `drawings[]` (each `image`, `alt{en,fr}`, `caption{en,fr}`),
-   `videos[]` (`src`, `poster`, `caption{en,fr}`), `cvAnchor`. The slug is the folder name. Images are referenced as `"@assets/projects/<slug>/<file>.jpg"` (quote it: a bare `@` is invalid YAML).
+   `role{en,fr}`, `period`, `location` (string, or `{en,fr}`), `domains` (oil-gas, atex, solar-pv, automation, scada), `tools[]`, `keyFigure{value,label{en,fr}}`, `cover`, `coverAlt`,
+   `heroClip{src,poster,ratio}` (optional; replaces the cover as hero; `ratio` like `"3 / 4"` for a clip that is not 16:9), `heroSide[]` (optional, up to two landscape pictures stacked beside a portrait `heroClip` so the hero reads as one landscape block; same fields as a gallery item), `gallery[]`, `drawings[]` (each `image`, `alt{en,fr}`, `caption{en,fr}`),
+   `videos[]` (`src`, `poster`, `ratio`, `caption{en,fr}`), `cvAnchor`. The slug is the folder name. Images are referenced as `"@assets/projects/<slug>/<file>.jpg"` (quote it: a bare `@` is invalid YAML).
 4. **Bilingual body**: `index.md` body = English, `index.fr.md` (same folder) body = French, no frontmatter. Use the same three `##` sections in both:
    Context / What I did / Result (Contexte / Ce que j'ai fait / Résultat). If `index.fr.md` is missing the French view falls back to English and the build warns.
    Everything else (titles, summaries, captions, alt) is bilingual in the frontmatter. Fill alt text in both languages (the build warns on empty alt of non-draft entries).
@@ -101,6 +101,8 @@ After every production build the `prune-unpublished` integration deletes (a) `di
 
 ## Components worth knowing
 
+- `Gallery` is a strict grid of equal tiles. The tile shape follows the majority of the photos (portrait 3:4 or landscape 4:3); in a portrait grid a landscape photo spans two columns. Thumbnails are cropped to the tile, the lightbox shows the whole photo. Photos stay in order; a row that is not full is centred.
+- The `videos` of a project page sit in one row, each clip with its own `ratio`, at one shared height; a row that is not full is centred too. `ProjectCard` crops to 8:5, so pick a landscape `cover`.
 - `Gallery` + `DrawingStrip` render `Thumb` buttons; one `<Lightbox />` per page opens them (native `<dialog>`, arrows/Home/End/Esc, focus trap, swipe, focus returns to the thumbnail).
 - `Clip`: `<video muted loop playsinline preload="none" poster>`; plays only while in the viewport (IntersectionObserver); with `prefers-reduced-motion` it never autoplays and shows a large Play button; there is always a Play/Pause button. Never add `autoplay` or audio.
 - Images use Astro `<Picture>` (AVIF/WebP + JPEG fallback, lazy). Hero images are `loading="eager"`.

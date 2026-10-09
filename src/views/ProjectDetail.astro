@@ -1,8 +1,8 @@
 ---
 /**
  * /projects/<slug>/ template:
- * hero (clip or image) -> at a glance -> body (Context / What I did / Result, from the Markdown)
- * -> gallery (lightbox) -> drawings strip -> videos -> back link.
+ * hero (clip, clip + two side pictures, or image) -> at a glance -> body (Context / What I did / Result, from the Markdown)
+ * -> drawings strip -> gallery (lightbox) -> videos -> back link.
  */
 import type { CollectionEntry } from 'astro:content';
 import { Picture, getImage } from 'astro:assets';
@@ -11,6 +11,7 @@ import Lang from '../components/Lang.astro';
 import Facts from '../components/Facts.astro';
 import Clip from '../components/Clip.astro';
 import Gallery from '../components/Gallery.astro';
+import Thumb from '../components/Thumb.astro';
 import DrawingStrip from '../components/DrawingStrip.astro';
 import Lightbox from '../components/Lightbox.astro';
 import Prose from '../components/Prose.astro';
@@ -30,7 +31,8 @@ warnMissingAlt(`projects/${project.id} drawings`, d.drawings, d.draft);
 const og = await getImage({ src: d.cover, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
 const coverAlt = d.coverAlt.en || d.title.en;
 const coverAltFr = d.coverAlt.fr || d.title.fr;
-const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0;
+const side = d.heroClip ? d.heroSide : [];
+const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0 || side.length > 0;
 ---
 <Base
   current="projects"
@@ -52,9 +54,21 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0;
       <p class="lead"><Lang en={d.summary.en} fr={d.summary.fr} /></p>
     </header>
 
-    <div class="hero">
+    <div class:list={['hero', side.length > 0 ? 'split' : d.heroClip?.ratio && 'fit']} style={d.heroClip ? `--ratio:${d.heroClip.ratio ?? '16 / 9'}` : undefined}>
       {d.heroClip ? (
-        <Clip src={d.heroClip.src} poster={d.heroClip.poster} />
+        <Fragment>
+          <Clip src={d.heroClip.src} poster={d.heroClip.poster} ratio={d.heroClip.ratio} />
+          {side.length > 0 && (
+            <ul class="side">
+              {side.map((it, i) => (
+                <li>
+                  <Thumb image={it.image} alt={it.alt} caption={it.caption} group="hero" index={i} total={side.length}
+                    widths={[480, 960, 1200]} sizes="(min-width: 40rem) min(34rem, 50vw), 50vw" width={900} height={600} eager />
+                </li>
+              ))}
+            </ul>
+          )}
+        </Fragment>
       ) : (
         <Picture
           src={d.cover}
@@ -83,13 +97,6 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0;
       <div lang="fr" data-fallback={frFallback ? 'en' : undefined}><Prose><Fr /></Prose></div>
     </section>
 
-    {d.gallery.length > 0 && (
-      <section class="section" aria-labelledby="gallery">
-        <h2 class="sec-h" id="gallery"><Lang en="Photos" fr="Photos" /></h2>
-        <Gallery items={d.gallery} group="gallery" />
-      </section>
-    )}
-
     {d.drawings.length > 0 && (
       <section class="section" aria-labelledby="drawings">
         <h2 class="sec-h" id="drawings"><Lang en="Drawings" fr="Plans et schémas" /></h2>
@@ -97,11 +104,18 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0;
       </section>
     )}
 
+    {d.gallery.length > 0 && (
+      <section class="section" aria-labelledby="gallery">
+        <h2 class="sec-h" id="gallery"><Lang en="Photos" fr="Photos" /></h2>
+        <Gallery items={d.gallery} group="gallery" />
+      </section>
+    )}
+
     {d.videos.length > 0 && (
       <section class="section" aria-labelledby="videos">
         <h2 class="sec-h" id="videos"><Lang en="Videos" fr="Vidéos" /></h2>
         <div class="clips">
-          {d.videos.map((v) => <Clip src={v.src} poster={v.poster} caption={v.caption} />)}
+          {d.videos.map((v) => <Clip src={v.src} poster={v.poster} ratio={v.ratio} caption={v.caption} />)}
         </div>
       </section>
     )}
@@ -115,5 +129,23 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0;
   .hero{margin-top:1.75rem;line-height:0}
   .hero :global(img){width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border:1px solid var(--rule)}
   .hero :global(.clip){line-height:1.6}
-  .clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(20rem,1fr));gap:1.5rem}
+  /* hero clip with its own ratio (e.g. portrait): the frame follows the clip and stays within the viewport height */
+  .hero.fit :global(.clip){max-width:calc(min(80vh,44rem) * var(--ratio));margin-inline:auto}
+  /* portrait clip + pictures stacked beside it, as one landscape block. Widths are in proportion to the clip ratio and
+     to half a 3:2 picture, so the pictures come out close to 3:2; the block height stays within the viewport. */
+  .hero.split{display:flex;gap:1.25rem;margin-inline:auto;max-width:calc(min(80vh,44rem) * (var(--ratio) + .75) + 1.25rem)}
+  .hero.split :global(.clip){flex:calc(var(--ratio)) 1 0;min-width:0}
+  .side{flex:.75 1 0;min-width:0;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.25rem}
+  .side li{flex:1 1 0;min-height:0;margin:0;position:relative}
+  .side li :global(.thumb){position:absolute;inset:0}
+  /* phones: the clip, then the pictures side by side under it */
+  @media (max-width:40rem){
+    .hero.split{flex-direction:column;gap:.75rem}
+    .hero.split :global(.clip),.side{flex:none}
+    .side{flex-direction:row;gap:.75rem}
+    .side li{aspect-ratio:3/2}
+  }
+  /* videos in justified rows, like the Gallery: each clip keeps its ratio and the clips of a row share one height */
+  .clips{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;--h:16rem;--hmax:22rem}
+  .clips :global(.clip){min-width:0;flex-grow:calc(var(--ratio));flex-shrink:1;flex-basis:calc(var(--ratio) * var(--h));max-width:min(100%,calc(var(--ratio) * var(--hmax)))}
 </style>

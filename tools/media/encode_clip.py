@@ -138,6 +138,13 @@ def main() -> int:
     print("\nFrontmatter reference:")
     print(f"  src: /media/{section}/{slug}/{name}.mp4")
     print(f"  poster: /media/{section}/{slug}/{name}.jpg")
+    if ffprobe:
+        s = run([ffprobe, "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height", "-of", "csv=p=0", str(mp4)])
+        try:
+            w, h = (int(x) for x in s.stdout.strip().split(",")[:2])
+            print(f'  ratio: "{w} / {h}"   # projects only; may be left out for a 16:9 clip')
+        except ValueError:
+            pass
     return 0
 
 

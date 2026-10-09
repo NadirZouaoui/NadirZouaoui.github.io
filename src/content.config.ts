@@ -29,6 +29,8 @@ const videoRef = z.object({
   src: z.string().startsWith('/media/'),
   /** Public URL of the poster jpg (same folder). */
   poster: z.string().startsWith('/media/'),
+  /** Width / height of the encoded clip, e.g. "3 / 4" for a portrait clip. Default: 16 / 9. */
+  ratio: z.string().regex(/^\d+(\.\d+)?\s*\/\s*\d+(\.\d+)?$/).optional(),
 });
 
 export const collections = {
@@ -46,13 +48,16 @@ export const collections = {
         client: z.string(),
         role: bi,
         period: z.coerce.string(), // "2024" or "Mar 2025 - Jul 2025"; a bare YAML number is accepted
-        location: z.string(),
+        /** A plain string (shown in both languages) or { en, fr }. */
+        location: z.union([z.string(), bi]),
         domains: z.array(z.enum(DOMAINS)).min(1),
         tools: z.array(z.string()).default([]),
         keyFigure: z.object({ value: z.string(), label: bi }).optional(),
         cover: image(),
         coverAlt: biLoose,
         heroClip: videoRef.optional(),
+        /** Up to two landscape pictures stacked beside a portrait `heroClip`, so that the hero reads as one landscape block. */
+        heroSide: z.array(picture).max(2).default([]),
         gallery: z.array(picture).default([]),
         drawings: z.array(picture).default([]),
         videos: z.array(videoRef.extend({ caption: biLoose })).default([]),
