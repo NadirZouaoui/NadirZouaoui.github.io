@@ -1,0 +1,28 @@
+---
+/**
+ * "See project →" hook for CV entries. Renders NOTHING unless it is given the slug (or the
+ * cvAnchor) of a published project, so it is safe to leave in place while projects are drafts.
+ * Never printed.
+ *
+ *   <ProjectLink slug="scada-gk3-audit" />       match by project folder name
+ *   <ProjectLink anchor="scada-sonatrach" />      match by `cvAnchor:` in the project frontmatter
+ */
+import { getProjects } from '../lib/content';
+import Lang from './Lang.astro';
+
+export interface Props {
+  slug?: string;
+  anchor?: string;
+}
+const { slug, anchor } = Astro.props;
+const project = (await getProjects()).find(
+  (p) => (slug !== undefined && p.id === slug) || (anchor !== undefined && p.data.cvAnchor === anchor),
+);
+---
+{project && (
+  <a class="see-project noprint" href={`/projects/${project.id}/`}><Lang en="See project →" fr="Voir le projet →" /></a>
+)}
+
+<style>
+  .see-project{margin-left:.5rem;white-space:nowrap}
+</style>

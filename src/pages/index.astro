@@ -1,0 +1,236 @@
+---
+/**
+ * The CV. Ported 1:1 from the original hand-written index.html (EN/FR, same markup, same CSS
+ * incl. print). Changes vs the original: shared layout/head (Base), shared language script
+ * (LangScript), portrait through Astro image handling, <ProjectLink> hooks (render nothing
+ * until a project with the matching cvAnchor is published).
+ */
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import ProjectLink from '../components/ProjectLink.astro';
+import portrait from '../assets/portrait.jpg';
+---
+<Base current="cv">
+<div class="page">
+
+<div class="bar noprint">
+  <div class="sw" role="group" aria-label="Language / Langue">
+    <button type="button" data-set="en" aria-pressed="true">EN</button><button type="button" data-set="fr" aria-pressed="false">FR</button>
+  </div>
+  <span lang="en"><a class="dl" href="Nadir-Zouaoui-CV-EN.pdf" download>Download CV (PDF)</a></span><span lang="fr"><a class="dl" href="Nadir-Zouaoui-CV-FR.pdf" download>Télécharger le CV (PDF)</a></span>
+</div>
+
+<header>
+  <div>
+    <h1>Nadir Zouaoui</h1>
+    <p class="title"><span lang="en">Electrical Engineer</span><span lang="fr">Ingénieur électricien</span></p>
+    <ul class="contact">
+      <li><a href="mailto:nadir.zouaoui@hotmail.com">nadir.zouaoui@hotmail.com</a></li>
+      <li><a href="tel:+213656060214">0656 060 214</a></li>
+      <li><span lang="en">Oran, Algeria</span><span lang="fr">Oran, Algérie</span></li>
+      <li id="li-link"><a href="https://www.linkedin.com/in/nadir-zouaoui/" rel="me noopener" target="_blank">linkedin.com/in/nadir-zouaoui</a></li>
+    </ul>
+  </div>
+  <Image class="photo" src={portrait} width={120} height={120} densities={[2, 3]} format="jpeg" quality={85} loading="eager" decoding="sync" alt="Nadir Zouaoui" />
+</header>
+
+<section>
+  <h2><span lang="en">Profile</span><span lang="fr">Profil</span></h2>
+  <p><span lang="en">State engineer in electrical engineering with four years of multidisciplinary experience across Oil &amp; Gas, industrial automation and renewable energy. Covers the full project cycle, from design and engineering to wiring, commissioning and site work: chemical dosing skids, gas-pipeline SCADA, ATEX equipment, machine rehabilitation and PV installations (over 1 MWp delivered).</span><span lang="fr">Ingénieur d'État en génie électrique, avec quatre ans d'expérience pluridisciplinaire dans l'Oil &amp; Gas, l'automatisation industrielle et les énergies renouvelables. Intervient sur tout le cycle projet, de l'étude et de la conception au câblage et à la mise en service : skids de dosage chimique, SCADA de gazoducs, équipements ATEX, réhabilitation de machines industrielles et installations PV (plus de 1 MWp réalisés).</span></p>
+</section>
+
+<section>
+  <h2><span lang="en">Certifications</span><span lang="fr">Certifications</span></h2>
+  <div class="entry">
+    <div class="head"><h3><span lang="en">Electrical Equipment in Hazardous Areas (EEHA)</span><span lang="fr">Équipements électriques en zones dangereuses (EEHA)</span></h3><span class="when">2026</span></div>
+    <p class="org">ROAR Training Solutions <span lang="en">(Australian RTO). Australian national competency units, AS/NZS 60079 (aligned with IEC 60079).</span><span lang="fr">(organisme de formation australien). Unités de compétence nationales australiennes, AS/NZS 60079 (alignées sur l'IEC 60079).</span></p>
+    <ul>
+      <li><span lang="en">Hazardous-area classification, explosion-protection requirements, planning and installation of Ex equipment and wiring systems (UEEHA0004, 0022, 0029, 0025).</span><span lang="fr">Classement des zones dangereuses, exigences de protection contre les explosions, planification et installation des équipements Ex et de leurs câblages (UEEHA0004, 0022, 0029, 0025).</span></li>
+      <li><span lang="en">Detailed, visual and close inspection, maintenance, and periodic inspection and maintenance programs for hazardous-area installations (UEEHA0020, 0038, 0026, 0023; UEECD0011).</span><span lang="fr">Inspections détaillées, visuelles et rapprochées, maintenance, et programmes d'inspection et de maintenance périodiques des installations en zones dangereuses (UEEHA0020, 0038, 0026, 0023 ; UEECD0011).</span></li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="head"><h3><span lang="en">Low-voltage design fundamentals + Caneco BT introduction</span><span lang="fr">Bases de la conception BT + Initiation Caneco BT</span></h3><span class="when"><span lang="en">Sept – Oct 2025</span><span lang="fr">Sept. – Oct. 2025</span></span></div>
+    <p class="org">Lokelect Engineering, <span lang="en">40-hour online course. Certificate ID</span><span lang="fr">formation en ligne de 40 h. Identifiant du certificat</span> 2b3376a9aea18854</p>
+    <p><a href="https://lokelect-engineering.com/tutor-certificate/?cert_hash=2b3376a9aea18854&amp;v=0de7b6a61a70" target="_blank" rel="noopener"><span lang="en">Verify the certificate</span><span lang="fr">Vérifier le certificat</span></a></p>
+  </div>
+</section>
+
+<section>
+  <h2><span lang="en">Professional experience</span><span lang="fr">Expérience professionnelle</span></h2>
+
+  <div class="entry">
+    <div class="head"><h3><span lang="en">Electrical Engineer</span><span lang="fr">Ingénieur électricien</span>, RMBTECH EURL</h3><span class="when"><span lang="en">Mar 2025 – Present</span><span lang="fr">Mars 2025 – Présent</span></span></div>
+    <ul>
+      <li><span lang="en"><b>SCADA for Sonatrach gas pipelines.</b> Led the electrical engineering: site audit of 66 isolated stations (solar or grid powered) on GK3, which produced a detailed equipment condition status for each station (good, damaged, vandalized, etc.); deployment on GK1/GK2; pre-engineering of GR1/2/4/6 (integrator: SUPCON).</span><span lang="fr"><b>SCADA des gazoducs Sonatrach.</b> Direction de l'ingénierie électrique : audit sur site de 66 stations isolées (alimentation solaire ou réseau) sur le GK3, avec un état détaillé des équipements de chaque station (bon, endommagé, vandalisé, etc.) ; déploiement sur GK1/GK2 ; pré-ingénierie des GR1/2/4/6 (intégrateur : SUPCON).</span><ProjectLink anchor="scada-sonatrach" /></li>
+      <li><span lang="en"><b>Critical equipment and ATEX.</b> Engineering for the replacement of an 8500 A rectifier for the AOA electrolysis system; design of an ATEX Ex "p" pressurized cabinet for Sonatrach GP2Z (Arzew).</span><span lang="fr"><b>Équipements critiques et ATEX.</b> Ingénierie du remplacement d'un redresseur 8500 A pour le système d'électrolyse AOA ; conception d'une armoire ATEX Ex "p" à surpression pour Sonatrach GP2Z (Arzew).</span><ProjectLink anchor="critical-equipment-atex" /></li>
+      <li><span lang="en"><b>Industrial rehabilitation.</b> Technical direction, redesign in Eplan, rewiring and automatic commissioning (Siemens S7-1200) of a BOSSAR packaging machine for GBFoods (Jumbo).</span><span lang="fr"><b>Réhabilitation industrielle.</b> Direction technique, refonte sous Eplan, recâblage et mise en service automatique (Siemens S7-1200) d'une machine d'emballage BOSSAR pour GBFoods (Jumbo).</span><ProjectLink anchor="bossar-rehabilitation" /></li>
+      <li><span lang="en"><b>Agro-industry.</b> Electrical design for the SCADA system of the OAIC grain silo in Mesra.</span><span lang="fr"><b>Agro-industrie.</b> Conception électrique du SCADA du silo à grains OAIC de Mesra.</span><ProjectLink anchor="silo-mesra" /></li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="head"><h3><span lang="en">Lead Electrical Engineer</span><span lang="fr">Ingénieur électricien principal</span>, PROSKID EURL</h3><span class="when"><span lang="en">Jul 2023 – Mar 2025</span><span lang="fr">Juil. 2023 – Mars 2025</span></span></div>
+    <ul>
+      <li><span lang="en">Designed and sized the electrical systems of Oil &amp; Gas skids for clients ENGCB/GCB and SARPI, and the off-grid solar power supplies feeding them.</span><span lang="fr">Conception et dimensionnement des systèmes électriques de skids Oil &amp; Gas pour les clients ENGCB/GCB et SARPI, et des alimentations solaires autonomes qui les alimentent.</span></li>
+      <li><span lang="en">Produced power supply, power and control schematics in EPLAN Electric P8 and AutoCAD Electrical.</span><span lang="fr">Schémas d'alimentation, de puissance et de commande réalisés sous EPLAN Electric P8 et AutoCAD Electrical.</span></li>
+      <li><span lang="en">Commissioned 27 Milton Roy chemical anticorrosion dosing skids and their solar installations.</span><span lang="fr">Mise en service de 27 skids de dosage chimique anticorrosion Milton Roy et de leurs installations solaires.</span><ProjectLink anchor="proskid-dosing-skids" /></li>
+      <li><span lang="en"><b>ATEX Ex "d" flameproof enclosure.</b> Designed and built it for a corrosion inhibitor skid, including component mounting and wiring.</span><span lang="fr"><b>Armoire antidéflagrante ATEX Ex "d".</b> Conception et réalisation pour un skid d'inhibiteur de corrosion, y compris montage des composants et câblage.</span><ProjectLink anchor="atex-ex-d-enclosure" /></li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="head"><h3><span lang="en">Photovoltaic Design Engineer</span><span lang="fr">Ingénieur d'études photovoltaïques</span>, Sungy SPA</h3><span class="when"><span lang="en">Oct 2022 – Jul 2023</span><span lang="fr">Oct. 2022 – Juil. 2023</span></span></div>
+    <ul>
+      <li><span lang="en">Over 300 kWp of installed solar capacity.</span><span lang="fr">Plus de 300 kWp de capacité solaire installée.</span></li>
+      <li><span lang="en">3D layout, sizing and simulation of PV systems; electrical sizing and diagrams for each installation.</span><span lang="fr">Implantation 3D, dimensionnement et simulation de systèmes PV ; dimensionnement électrique et schémas de chaque installation.</span></li>
+      <li><span lang="en">Commissioning and monitoring; energy sobriety plans; deployable mobile solar solutions.</span><span lang="fr">Mise en service et suivi ; plans de sobriété énergétique ; solutions solaires mobiles déployables.</span></li>
+    </ul>
+  </div>
+
+</section>
+
+<section>
+  <h2><span lang="en">Freelance</span><span lang="fr">Freelance</span></h2>
+
+  <div class="entry">
+    <div class="head"><h3><span lang="en">5.4 MW industrial solar installation, SARL Ibrahim &amp; Fils (IFRI)</span><span lang="fr">Installation solaire industrielle de 5,4 MW, SARL Ibrahim &amp; Fils (IFRI)</span></h3><span class="when">Akbou, Béjaïa</span></div>
+    <ul>
+      <li><span lang="en">Rooftop PV design for a zero-injection self-consumption plant across several production sites: JinkoSolar 635 Wp bifacial modules, Huawei SUN2000-150K inverters, 10 × 241 kWh battery storage.</span><span lang="fr">Conception PV en toiture d'une centrale d'autoconsommation à injection zéro sur plusieurs sites de production : modules bifaciaux JinkoSolar 635 Wc, onduleurs Huawei SUN2000-150K, stockage 10 × 241 kWh.</span><ProjectLink anchor="ifri-pv" /></li>
+      <li><span lang="en">Layout, string and inverter zoning, and DC/AC cable sizing optimized for voltage drop and cost.</span><span lang="fr">Implantation, zonage des strings et des onduleurs, dimensionnement des câbles DC/AC optimisé (chute de tension et coût).</span></li>
+      <li><span lang="en">Single-line diagram dossiers, load and power quality analysis.</span><span lang="fr">Dossiers de schémas unifilaires, analyse des charges et de la qualité d'énergie.</span></li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="head"><h3><span lang="en">Electrical training modules, ROAR Training Solutions (Australian RTO)</span><span lang="fr">Modules de formation électrique, ROAR Training Solutions (OFR australien)</span></h3></div>
+    <ul>
+      <li><span lang="en">Developed first-person 3D playable exercises for electrical competency training, including a 3D substation exercise and a Low Voltage Rescue and CPR simulation (hazard identification, PPE, breaker isolation, insulated-hook rescue, then CPR with AED, guided by a phase-gated procedure checklist).</span><span lang="fr">Développement d'exercices 3D jouables à la première personne pour la formation aux compétences électriques, dont un exercice de poste 3D et une simulation de sauvetage en basse tension et RCP (identification des dangers, EPI, consignation du disjoncteur, dégagement à la perche isolante, puis RCP avec DAE, guidée par une checklist de procédure par phases).</span><ProjectLink anchor="roar-3d-training" /></li>
+      <li><span lang="en">3D assets and character animation in Blender; interaction logic and training scenarios in Godot 4.</span><span lang="fr">Assets 3D et animation de personnages sous Blender ; logique d'interaction et scénarios de formation sous Godot 4.</span></li>
+      <li><span lang="en">Packaged as SCORM 1.2 modules running in the browser (WebGL2) for delivery through the client's LMS.</span><span lang="fr">Livrés en modules SCORM 1.2 exécutés dans le navigateur (WebGL2), pour le LMS du client.</span></li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="head"><h3><span lang="en">Motion design and video</span><span lang="fr">Motion design et vidéo</span></h3><span class="when"><span lang="en">Sept 2018 – Present</span><span lang="fr">Sept. 2018 – Présent</span></span></div>
+    <p><span lang="en">Freelance motion design and video work. Portfolio on</span><span lang="fr">Motion design et vidéo en freelance. Portfolio sur</span> <a href="https://www.behance.net/nad04799c26">Behance</a>, <a href="https://www.freelancer.com/u/NadirZouaoui">Freelancer</a>, <a href="https://www.fiverr.com/nadir_z">Fiverr</a>.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span lang="en">Thesis project</span><span lang="fr">Projet de fin d'études</span></h2>
+  <div class="entry">
+    <div class="head"><h3><span lang="en">5 kW autonomous photovoltaic microgrid</span><span lang="fr">Micro-réseau photovoltaïque autonome de 5 kW</span></h3><span class="when"><span lang="en">May – Jul 2021</span><span lang="fr">Mai – Juil. 2021</span></span></div>
+    <ul>
+      <li><span lang="en">Sized and built a microgrid with a 3 kW PV array, an 800 Ah battery bank, a 50 kVA diesel generator and a three-input hybrid inverter (PV, battery, grid/genset), with electrical and synoptic diagrams.</span><span lang="fr">Dimensionnement et réalisation d'un micro-réseau avec champ PV de 3 kW, batteries 800 Ah, groupe électrogène 50 kVA et onduleur hybride à trois entrées (PV, batterie, réseau/groupe), avec schémas électriques et synoptiques.</span></li>
+      <li><span lang="en">Installed the outdoor (PV array, supports) and indoor (inverter, batteries, generator, boxes, ATS) equipment, then commissioned and tested the system.</span><span lang="fr">Installation des équipements extérieurs (champ PV, supports) et intérieurs (onduleur, batteries, groupe, coffrets, ATS), puis mise en service et essais.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2><span lang="en">Education</span><span lang="fr">Formation</span></h2>
+  <div class="entry">
+    <div class="head"><h3><span lang="en">State Engineer + Master II</span><span lang="fr">Ingénieur d'État + Master II</span></h3><span class="when">2018 – 2021</span></div>
+    <p class="org"><span lang="en">École Nationale Polytechnique d'Oran – Maurice Audin (ENPO-MA). Valedictorian 2018–2021.</span><span lang="fr">École Nationale Polytechnique d'Oran – Maurice Audin (ENPO-MA). Major de promotion 2018–2021.</span></p>
+  </div>
+  <div class="entry">
+    <div class="head"><h3><span lang="en">Preparatory cycle in sciences and technologies</span><span lang="fr">Cycle préparatoire en sciences et technologies</span></h3><span class="when">2016 – 2018</span></div>
+    <p class="org">ENPO-MA</p>
+  </div>
+</section>
+
+<section>
+  <h2><span lang="en">Earlier experience</span><span lang="fr">Parcours antérieur</span></h2>
+  <div class="brief">
+    <div class="head"><h3><span lang="en">Document Controller, CEVIELEC SPA: ALRAR gas complex re-instrumentation</span><span lang="fr">Contrôleur documentaire, CEVIELEC SPA : réinstrumentation du complexe gazier ALRAR</span></h3><small>2022</small></div>
+    <div class="head"><h3><span lang="en">Internship, SKTM: 12 MW Dhaya PV plant</span><span lang="fr">Stage, SKTM : centrale PV de Dhaya (12 MW)</span></h3><small>2021</small></div>
+    <div class="head"><h3><span lang="en">Internship, SDO Sonelgaz: MV-LV distribution network</span><span lang="fr">Stage, SDO Sonelgaz : réseau de distribution MT/BT</span></h3><small>2019</small></div>
+    <div class="head"><h3><span lang="en">Internship, ENIE Solar: PV panel production</span><span lang="fr">Stage, ENIE Solar : production de panneaux PV</span></h3><small>2019</small></div>
+    <div class="head"><h3><span lang="en">Internship, CITAL: Sidi Bel Abbès tramway traction</span><span lang="fr">Stage, CITAL : traction du tramway de Sidi Bel Abbès</span></h3><small>2018</small></div>
+  </div>
+</section>
+
+<section>
+  <h2><span lang="en">Skills and tools</span><span lang="fr">Compétences et outils</span></h2>
+  <dl class="facts">
+    <dt><span lang="en">Tools</span><span lang="fr">Outils</span></dt>
+    <dd>EPLAN Electric P8 &amp; Pro Panel, Archelios PV, AutoCAD Electrical, Caneco BT, TIA Portal / Step 7, Siemens S7-1200, Microsoft Excel, Blender 3D, Adobe Suite</dd>
+    <dt><span lang="en">Domains</span><span lang="fr">Domaines</span></dt>
+    <dd><span lang="en">Oil &amp; Gas, industrial equipment, hazardous areas (ATEX), MCC and switchgear, commissioning, PV system design and sizing, electrical diagrams and schematics, SCADA, industrial automation</span><span lang="fr">Oil &amp; Gas, équipements industriels, zones dangereuses (ATEX), MCC et appareillage, mise en service, conception et dimensionnement PV, schémas électriques, SCADA, automatisation industrielle</span></dd>
+    <dt><span lang="en">Languages</span><span lang="fr">Langues</span></dt>
+    <dd><span lang="en">Arabic (native), English (fluent), French (bilingual, DALF C1, 76/100)</span><span lang="fr">Arabe (langue maternelle), anglais (courant), français (bilingue, DALF C1, 76/100)</span></dd>
+    <dt><span lang="en">Other</span><span lang="fr">Divers</span></dt>
+    <dd><span lang="en">Driving license B, national service exempt</span><span lang="fr">Permis B, service national : dispensé</span></dd>
+  </dl>
+</section>
+
+<section id="li" hidden>
+  <h2>LinkedIn</h2>
+  <div id="li-badge"></div>
+</section>
+
+</div>
+<script is:inline>
+(function(){
+  // LinkedIn profile slug (the part after linkedin.com/in/); empty string turns the badge off.
+  var LINKEDIN = "nadir-zouaoui";
+  if (LINKEDIN) {
+    var url = "https://www.linkedin.com/in/" + LINKEDIN;
+    document.getElementById("li").hidden = false;
+    document.getElementById("li-badge").innerHTML =
+      '<div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="HORIZONTAL" data-vanity="' + LINKEDIN + '" data-version="v1"><a class="badge-base__link LI-simple-link" href="' + url + '">Nadir Zouaoui</a></div>';
+    var s = document.createElement("script");
+    s.src = "https://platform.linkedin.com/badges/js/profile.js"; s.async = true; s.defer = true;
+    document.body.appendChild(s);
+  }
+})();
+</script>
+</Base>
+
+<style is:global>
+.page{max-width:46rem;margin:0 auto;padding:2rem 1.5rem 4rem}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.5rem;font-size:.9rem}
+.sw button{font:inherit;background:none;border:1px solid var(--rule);color:var(--muted);padding:.2rem .65rem;cursor:pointer}
+.sw button:first-child{border-radius:4px 0 0 4px}.sw button:last-child{border-radius:0 4px 4px 0;border-left:0}
+.sw button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+/* When SiteNav renders its row it carries its own EN/FR switch: hide this one (screen only; .bar is .noprint) and keep Download at the right. */
+.nav-row ~ .page .bar{justify-content:flex-end}
+.nav-row ~ .page .bar .sw{display:none}
+.dl{display:inline-block;border:1px solid var(--accent);border-radius:4px;padding:.25rem .8rem;text-decoration:none;font-weight:500}
+header{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;padding-bottom:1.75rem;border-bottom:1px solid var(--ink)}
+.photo{width:120px;height:120px;border-radius:50%;object-fit:cover;flex:none}
+h1{font-size:2.1rem;line-height:1.15;font-weight:600;letter-spacing:-.01em;margin:0}
+.title{margin:.25rem 0 0;font-size:1.1rem;color:var(--muted)}
+.contact{display:flex;flex-wrap:wrap;gap:.2rem 1.5rem;list-style:none;margin:1.1rem 0 0;padding:0;font-size:.95rem;color:var(--muted)}
+.contact a{color:var(--ink)}
+section{padding-top:2rem}
+h2{font-size:.95rem;font-weight:600;color:var(--accent);margin:0 0 1rem;padding-bottom:.4rem;border-bottom:1px solid var(--rule)}
+p{margin:0}
+.entry+.entry{margin-top:1.6rem}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+h3{font-size:1rem;font-weight:600;margin:0}
+.when{color:var(--muted);font-size:.92rem;white-space:nowrap}
+.org{color:var(--muted);font-size:.95rem}
+ul{margin:.55rem 0 0;padding-left:1.15rem}li{margin:.3rem 0}
+.entry p+p,.entry .org+p{margin-top:.45rem}
+.brief .head{padding:.35rem 0;border-top:1px solid var(--rule)}
+.brief .head:first-child{border-top:0}
+.brief h3{font-weight:500}
+.brief small{color:var(--muted);font-size:.92rem}
+dl.facts{display:grid;grid-template-columns:9rem minmax(0,1fr);gap:.55rem 1.25rem;margin:0}
+dl.facts dt{font-weight:600}dl.facts dd{margin:0}
+#li-badge{margin-top:.5rem}
+@media (max-width:560px){
+  .head{flex-direction:column;gap:0}.photo{width:88px;height:88px}
+  dl.facts{grid-template-columns:1fr;gap:0}dl.facts dd{margin-bottom:.7rem}
+}
+@page{size:A4;margin:14mm 15mm}
+@media print{
+  .noprint,#li{display:none!important}
+  .page{padding:0;max-width:none}body{font-size:10pt;line-height:1.45}
+  section{padding-top:1.1rem}.entry+.entry{margin-top:1rem}
+  .photo{width:90px;height:90px}h1{font-size:1.8rem}
+  a{color:inherit;text-decoration:none}
+}
+</style>

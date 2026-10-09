@@ -1,0 +1,38 @@
+---
+/**
+ * Horizontal strip of technical drawings (single-line diagrams, layouts, cabinet drawings).
+ * Drawings are shown whole (no cropping) and open in the page's <Lightbox>.
+ * Crop client title blocks out of the image BEFORE adding it (see CLAUDE.md).
+ */
+import type { ImageMetadata } from 'astro';
+import Thumb from './Thumb.astro';
+import Lang from './Lang.astro';
+
+export interface Props {
+  items: { image: ImageMetadata; alt: { en: string; fr: string }; caption: { en: string; fr: string } }[];
+  group?: string;
+}
+const { items, group = 'drawings' } = Astro.props;
+---
+<ul class="strip">
+  {items.map((it, i) => {
+    const ratio = it.image.width / it.image.height;
+    const h = 360;
+    return (
+      <li style={`--r:${ratio.toFixed(4)}`}>
+        <div class="frame">
+          <Thumb image={it.image} alt={it.alt} caption={it.caption} group={group} index={i} total={items.length}
+            widths={[480, 960]} sizes="(min-width: 40rem) 30rem, 85vw" width={Math.round(h * ratio)} height={h} />
+        </div>
+        {(it.caption.en || it.caption.fr) && <p class="cap"><Lang en={it.caption.en} fr={it.caption.fr} /></p>}
+      </li>
+    );
+  })}
+</ul>
+
+<style>
+  .strip{list-style:none;margin:0;padding:0 0 .75rem;display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x proximity}
+  li{margin:0;flex:none;width:calc(var(--r) * 15rem);max-width:85vw;scroll-snap-align:start}
+  .frame{height:15rem;--thumb-fit:contain}
+  .cap{margin:.4rem 0 0;font-size:.9rem;color:var(--muted)}
+</style>

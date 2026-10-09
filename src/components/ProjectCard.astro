@@ -1,0 +1,64 @@
+---
+/** Card on /projects/. The whole card is clickable through the title link. */
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Lang from './Lang.astro';
+import { DOMAIN_LABELS } from '../lib/content';
+
+export interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const d = project.data;
+const coverAlt = d.coverAlt.en || d.title.en;
+const coverAltFr = d.coverAlt.fr || d.title.fr;
+---
+<li class="card" data-domains={d.domains.join(' ')}>
+  <div class="img">
+    <Picture
+      src={d.cover}
+      alt={coverAlt}
+      data-alt-en={coverAlt}
+      data-alt-fr={coverAltFr}
+      widths={[400, 800]}
+      sizes="(min-width: 72rem) 22rem, (min-width: 40rem) 33vw, 100vw"
+      width={800}
+      height={500}
+      formats={['avif', 'webp']}
+      fallbackFormat="jpg"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div class="body">
+    <h2><a href={`/projects/${project.id}/`}><Lang en={d.title.en} fr={d.title.fr} /></a></h2>
+    <p class="meta">{d.client} · {d.period}</p>
+    <p class="sum"><Lang en={d.summary.en} fr={d.summary.fr} /></p>
+    {d.keyFigure && (
+      <p class="fig"><strong>{d.keyFigure.value}</strong> <span><Lang en={d.keyFigure.label.en} fr={d.keyFigure.label.fr} /></span></p>
+    )}
+    <ul class="tags">
+      {d.domains.map((x) => <li><Lang en={DOMAIN_LABELS[x].en} fr={DOMAIN_LABELS[x].fr} /></li>)}
+    </ul>
+  </div>
+</li>
+
+<style>
+  .card{position:relative;display:flex;flex-direction:column;border:1px solid var(--rule);background:#fff;margin:0}
+  .card:hover{border-color:var(--accent)}
+  .card[hidden]{display:none}
+  .img{aspect-ratio:8/5;background:#f3f4f6;overflow:hidden;line-height:0}
+  .img :global(img){width:100%;height:100%;object-fit:cover;display:block}
+  .body{padding:1rem 1.1rem 1.1rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
+  h2{font-size:1.1rem;font-weight:600;line-height:1.3;margin:0}
+  h2 a{color:var(--ink);text-decoration:none}
+  h2 a::after{content:"";position:absolute;inset:0}
+  h2 a:hover{color:var(--accent);text-decoration:underline}
+  h2 a:focus-visible{outline:none}
+  .card:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+  .meta{font-size:.9rem;color:var(--muted)}
+  .sum{font-size:.95rem}
+  .fig{font-size:.9rem;color:var(--muted)}
+  .fig strong{color:var(--accent);font-size:1.05rem;margin-right:.25rem}
+  .tags{margin-top:auto;padding-top:.4rem}
+</style>

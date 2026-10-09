@@ -1,0 +1,17 @@
+---
+/** /simulators/ (hub) and /simulators/<slug>/ (detail). Same approach as the projects route. */
+import SimulatorsIndex from '../../views/SimulatorsIndex.astro';
+import SimulatorDetail from '../../views/SimulatorDetail.astro';
+import { getSimulators } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const sims = await getSimulators();
+  if (sims.length === 0) return [];
+  return [
+    { params: { slug: undefined }, props: { simulator: undefined } },
+    ...sims.map((simulator) => ({ params: { slug: simulator.id }, props: { simulator } })),
+  ];
+}
+const { simulator } = Astro.props;
+---
+{simulator ? <SimulatorDetail simulator={simulator} /> : <SimulatorsIndex />}

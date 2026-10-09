@@ -1,0 +1,32 @@
+---
+/** /simulators/ : hub with one card per training module. */
+import Base from '../layouts/Base.astro';
+import Lang from '../components/Lang.astro';
+import SimulatorCard from '../components/SimulatorCard.astro';
+import { getSimulators } from '../lib/content';
+import '../styles/content.css';
+
+const sims = await getSimulators();
+const anyDraft = sims.some((s) => s.data.draft);
+---
+<Base
+  current="simulators"
+  wide
+  titles={{ en: 'Simulators, Nadir Zouaoui', fr: 'Simulateurs, Nadir Zouaoui' }}
+  description="3D training simulators for electrical competency: interactive first-person exercises built with Blender and Godot. / Simulateurs de formation 3D pour les compétences électriques : exercices interactifs à la première personne, réalisés avec Blender et Godot."
+  ogType="website"
+  noindex={anyDraft}
+>
+  <main class="wrap">
+    {anyDraft && <p class="draft-banner noprint">Preview: includes draft simulators (not published).</p>}
+    <h1><Lang en="Simulators" fr="Simulateurs" /></h1>
+    <p class="lead"><Lang en="Interactive 3D training exercises for electrical competency. Each module is shown as short clips of the real simulation." fr="Exercices de formation 3D interactifs pour les compétences électriques. Chaque module est présenté par de courts extraits de la simulation réelle." /></p>
+    <ul class="grid">
+      {sims.map((s) => <SimulatorCard simulator={s} />)}
+    </ul>
+  </main>
+</Base>
+
+<style>
+  .grid{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(18rem,1fr));gap:1.5rem}
+</style>

@@ -1,0 +1,79 @@
+---
+/** /projects/ : card grid with client-side domain filter chips. */
+import Base from '../layouts/Base.astro';
+import Lang from '../components/Lang.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getProjects, DOMAINS, DOMAIN_LABELS } from '../lib/content';
+import '../styles/content.css';
+
+const projects = await getProjects();
+const used = DOMAINS.filter((d) => projects.some((p) => p.data.domains.includes(d)));
+const anyDraft = projects.some((p) => p.data.draft);
+---
+<Base
+  current="projects"
+  wide
+  titles={{ en: 'Projects, Nadir Zouaoui', fr: 'Projets, Nadir Zouaoui' }}
+  description="Selected electrical engineering projects: Oil & Gas skids, ATEX equipment, SCADA, industrial automation and solar PV. / Projets d'ingénierie électrique sélectionnés : skids Oil & Gas, équipements ATEX, SCADA, automatisation industrielle et solaire PV."
+  ogType="website"
+  noindex={anyDraft}
+>
+  <main class="wrap">
+    {anyDraft && <p class="draft-banner noprint">Preview: includes draft projects (not published).</p>}
+    <h1><Lang en="Projects" fr="Projets" /></h1>
+    <p class="lead"><Lang en="Selected electrical engineering work, with the context, my role and the result." fr="Sélection de travaux d'ingénierie électrique : contexte, mon rôle et résultat." /></p>
+
+    {used.length > 1 && (
+      <div class="chips noprint" role="group" aria-label="Filter by domain / Filtrer par domaine" data-chips>
+        <button type="button" data-filter="all" aria-pressed="true"><Lang en="All" fr="Tous" /></button>
+        {used.map((d) => (
+          <button type="button" data-filter={d} aria-pressed="false"><Lang en={DOMAIN_LABELS[d].en} fr={DOMAIN_LABELS[d].fr} /></button>
+        ))}
+      </div>
+    )}
+    <p class="vh" role="status" aria-live="polite" data-filter-status></p>
+
+    <ul class="grid" data-grid>
+      {projects.map((p) => <ProjectCard project={p} />)}
+    </ul>
+  </main>
+</Base>
+
+<style>
+  .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.5rem}
+  .chips button{font:inherit;font-size:.9rem;background:none;border:1px solid var(--rule);color:var(--muted);padding:.2rem .75rem;border-radius:4px;cursor:pointer}
+  .chips button:hover{border-color:var(--accent);color:var(--ink)}
+  .chips button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .grid{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(18rem,1fr));gap:1.5rem}
+</style>
+
+<script>
+  const chips = document.querySelector<HTMLElement>('[data-chips]');
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-grid] > .card'));
+  const status = document.querySelector<HTMLElement>('[data-filter-status]');
+  if (chips) {
+    const buttons = Array.from(chips.querySelectorAll<HTMLButtonElement>('button[data-filter]'));
+    const valid = buttons.map((b) => b.dataset.filter);
+    function apply(f: string, writeHash: boolean) {
+      let shown = 0;
+      cards.forEach((c) => {
+        const ok = f === 'all' || (c.dataset.domains || '').split(' ').includes(f);
+        c.hidden = !ok;
+        if (ok) shown++;
+      });
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === f)));
+      if (status) {
+        status.textContent = document.documentElement.dataset.lang === 'fr'
+          ? `${shown} projet${shown > 1 ? 's' : ''} affiché${shown > 1 ? 's' : ''}`
+          : `${shown} project${shown > 1 ? 's' : ''} shown`;
+      }
+      if (writeHash) history.replaceState(null, '', f === 'all' ? location.pathname + location.search : '#' + f);
+    }
+    chips.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-filter]');
+      if (b) apply(b.dataset.filter!, true);
+    });
+    const fromHash = location.hash.slice(1);
+    if (valid.includes(fromHash)) apply(fromHash, false);
+  }
+</script>

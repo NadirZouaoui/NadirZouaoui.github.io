@@ -1,0 +1,36 @@
+---
+/** "At a glance" facts of a project: client, role, period, location, domains, tools, key figure. */
+import type { CollectionEntry } from 'astro:content';
+import Lang from './Lang.astro';
+import { DOMAIN_LABELS } from '../lib/content';
+
+export interface Props {
+  project: CollectionEntry<'projects'>['data'];
+}
+const { project: p } = Astro.props;
+---
+<dl class="facts-grid">
+  <div><dt><Lang en="Client" fr="Client" /></dt><dd>{p.client}</dd></div>
+  <div><dt><Lang en="Role" fr="Rôle" /></dt><dd><Lang en={p.role.en} fr={p.role.fr} /></dd></div>
+  <div><dt><Lang en="Period" fr="Période" /></dt><dd>{p.period}</dd></div>
+  <div><dt><Lang en="Location" fr="Lieu" /></dt><dd>{typeof p.location === 'string' ? p.location : <Lang en={p.location.en} fr={p.location.fr} />}</dd></div>
+  <div>
+    <dt><Lang en="Domains" fr="Domaines" /></dt>
+    <dd>{p.domains.map((d, i) => <>{i > 0 && ', '}<Lang en={DOMAIN_LABELS[d].en} fr={DOMAIN_LABELS[d].fr} /></>)}</dd>
+  </div>
+  {p.tools.length > 0 && <div><dt><Lang en="Tools" fr="Outils" /></dt><dd>{p.tools.join(', ')}</dd></div>}
+  {p.keyFigure && (
+    <div class="key">
+      <dt><Lang en={p.keyFigure.label.en} fr={p.keyFigure.label.fr} /></dt>
+      <dd>{p.keyFigure.value}</dd>
+    </div>
+  )}
+</dl>
+
+<style>
+  .facts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1rem 2rem;margin:0}
+  .facts-grid div{margin:0}
+  dt{font-size:.85rem;color:var(--muted);margin:0}
+  dd{margin:0}
+  .key dd{font-weight:600;font-size:1.25rem;color:var(--accent);line-height:1.3}
+</style>
