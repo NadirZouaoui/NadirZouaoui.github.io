@@ -13,7 +13,7 @@ const { project: p } = Astro.props;
   <div><dt><Lang en="Client" fr="Client" /></dt><dd>{p.client}</dd></div>
   <div><dt><Lang en="Role" fr="Rôle" /></dt><dd><Lang en={p.role.en} fr={p.role.fr} /></dd></div>
   <div><dt><Lang en="Period" fr="Période" /></dt><dd>{p.period}</dd></div>
-  <div><dt><Lang en="Location" fr="Lieu" /></dt><dd>{p.location}</dd></div>
+  <div><dt><Lang en="Location" fr="Lieu" /></dt><dd>{typeof p.location === 'string' ? p.location : <Lang en={p.location.en} fr={p.location.fr} />}</dd></div>
   <div>
     <dt><Lang en="Domains" fr="Domaines" /></dt>
     <dd>{p.domains.map((d, i) => <>{i > 0 && ', '}<Lang en={DOMAIN_LABELS[d].en} fr={DOMAIN_LABELS[d].fr} /></>)}</dd>

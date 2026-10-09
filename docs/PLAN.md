@@ -20,7 +20,7 @@ Last updated 2026-10-09.
 - [x] **Phase 1: scaffold + CV port.** Draft PR #1 (`astro-site`). CV verified 1:1 (screen EN/FR at 1280/390 px, print PDF; only the portrait re-encode differs).
 - [x] **Phase 2: content model, components, media tools.** In the same PR. Draft samples: `sample-project`, `sample-simulator`.
 - [ ] **Go live:** Settings → Pages → Source: **GitHub Actions**, THEN merge PR #1. (Merging first would serve the raw Astro source.)
-- [~] **Phase 3: ATEX Ex "d" case study (the pilot).** Reviewed in five rounds; Nadir approved the result on 2026-10-09 ("Pilot looks good"). Still `draft: true` in draft PR #2 (`phase-3-atex` into `astro-site`): setting `draft: false` and merging are the next steps, on his go-ahead. Content in `src/content/projects/atex-ex-d-enclosure/`, media in `src/assets/projects/atex-ex-d-enclosure/` and `public/media/projects/atex-ex-d-enclosure/`. Branch `phase-3-atex`, draft PR into `astro-site`.
+- [x] **Phase 3: ATEX Ex "d" case study (the pilot).** Reviewed in five rounds; Nadir approved the result on 2026-10-09. Published (`draft: false`) and PR #2 (`phase-3-atex`) merged into `astro-site` on 2026-10-09. It goes live with PR #1. Content in `src/content/projects/atex-ex-d-enclosure/`, media in `src/assets/projects/atex-ex-d-enclosure/` and `public/media/projects/atex-ex-d-enclosure/`. Branch `phase-3-atex`, draft PR into `astro-site`.
 - [ ] **Phase 4: Simulators.** Waiting for clips.
 - [ ] **Phase 5: more case studies** as media arrives.
 - [ ] **Phase 6: polish.** Per-page OG images, sitemap, performance pass, link check.
@@ -33,12 +33,15 @@ Last updated 2026-10-09.
 
 Confirmed by Nadir on review (2026-10-09): the period 08/2024 - 10/2024; naming Chimec in the copy; the "PLC" labels and instrument tags visible in the hero's EPLAN frames are fine.
 
-Still open, for Nadir to confirm (listed in the build report):
-- The location "Algeria" (no document states it).
+Answered by Nadir before publishing (2026-10-09):
+- Location: "Algiers, Algeria" / "Alger, Algérie" (`location` now accepts a string or `{en,fr}`).
+- The enclosure maker is named once in the Context section: ATEX System (from the supplier quotation).
+- Photos 14 to 16 (a leg in trousers, no face; photo 16 cropped to the enclosure and the test bench) are published as they are. Photo 01 is cropped above the title block of the printed drawing.
+- The three EPLAN Pro Panel 3D screenshots are small (about 500 x 750 px): published as they are, to be replaced when Nadir makes larger exports.
+- The CV shows a single EN/FR switch: its own switch is hidden on screen whenever the nav row is rendered (CSS in `src/pages/index.astro`).
+
+Notes kept for reference:
 - Enclosure dimensions differ between the supplier documents (CCF16G 550x800x245 in the technical sheet, CCF16BG 500x800x360 in the quotation), and the isolator rating differs (S0 16 A in the schematic, 32 A in the technical sheet). Neither is used in the copy.
-- Whether naming the enclosure maker is wanted (not named in the copy).
-- Photos 14 to 16 show a leg in trousers (no face). Photo 16 is a workshop shot, cropped to the enclosure and the test bench (background signage and the pump removed). Photo 01 is cropped above the title block of the printed drawing.
-- The three EPLAN Pro Panel 3D screenshots are small (about 500 x 750 px); larger exports would look better in the lightbox.
 - The hero is `2202 building.mp4` (Nadir's LinkedIn edit: EPLAN first, then the build), with the EPLAN part (0 to 12.37 s) at 2x, encoded by hand with ffmpeg using the `encode_clip.py` settings because the tool has one speed for the whole clip. Its schematic frames show the remote system labelled "PLC" and instrument tag numbers. It is portrait (3:4) and the hero frame follows that ratio; two landscape pictures (`heroSide`: photo 01 and the door layout drawing) are stacked beside it so the hero reads as one landscape block. The card cover is photo 01 (landscape: empty enclosure and the drawing). Nadir removed the photo "Wiring behind the door" (2026-10-09).
 Schematics used: `D:\Nadir\Documents\Work\Proskid\NZO\2202\SCHEMAS ELECTRIQUES\2202 SKID GCB.pdf` (p.12 power, p.13-15 control, p.16-17 layout). Page 15 mentions a PLC and a site tag, so it is not published.
 

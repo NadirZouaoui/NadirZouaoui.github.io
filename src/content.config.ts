@@ -48,7 +48,8 @@ export const collections = {
         client: z.string(),
         role: bi,
         period: z.coerce.string(), // "2024" or "Mar 2025 - Jul 2025"; a bare YAML number is accepted
-        location: z.string(),
+        /** A plain string (shown in both languages) or { en, fr }. */
+        location: z.union([z.string(), bi]),
         domains: z.array(z.enum(DOMAINS)).min(1),
         tools: z.array(z.string()).default([]),
         keyFigure: z.object({ value: z.string(), label: bi }).optional(),

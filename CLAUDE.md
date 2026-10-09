@@ -75,7 +75,7 @@ To add a hook elsewhere: `<ProjectLink anchor="..." />` at the end of an `<li>` 
 1. Photos: `python tools/media/prep_images.py <raw_folder> <slug>` (writes `src/assets/projects/<slug>/`, prints YAML to paste).
 2. Clips (optional): `python tools/media/encode_clip.py <raw.mov> projects/<slug>/hero --start 5 --end 17` (writes `public/media/projects/<slug>/`).
 3. Create `src/content/projects/<slug>/index.md` (copy `sample-project`). Frontmatter fields: `draft`, `order`, `title{en,fr}`, `summary{en,fr}`, `client`,
-   `role{en,fr}`, `period`, `location`, `domains` (oil-gas, atex, solar-pv, automation, scada), `tools[]`, `keyFigure{value,label{en,fr}}`, `cover`, `coverAlt`,
+   `role{en,fr}`, `period`, `location` (string, or `{en,fr}`), `domains` (oil-gas, atex, solar-pv, automation, scada), `tools[]`, `keyFigure{value,label{en,fr}}`, `cover`, `coverAlt`,
    `heroClip{src,poster,ratio}` (optional; replaces the cover as hero; `ratio` like `"3 / 4"` for a clip that is not 16:9), `heroSide[]` (optional, up to two landscape pictures stacked beside a portrait `heroClip` so the hero reads as one landscape block; same fields as a gallery item), `gallery[]`, `drawings[]` (each `image`, `alt{en,fr}`, `caption{en,fr}`),
    `videos[]` (`src`, `poster`, `ratio`, `caption{en,fr}`), `cvAnchor`. The slug is the folder name. Images are referenced as `"@assets/projects/<slug>/<file>.jpg"` (quote it: a bare `@` is invalid YAML).
 4. **Bilingual body**: `index.md` body = English, `index.fr.md` (same folder) body = French, no frontmatter. Use the same three `##` sections in both:

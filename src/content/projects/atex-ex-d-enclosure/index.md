@@ -1,6 +1,5 @@
 ---
-# DRAFT for Nadir's review (Phase 3). Set `draft: false` only after he has approved the text and the media.
-draft: true
+draft: false
 order: 10
 title:
   en: Ex d flameproof enclosure for a three-pump dosing skid
@@ -13,7 +12,9 @@ role:
   en: Lead Electrical Engineer, PROSKID
   fr: Ingénieur électricien principal, PROSKID
 period: 08/2024 - 10/2024
-location: Algeria
+location:
+  en: Algiers, Algeria
+  fr: Alger, Algérie
 domains: [oil-gas, atex]
 tools: [EPLAN Electric P8, EPLAN Pro Panel]
 keyFigure:
@@ -206,7 +207,7 @@ cvAnchor: atex-ex-d-enclosure
 
 PROSKID built a chemical injection skid for GCB (ENGCB) that doses a corrosion inhibitor (Chimec) into a gas pipeline. Its three dosing pumps are supplied and controlled from a single flameproof enclosure mounted on the skid, rated Ex d IIB+H2 T5 Gb, Ex tb IIIC T100 °C Db, IP66.
 
-The enclosure maker machines the door and the cable entries and fits the certified door devices to the buyer's layout. A flameproof enclosure cannot be drilled afterwards without losing its certification, so the layout had to be final before the order. The internal equipment, its mounting and all the wiring were in PROSKID's scope.
+The enclosure maker, ATEX System, machines the door and the cable entries and fits the certified door devices to the buyer's layout. A flameproof enclosure cannot be drilled afterwards without losing its certification, so the layout had to be final before the order. The internal equipment, its mounting and all the wiring were in PROSKID's scope.
 
 The control is hard-wired relay logic, without a PLC. In local mode each pump is started and stopped from the door. In remote mode the commands come from the site RTU, which also receives the pump statuses. The pilot lights on the door give the local feedback.
 

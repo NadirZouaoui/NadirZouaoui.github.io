@@ -2,7 +2,7 @@
 
 PROSKID a réalisé pour GCB (ENGCB) un skid d'injection chimique qui dose un inhibiteur de corrosion (Chimec) dans un gazoduc. Ses trois pompes doseuses sont alimentées et commandées depuis une seule armoire antidéflagrante montée sur le skid, de marquage Ex d IIB+H2 T5 Gb, Ex tb IIIC T100 °C Db, IP66.
 
-Le fabricant de l'armoire usine la porte et les entrées de câbles et monte les appareils de porte certifiés selon le plan fourni par l'acheteur. Une armoire antidéflagrante ne peut pas être percée après coup sans perdre sa certification : l'implantation devait donc être définitive avant la commande. Le matériel interne, son montage et tout le câblage relevaient de PROSKID.
+Le fabricant de l'armoire, ATEX System, usine la porte et les entrées de câbles et monte les appareils de porte certifiés selon le plan fourni par l'acheteur. Une armoire antidéflagrante ne peut pas être percée après coup sans perdre sa certification : l'implantation devait donc être définitive avant la commande. Le matériel interne, son montage et tout le câblage relevaient de PROSKID.
 
 La commande est en logique câblée à relais, sans automate. En mode local, chaque pompe se démarre et s'arrête depuis la porte. En mode distant, les ordres viennent de la RTU du site, qui reçoit aussi l'état des pompes. Les voyants de la porte donnent le retour d'information local.
 

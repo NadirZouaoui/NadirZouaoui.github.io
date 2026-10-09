@@ -194,6 +194,9 @@ import portrait from '../assets/portrait.jpg';
 .sw button{font:inherit;background:none;border:1px solid var(--rule);color:var(--muted);padding:.2rem .65rem;cursor:pointer}
 .sw button:first-child{border-radius:4px 0 0 4px}.sw button:last-child{border-radius:0 4px 4px 0;border-left:0}
 .sw button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+/* When SiteNav renders its row it carries its own EN/FR switch: hide this one (screen only; .bar is .noprint) and keep Download at the right. */
+.nav-row ~ .page .bar{justify-content:flex-end}
+.nav-row ~ .page .bar .sw{display:none}
 .dl{display:inline-block;border:1px solid var(--accent);border-radius:4px;padding:.25rem .8rem;text-decoration:none;font-weight:500}
 header{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;padding-bottom:1.75rem;border-bottom:1px solid var(--ink)}
 .photo{width:120px;height:120px;border-radius:50%;object-fit:cover;flex:none}
