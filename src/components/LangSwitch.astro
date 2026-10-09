@@ -1,0 +1,12 @@
+---
+/** EN | FR toggle (same markup and look as the CV toolbar). Handled by the shared LangScript. */
+---
+<div class="sw" role="group" aria-label="Language / Langue">
+  <button type="button" data-set="en" aria-pressed="true">EN</button><button type="button" data-set="fr" aria-pressed="false">FR</button>
+</div>
+
+<style>
+  .sw button{font:inherit;background:none;border:1px solid var(--rule);color:var(--muted);padding:.2rem .65rem;cursor:pointer}
+  .sw button:first-child{border-radius:4px 0 0 4px}.sw button:last-child{border-radius:0 4px 4px 0;border-left:0}
+  .sw button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+</style>

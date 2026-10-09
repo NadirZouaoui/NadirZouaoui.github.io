@@ -1,0 +1,20 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs / OS
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# local env
+.env
+.env.*
+
+# media tool scratch / test output (raw media never goes in the repo)
+media-src/
+tools/media/__pycache__/
+*.pyc

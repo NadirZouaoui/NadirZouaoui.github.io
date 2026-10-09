@@ -1,0 +1,14 @@
+---
+/**
+ * Bilingual inline text. Renders both languages; the shared CSS rule
+ * `html[data-lang=..] [lang=..]` shows the active one.
+ *   <Lang en="Projects" fr="Projets" />
+ * Both strings are escaped. For rich text use Markdown bodies (index.md / index.fr.md).
+ */
+export interface Props {
+  en: string;
+  fr: string;
+}
+const { en, fr } = Astro.props;
+---
+<span lang="en">{en}</span><span lang="fr">{fr}</span>

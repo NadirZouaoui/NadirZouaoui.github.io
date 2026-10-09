@@ -1,0 +1,51 @@
+---
+/**
+ * Top navigation: CV · Projects · Simulators. Hidden in print.
+ * An item is shown only when its collection has at least one visible (non-draft) entry,
+ * and the whole row is omitted when nothing but the CV exists. So with no published
+ * content the CV page is exactly what it was before.
+ */
+import { getProjects, getSimulators } from '../lib/content';
+import Lang from './Lang.astro';
+import LangSwitch from './LangSwitch.astro';
+
+export interface Props {
+  current: 'cv' | 'projects' | 'simulators';
+  wide: boolean;
+  langSwitch: boolean;
+}
+const { current, wide, langSwitch } = Astro.props;
+
+const hasProjects = (await getProjects()).length > 0;
+const hasSimulators = (await getSimulators()).length > 0;
+const show = hasProjects || hasSimulators;
+const items = [
+  { key: 'cv', href: '/', en: 'CV', fr: 'CV', on: true },
+  { key: 'projects', href: '/projects/', en: 'Projects', fr: 'Projets', on: hasProjects },
+  { key: 'simulators', href: '/simulators/', en: 'Simulators', fr: 'Simulateurs', on: hasSimulators },
+].filter((i) => i.on);
+---
+{show && (
+  <div class:list={['nav-row', 'noprint', { wide }]}>
+    <nav aria-label="Main / Principale">
+      <ul>
+        {items.map((i) => (
+          <li>
+            <a href={i.href} aria-current={i.key === current ? 'page' : undefined}><Lang en={i.en} fr={i.fr} /></a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    {langSwitch && <LangSwitch />}
+  </div>
+)}
+
+<style>
+  .nav-row{max-width:46rem;margin:0 auto;padding:1rem 1.5rem 0;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-size:.9rem}
+  .nav-row.wide{max-width:72rem}
+  ul{list-style:none;margin:0;padding:0;display:flex;gap:1.5rem;flex-wrap:wrap}
+  li{margin:0}
+  a{color:var(--muted);text-decoration:none;padding:.15rem 0;border-bottom:2px solid transparent}
+  a:hover{color:var(--ink)}
+  a[aria-current="page"]{color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+</style>

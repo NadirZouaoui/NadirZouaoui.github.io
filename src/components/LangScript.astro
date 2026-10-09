@@ -1,0 +1,45 @@
+---
+/**
+ * Shared EN/FR mechanism (used by every page through Base.astro).
+ *
+ * Same behaviour as the original CV page:
+ *   - language order of precedence: ?lang=en|fr  >  localStorage "lang"  >  navigator.language
+ *   - sets <html data-lang> and <html lang>, switches document.title
+ *   - any element with [data-set="en|fr"] is a language button (aria-pressed is kept in sync)
+ * Additions for the new pages:
+ *   - runs from <head> (less flash of the wrong language); buttons are handled by event delegation
+ *   - elements with data-alt-en / data-alt-fr get their alt attribute switched,
+ *     elements with data-label-en / data-label-fr get their aria-label switched.
+ */
+export interface Props {
+  titles: { en: string; fr: string };
+}
+const { titles } = Astro.props;
+---
+<script is:inline define:vars={{ T: titles }}>
+(function(){
+  var root = document.documentElement;
+  function get(){ try { return localStorage.getItem("lang"); } catch(e){ return null; } }
+  function put(l){ try { localStorage.setItem("lang", l); } catch(e){} }
+  function apply(l){
+    root.dataset.lang = l; root.lang = l; document.title = T[l];
+    document.querySelectorAll("[data-set]").forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.dataset.set === l));
+    });
+    document.querySelectorAll("[data-alt-en]").forEach(function(el){
+      el.setAttribute("alt", l === "fr" ? el.dataset.altFr : el.dataset.altEn);
+    });
+    document.querySelectorAll("[data-label-en]").forEach(function(el){
+      el.setAttribute("aria-label", l === "fr" ? el.dataset.labelFr : el.dataset.labelEn);
+    });
+  }
+  var q = (location.search.match(/[?&]lang=(en|fr)/) || [])[1];
+  apply(q || get() || ((navigator.language || "").slice(0,2) === "fr" ? "fr" : "en"));
+  // Elements below this script do not exist yet when it runs from <head>: re-apply once parsed.
+  document.addEventListener("DOMContentLoaded", function(){ apply(root.dataset.lang); });
+  document.addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest("[data-set]") : null;
+    if (b) { put(b.dataset.set); apply(b.dataset.set); }
+  });
+})();
+</script>

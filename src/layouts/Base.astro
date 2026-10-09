@@ -1,0 +1,69 @@
+---
+import '../styles/site.css';
+import LangScript from '../components/LangScript.astro';
+import SiteNav from '../components/SiteNav.astro';
+
+export interface Props {
+  /** Page title in each language. The <title> element is the English one; the shared script switches it. */
+  titles?: { en: string; fr: string };
+  /** <meta name="description">. */
+  description?: string;
+  /** og:title / og:description (default to the current CV values). */
+  ogTitle?: string;
+  ogDescription?: string;
+  ogType?: string;
+  ogImage?: string;
+  /** Which nav item is the current page. */
+  current?: 'cv' | 'projects' | 'simulators';
+  /** Width of the nav row: the CV is narrow, content pages are wide. */
+  wide?: boolean;
+  /** Show the EN/FR switch inside the nav row (the CV has its own in its toolbar). */
+  langSwitch?: boolean;
+  /** Add <meta name="robots" content="noindex"> (drafts, 404). */
+  noindex?: boolean;
+}
+
+const {
+  titles = { en: 'Nadir Zouaoui, Electrical Engineer', fr: 'Nadir Zouaoui, Ingénieur électricien' },
+  description = 'Electrical engineer with multidisciplinary experience: Oil & Gas skids, gas-pipeline SCADA, ATEX equipment, industrial automation and renewable energy. Based in Oran, Algeria. / Ingénieur électricien pluridisciplinaire : skids Oil & Gas, SCADA, équipements ATEX, automatisation et énergies renouvelables.',
+  ogTitle = titles.en,
+  ogDescription = 'Multidisciplinary electrical engineer: Oil & Gas skids, SCADA, ATEX equipment, industrial automation and PV. Based in Oran, Algeria.',
+  ogType = 'profile',
+  ogImage = 'https://nadirzouaoui.github.io/og.png',
+  current = 'cv',
+  wide = false,
+  langSwitch = true,
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{titles.en}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+{noindex && <meta name="robots" content="noindex">}
+<meta property="og:type" content={ogType}>
+<meta property="og:site_name" content="Nadir Zouaoui">
+<meta property="og:title" content={ogTitle}>
+<meta property="og:description" content={ogDescription}>
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content={ogImage}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fr_FR">
+{ogType === 'profile' && <meta property="profile:first_name" content="Nadir">}
+{ogType === 'profile' && <meta property="profile:last_name" content="Zouaoui">}
+<meta name="twitter:card" content="summary_large_image">
+<LangScript titles={titles} />
+</head>
+<body>
+<SiteNav current={current} wide={wide} langSwitch={langSwitch} />
+<slot />
+</body>
+</html>
