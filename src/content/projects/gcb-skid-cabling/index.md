@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 order: 15
 title:
   en: Cable trays and power routing on a three-pump dosing skid
@@ -80,6 +80,13 @@ gallery:
       en: The same cable arriving at a pump motor, clear of the tubing.
       fr: Le même câble à son arrivée au moteur d'une pompe, à l'écart de la tuyauterie.
 drawings:
+  - image: "@assets/projects/atex-ex-d-enclosure/02-power-schematic.jpg"
+    alt:
+      en: Power schematic page with the three-phase supply, three motor feeders for pumps A, B and C, and a 230 VAC to 24 VDC supply
+      fr: Page de schéma de puissance avec l'alimentation triphasée, trois départs moteur pour les pompes A, B et C et une alimentation 230 VAC vers 24 VDC
+    caption:
+      en: "Power schematic page: three 380 VAC, 550 W pump motors."
+      fr: "Page de schéma de puissance : trois moteurs de pompe 380 VAC, 550 W."
   - image: "@assets/projects/gcb-skid-cabling/07-terminal-connection-diagram.jpg"
     alt:
       en: Terminal-connection diagram of the enclosure showing the customer supply cable, the three motor feeder terminal blocks and the three pump motors (labels in French)
@@ -99,8 +106,8 @@ videos:
     poster: /media/projects/gcb-skid-cabling/animation-3d.jpg
     ratio: "1280 / 720"
     caption:
-      en: The full 3D animation of the skid, 75 seconds, silent here.
-      fr: L'animation 3D complète du skid, 75 secondes, sans le son ici.
+      en: The full 3D animation of the skid.
+      fr: L'animation 3D complète du skid.
 ---
 
 ## Context
