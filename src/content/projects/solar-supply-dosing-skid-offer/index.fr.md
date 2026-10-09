@@ -15,6 +15,4 @@ L'étude est documentée dans un synoptique de deux feuilles daté du 03/10/2023
 
 ## Résultat
 
-Deux synoptiques pour l'offre technique, un par version, avec les composants, leurs caractéristiques et les sections de câbles définis.
-
-Sur site, j'ai mis en service 27 skids de dosage chimique anticorrosion Milton Roy et leurs installations solaires.
+Deux synoptiques pour l'offre technique, un par version, avec les composants, leurs caractéristiques et les sections de câbles définis. Il s'agissait d'une étude pour une offre ; je ne sais pas si ces alimentations ont été réalisées.

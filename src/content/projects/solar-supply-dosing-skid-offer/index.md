@@ -22,40 +22,39 @@ keyFigure:
   label:
     en: 4 × 325 Wp array, 24 V battery bank of 570 Ah
     fr: 4 × 325 Wc, parc de batteries 24 V de 570 Ah
-cover: "@assets/projects/proskid-dosing-skids/01-skid-solar-supply-synoptic.jpg"
+cover: "@assets/projects/solar-supply-dosing-skid-offer/01-skid-solar-supply-synoptic.jpg"
 coverAlt:
   en: System diagram of a solar power supply for a dosing skid, from the panels on a pole to the charge controller, battery bank and 24 V output (labels in French)
   fr: Synoptique d'une alimentation solaire pour skid de dosage, des panneaux sur mât au régulateur de charge, au parc de batteries et à la sortie 24 V
 drawings:
-  - image: "@assets/projects/proskid-dosing-skids/01-skid-solar-supply-synoptic.jpg"
+  - image: "@assets/projects/solar-supply-dosing-skid-offer/01-skid-solar-supply-synoptic.jpg"
     alt:
       en: System diagram of the skid version, with four solar panels on a pole, a disconnect and surge-protection box, an MPPT charge controller, two bus bars, a battery bank, a battery controller and a DC/DC converter feeding a 24 V output (labels in French)
       fr: Synoptique de la version skid, avec quatre panneaux sur mât, un coffret de sectionnement et parafoudre, un régulateur de charge MPPT, deux jeux de barres, un parc de batteries, un contrôleur de batteries et un convertisseur DC/DC alimentant une sortie 24 V
     caption:
       en: "Skid version: 4 × 325 Wp, MPPT 150 V / 70 A, 12 × 2 V / 570 Ah, DC/DC 24 V / 24 V 240 W (labels in French)."
       fr: "Version skid : 4 × 325 Wc, MPPT 150 V / 70 A, 12 × 2 V / 570 Ah, DC/DC 24 V / 24 V 240 W."
-  - image: "@assets/projects/proskid-dosing-skids/02-rtu-solar-supply-synoptic.jpg"
+  - image: "@assets/projects/solar-supply-dosing-skid-offer/02-rtu-solar-supply-synoptic.jpg"
     alt:
       en: System diagram of the RTU version, with two solar panels, the same charge controller, a smaller battery bank, a DC/DC converter and an AC/DC converter fed from a 230 VAC input (labels in French)
       fr: Synoptique de la version RTU, avec deux panneaux, le même régulateur de charge, un parc de batteries plus petit, un convertisseur DC/DC et un convertisseur AC/DC alimenté par une entrée 230 VAC
     caption:
       en: "RTU version: 2 × 325 Wp, 12 × 2 V / 400 Ah, DC/DC 110 W, and an AC/DC converter 230 V / 24 V 25 A (labels in French)."
       fr: "Version RTU : 2 × 325 Wc, 12 × 2 V / 400 Ah, DC/DC 110 W et convertisseur AC/DC 230 V / 24 V 25 A."
-  - image: "@assets/projects/proskid-dosing-skids/03-skid-array-protection-and-charge-controller.jpg"
+  - image: "@assets/projects/solar-supply-dosing-skid-offer/03-skid-array-protection-and-charge-controller.jpg"
     alt:
       en: Detail of the skid diagram, with solar panels on a pole, the disconnect and surge-protection box, the MPPT charge controller and the two protective devices, and the cable section written on each run (labels in French)
       fr: Détail du synoptique du skid, avec panneaux sur mât, coffret de sectionnement et parafoudre, régulateur de charge MPPT et les deux protections, et la section de chaque câble
     caption:
       en: From the array to the bus bar, with cable sections of 4, 6 and 16 mm² and protections of 40 A and 20 A (labels in French).
       fr: Du champ au jeu de barres, avec des câbles de 4, 6 et 16 mm² et des protections de 40 A et 20 A.
-  - image: "@assets/projects/proskid-dosing-skids/04-skid-battery-bank-and-battery-controller.jpg"
+  - image: "@assets/projects/solar-supply-dosing-skid-offer/04-skid-battery-bank-and-battery-controller.jpg"
     alt:
       en: Detail of the skid diagram, with twelve 2 V cells in two rows connected in series, a battery controller with a temperature sensor, and a fused knife disconnect to the bus bars (labels in French)
       fr: Détail du synoptique du skid, avec douze éléments de 2 V en deux rangées reliés en série, un contrôleur de batteries avec sonde de température et un inter-sectionneur à fusibles couteau vers les jeux de barres
     caption:
       en: Battery bank of 12 × 2 V / 570 Ah with its controller, temperature sensor and fused disconnect (labels in French).
       fr: Parc de batteries 12 × 2 V / 570 Ah avec son contrôleur, sa sonde de température et son sectionneur à fusibles.
-cvAnchor: proskid-dosing-skids
 ---
 
 ## Context
@@ -75,6 +74,4 @@ The design is documented in a two-sheet system diagram dated 03/10/2023, one she
 
 ## Result
 
-Two system diagrams for the technical offer, one per version, with the components, ratings and cable sections defined.
-
-On site, I commissioned 27 Milton Roy chemical anticorrosion dosing skids and their solar installations.
+Two system diagrams for the technical offer, one per version, with the components, ratings and cable sections defined. This was a design for an offer; I do not know whether the supplies were built.
