@@ -37,7 +37,7 @@ Still open, for Nadir to confirm (listed in the build report):
 - Whether naming the enclosure maker is wanted (not named in the copy).
 - Photos 14 to 16 show a leg in trousers (no face). Photo 16 is a workshop shot, cropped to the enclosure and the test bench (background signage and the pump removed). Photo 01 is cropped above the title block of the printed drawing.
 - The three EPLAN Pro Panel 3D screenshots are small (about 500 x 750 px); larger exports would look better in the lightbox.
-- The hero is `2202 building.mp4` (Nadir's LinkedIn edit: EPLAN first, then the build), with the EPLAN part (0 to 12.37 s) at 2x, encoded by hand with ffmpeg using the `encode_clip.py` settings because the tool has one speed for the whole clip. Its schematic frames show the remote system labelled "PLC" and instrument tag numbers. It is portrait, so the Clip frame pillarboxes it; portrait photos are centre-cropped in 4:3 thumbnails and the 8:5 cards.
+- The hero is `2202 building.mp4` (Nadir's LinkedIn edit: EPLAN first, then the build), with the EPLAN part (0 to 12.37 s) at 2x, encoded by hand with ffmpeg using the `encode_clip.py` settings because the tool has one speed for the whole clip. Its schematic frames show the remote system labelled "PLC" and instrument tag numbers. It is portrait (3:4) and the hero frame follows that ratio. The card cover is photo 01 (landscape: empty enclosure and the drawing).
 Schematics used: `D:\Nadir\Documents\Work\Proskid\NZO\2202\SCHEMAS ELECTRIQUES\2202 SKID GCB.pdf` (p.12 power, p.13-15 control, p.16-17 layout). Page 15 mentions a PLC and a site tag, so it is not published.
 
 ## Building on Nadir's PC
@@ -46,7 +46,8 @@ Schematics used: `D:\Nadir\Documents\Work\Proskid\NZO\2202\SCHEMAS ELECTRIQUES\2
 - Python 3.13 with Pillow and PyMuPDF. Use `python -I -X utf8` when printing PDF text (accents otherwise raise UnicodeEncodeError). For multi-line files, use the editor tools instead of shell heredocs.
 - Screenshots: headless Microsoft Edge (`--screenshot`, `--window-size`), served from a local `http.server`. Stop the server afterwards.
 - Raw material is staged outside the repo in `D:\Nadir\Documents\Portfolio\media-src\<slug>\` and only the processed output is written into the repo.
-- Portrait media is a template limitation: `Clip` uses a fixed 16/9 frame (portrait video is pillarboxed), `Gallery` and `ProjectCard` crop to 4:3 and 8:5.
+- Portrait media: `Clip` uses a 16/9 frame unless the entry gives `ratio` (set on the ATEX hero, `"3 / 4"`; without it a portrait video is pillarboxed). `Gallery` and `ProjectCard` crop to 4:3 and 8:5, so pick a landscape photo as `cover`.
+- Local preview: a plain `http.server` lets the browser replay an old clip from its cache when a file is re-encoded under the same name. Serve with `Cache-Control: no-store` or hard-reload.
 
 ## Media locations (Nadir's PC)
 | Project | Where | Notes |

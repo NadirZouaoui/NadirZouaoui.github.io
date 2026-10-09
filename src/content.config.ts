@@ -29,6 +29,8 @@ const videoRef = z.object({
   src: z.string().startsWith('/media/'),
   /** Public URL of the poster jpg (same folder). */
   poster: z.string().startsWith('/media/'),
+  /** Width / height of the encoded clip, e.g. "3 / 4" for a portrait clip. Default: 16 / 9. */
+  ratio: z.string().regex(/^\d+(\.\d+)?\s*\/\s*\d+(\.\d+)?$/).optional(),
 });
 
 export const collections = {

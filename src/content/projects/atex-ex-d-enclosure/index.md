@@ -21,13 +21,14 @@ keyFigure:
   label:
     en: flameproof rating, IP66
     fr: marquage antidéflagrant, IP66
-cover: "@assets/projects/atex-ex-d-enclosure/cover.jpg"
+cover: "@assets/projects/atex-ex-d-enclosure/01-empty-enclosure-and-drawing.jpg"
 coverAlt:
-  en: Door of the flameproof enclosure with labelled pushbuttons, a pump running light and the phase lights lit
-  fr: Face avant de l'armoire antidéflagrante avec boutons étiquetés, voyant de marche de pompe et voyants de phase allumés
+  en: Open flameproof enclosure, door devices fitted and mounting plate empty, with the printed door layout drawing in front
+  fr: Armoire antidéflagrante ouverte, appareils de porte en place et platine vide, avec le plan d'implantation de la porte imprimé au premier plan
 heroClip:
   src: /media/projects/atex-ex-d-enclosure/hero.mp4
   poster: /media/projects/atex-ex-d-enclosure/hero.jpg
+  ratio: "3 / 4"
 gallery:
   - image: "@assets/projects/atex-ex-d-enclosure/01-empty-enclosure-and-drawing.jpg"
     alt:

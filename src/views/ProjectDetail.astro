@@ -52,9 +52,9 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0;
       <p class="lead"><Lang en={d.summary.en} fr={d.summary.fr} /></p>
     </header>
 
-    <div class="hero">
+    <div class:list={['hero', d.heroClip?.ratio && 'fit']}>
       {d.heroClip ? (
-        <Clip src={d.heroClip.src} poster={d.heroClip.poster} />
+        <Clip src={d.heroClip.src} poster={d.heroClip.poster} ratio={d.heroClip.ratio} />
       ) : (
         <Picture
           src={d.cover}
@@ -101,7 +101,7 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0;
       <section class="section" aria-labelledby="videos">
         <h2 class="sec-h" id="videos"><Lang en="Videos" fr="Vidéos" /></h2>
         <div class="clips">
-          {d.videos.map((v) => <Clip src={v.src} poster={v.poster} caption={v.caption} />)}
+          {d.videos.map((v) => <Clip src={v.src} poster={v.poster} ratio={v.ratio} caption={v.caption} />)}
         </div>
       </section>
     )}
@@ -115,5 +115,7 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0;
   .hero{margin-top:1.75rem;line-height:0}
   .hero :global(img){width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border:1px solid var(--rule)}
   .hero :global(.clip){line-height:1.6}
+  /* hero clip with its own ratio (e.g. portrait): the frame follows the clip and stays within the viewport height */
+  .hero.fit :global(.clip){max-width:calc(min(80vh,44rem) * var(--ratio));margin-inline:auto}
   .clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(20rem,1fr));gap:1.5rem}
 </style>
