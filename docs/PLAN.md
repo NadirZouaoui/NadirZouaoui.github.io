@@ -22,8 +22,17 @@ Last updated 2026-10-09.
 - [x] **Go live:** done 2026-10-09. Pages source set to **GitHub Actions**, then PR #1 merged into `main`. Live checks passed: `/`, `/?lang=fr`, both CV PDFs and `/og.png` (byte-identical to the build), `/projects/`, the ATEX page and its media; sample pages and source files return 404. New work now branches from `main`, one PR per change.
 - [x] **Phase 3: ATEX Ex "d" case study (the pilot).** Reviewed in five rounds; Nadir approved the result on 2026-10-09. Published (`draft: false`) and PR #2 (`phase-3-atex`) merged into `astro-site` on 2026-10-09; live since PR #1 was merged the same day. Content in `src/content/projects/atex-ex-d-enclosure/`, media in `src/assets/projects/atex-ex-d-enclosure/` and `public/media/projects/atex-ex-d-enclosure/`. Branch `phase-3-atex`, draft PR into `astro-site`.
 - [ ] **Phase 4: Simulators.** Waiting for clips.
-- [ ] **Phase 5: more case studies** as media arrives.
-- [ ] **Phase 6: polish.** Per-page OG images, sitemap, performance pass, link check.
+- [ ] **Phase 5: more case studies.** In progress, one draft PR each, entries stay `draft: true` until Nadir has read them. See "Phase 5 queue" below.
+- [x] **Phase 6: polish.** PR #4 merged 2026-10-09 and verified live: `/sitemap.xml` (published pages only), `/robots.txt`, per-page share image (1200x630, from the cover), preload of the hero poster, `npm run check:links`. The CV page stayed byte-identical. Lighthouse on the local build: CV and `/projects/` 100 on all four, ATEX page 89 for performance (the 4.9 MB hero clip is the largest paint). Not done: no favicon (adding one changes the CV head); the Fiverr and LinkedIn links refuse automated checks, test them by hand.
+
+## Phase 5 queue (decided 2026-10-09 from the media on Nadir's PC)
+1. **IFRI 5.4 MW rooftop PV** (`ifri-pv`): draft PR #5, branch `phase-5-ifri-pv`. Source `Work\Freelance\Walid\Ifri\`. All figures come from the single-line diagram dossier revision D (27/07/2026) and the Archelios Pro report of one zone; the scope of work and the load study give older figures (20 or 14 injection points), do not use them. No claim of commissioning. Open questions are listed in the PR.
+2. **PROSKID off-grid solar supplies for chemical-injection skids** (`proskid-dosing-skids`): source `Work\Proskid\NZO\Skids solaires HRM\` (drawing set 23-028-ELE-GAD-001, author NZO) and the 3D animations in `Work\Proskid\NZO\2202\3D\Animation\` and `2204\Animation 3D\`. The PROSKID logo is in the animations: ask Nadir. The Milton Roy drawings are the manufacturer's, not Nadir's. `23-040` and `2403` are critical infrastructure.
+3. **At Pharma PV + storage visualisation**: source `Work\Freelance\Walid\At Pharma\Renders\`. Scope is visualisation only (quote of 28/07/2024). Renders carry equipment brands; aerial views sit on real satellite imagery; the site plan is not publishable.
+
+Left out for now: Sungy (renders only, a bank's sign in some), MHR (800x600 images), the genset cabinet (WhatsApp-size photos), the private villa.
+
+Preview of drafts: `npm run build:drafts`, then serve `dist-drafts/` with a no-cache server.
 
 ## Nadir's answers (Phase 3)
 1. **Function:** the skid doses a chemical corrosion inhibitor (Chimec) into a gas pipeline. The enclosure is both the power panel and the control panel for 3 dosing pumps. There is no PLC: it is hard-wired relay logic. Local and remote command, with status feedback to the site RTU; the door pilot lights are the local feedback. (The door has 19 devices: 10 pilot lights, 6 pushbuttons, a local/remote selector, an ON/OFF switch, an emergency stop.)
