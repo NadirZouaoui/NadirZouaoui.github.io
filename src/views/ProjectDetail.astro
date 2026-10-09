@@ -32,6 +32,9 @@ warnMissingAlt(`projects/${project.id} drawings`, d.drawings, d.draft);
 const coverAlt = d.coverAlt.en || d.title.en;
 const og = await ogImageProps(d.cover, coverAlt, Astro.site);
 const coverAltFr = d.coverAlt.fr || d.title.fr;
+const heroImage = d.hero ?? d.cover;
+const heroAlt = d.hero ? d.heroAlt.en || coverAlt : coverAlt;
+const heroAltFr = d.hero ? d.heroAlt.fr || coverAltFr : coverAltFr;
 const side = d.heroClip ? d.heroSide : [];
 const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0 || side.length > 0;
 ---
@@ -73,10 +76,10 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0 || side.length
         </Fragment>
       ) : (
         <Picture
-          src={d.cover}
-          alt={coverAlt}
-          data-alt-en={coverAlt}
-          data-alt-fr={coverAltFr}
+          src={heroImage}
+          alt={heroAlt}
+          data-alt-en={heroAlt}
+          data-alt-fr={heroAltFr}
           widths={[800, 1200, 1600, 2000]}
           sizes="(min-width: 72rem) 69rem, 100vw"
           width={1600}

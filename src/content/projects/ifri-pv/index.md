@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 order: 20
 title:
   en: Electrical design of a 5.4 MW rooftop solar plant with zero export
@@ -26,6 +26,10 @@ cover: "@assets/projects/ifri-pv/07-array-rows-standing-seam.jpg"
 coverAlt:
   en: Rows of solar modules on a metal roof under a low sun, with a roof valley on the left and hills on the horizon
   fr: Rangées de modules solaires sur une toiture métallique sous un soleil bas, avec un chéneau à gauche et des collines à l'horizon
+hero: "@assets/projects/ifri-pv/06-dusk-modules.jpg"
+heroAlt:
+  en: Rows of modules covering a roof at dusk, with hills and distant lights on the horizon
+  fr: Rangées de modules couvrant une toiture au crépuscule, avec des collines et des lumières lointaines à l'horizon
 gallery:
   - image: "@assets/projects/ifri-pv/01-crane-lifting-pallet.jpg"
     alt:
@@ -55,20 +59,6 @@ gallery:
     caption:
       en: Cable run along the module frame at a rail clip.
       fr: Câble le long du cadre du module, au niveau d'une patte de rail.
-  - image: "@assets/projects/ifri-pv/05-night-works-roof.jpg"
-    alt:
-      en: Night view along a metal roof towards a parapet wall, with a few modules laid at the far end and two workers in high-visibility vests under floodlights
-      fr: Vue de nuit le long d'une toiture métallique vers un acrotère, avec quelques modules posés au fond et deux ouvriers en gilet haute visibilité sous des projecteurs
-    caption:
-      en: Work on the roof at night, under floodlights.
-      fr: Travaux sur la toiture de nuit, sous projecteurs.
-  - image: "@assets/projects/ifri-pv/06-dusk-modules.jpg"
-    alt:
-      en: Rows of modules covering a roof at dusk, with hills and distant lights on the horizon
-      fr: Rangées de modules couvrant une toiture au crépuscule, avec des collines et des lumières lointaines à l'horizon
-    caption:
-      en: Module rows at dusk.
-      fr: Rangées de modules au crépuscule.
 drawings:
   - image: "@assets/projects/ifri-pv/01-typical-150kw-block.jpg"
     alt:
@@ -77,13 +67,69 @@ drawings:
     caption:
       en: Typical 150 kW block, with the note justifying the fuse-free DC side (labels in French).
       fr: Bloc type de 150 kW, avec la note qui justifie le côté DC sans fusible.
-  - image: "@assets/projects/ifri-pv/02-module-layout-one-zone.jpg"
+  - image: "@assets/projects/ifri-pv/07-site-plan-zones.jpg"
     alt:
-      en: Module layout plan of one roof zone, with four colour-coded inverter groups of 14 strings each, obstacles, dimensions and a legend (labels in French)
-      fr: Plan de calepinage des modules d'une zone de toiture, avec quatre groupes d'onduleur de 14 chaînes chacun en couleurs, les obstacles, les cotes et une légende
+      en: "Site plan of the three buildings with the roof zones in colour, each labelled with its injection point, cabinet and AC power, and a zone legend totalling 5 400 kW (labels in French)"
+      fr: "Plan de masse des trois bâtiments avec les zones de toiture en couleur, chacune repérée par son point d'injection, son armoire et sa puissance AC, et une légende des zones totalisant 5 400 kW"
     caption:
-      en: Module layout study for one roof zone (labels in French).
-      fr: Étude de calepinage des modules pour une zone de toiture.
+      en: "Site plan of the roof zones, with the legend of the 12 AC cabinets (labels in French)."
+      fr: "Plan de masse des zones de toiture, avec la légende des 12 armoires AC."
+  - image: "@assets/projects/ifri-pv/08-single-line-general.jpg"
+    alt:
+      en: "General single-line diagram with twelve PV fields, their inverter groups, AC cabinets and protections, the 11 injection points and the internal site network (labels in French)"
+      fr: "Schéma unifilaire général avec douze champs PV, leurs groupes d'onduleurs, les armoires AC et les protections, les 11 points d'injection et le réseau interne du site"
+    caption:
+      en: "General single-line diagram, from PV fields to the 11 injection points (labels in French)."
+      fr: "Schéma unifilaire général, des champs PV aux 11 points d'injection."
+  - image: "@assets/projects/ifri-pv/03-layout-ksb.jpg"
+    alt:
+      en: "Module layout plan of the KSB zone, with eight colour-coded inverter groups, roof dimensions and the injection point (labels in French)"
+      fr: "Plan de calepinage des modules de la zone KSB, avec huit groupes d'onduleur en couleurs, les cotes de la toiture et le point d'injection"
+    caption:
+      en: "Module layout of the KSB zone (labels in French)."
+      fr: "Calepinage des modules de la zone KSB."
+  - image: "@assets/projects/ifri-pv/04-layout-tetra-canette.jpg"
+    alt:
+      en: "Module layout plan of the Tetra and Canette zone, with four colour-coded inverter groups, roof obstacles, dimensions and the injection point (labels in French)"
+      fr: "Plan de calepinage des modules de la zone Tetra et Canette, avec quatre groupes d'onduleur en couleurs, les obstacles de toiture, les cotes et le point d'injection"
+    caption:
+      en: "Module layout of the Tetra and Canette zone (labels in French)."
+      fr: "Calepinage des modules de la zone Tetra et Canette."
+  - image: "@assets/projects/ifri-pv/05-layout-sidel-1.jpg"
+    alt:
+      en: "Module layout plan of the Sidel 1 zone over two roofs, with four colour-coded inverter groups, dimensions and the injection point (labels in French)"
+      fr: "Plan de calepinage des modules de la zone Sidel 1 sur deux toitures, avec quatre groupes d'onduleur en couleurs, les cotes et le point d'injection"
+    caption:
+      en: "Module layout of the Sidel 1 zone (labels in French)."
+      fr: "Calepinage des modules de la zone Sidel 1."
+  - image: "@assets/projects/ifri-pv/06-layout-sidel-2.jpg"
+    alt:
+      en: "Module layout plan of the Sidel 2 zone on the north extension roof, with two colour-coded inverter groups, dimensions and the injection point (labels in French)"
+      fr: "Plan de calepinage des modules de la zone Sidel 2 sur la toiture de l'extension nord, avec deux groupes d'onduleur en couleurs, les cotes et le point d'injection"
+    caption:
+      en: "Module layout of the Sidel 2 zone (labels in French)."
+      fr: "Calepinage des modules de la zone Sidel 2."
+  - image: "@assets/projects/ifri-pv/09-injection-pdl-01-tetra-canette.jpg"
+    alt:
+      en: "Single-line sheet of injection point PDL-01 (Tetra and Canette), with the typical inverter detail, four 150 kW inverters, cabinet AR-01, the connection to the site network and the AC balance and protection tables (labels in French)"
+      fr: "Feuille unifilaire du point d'injection PDL-01 (Tetra et Canette), avec le détail type d'onduleur, quatre onduleurs de 150 kW, l'armoire AR-01, le raccordement au réseau du site et les tableaux de bilan AC et de protections"
+    caption:
+      en: "Injection point PDL-01, Tetra and Canette (labels in French)."
+      fr: "Point d'injection PDL-01, Tetra et Canette."
+  - image: "@assets/projects/ifri-pv/10-injection-pdl-02-sidel-1.jpg"
+    alt:
+      en: "Single-line sheet of injection point PDL-02 (Sidel 1), with the typical inverter detail, four 150 kW inverters, cabinet AR-02, the connection to the site network and the AC balance and protection tables (labels in French)"
+      fr: "Feuille unifilaire du point d'injection PDL-02 (Sidel 1), avec le détail type d'onduleur, quatre onduleurs de 150 kW, l'armoire AR-02, le raccordement au réseau du site et les tableaux de bilan AC et de protections"
+    caption:
+      en: "Injection point PDL-02, Sidel 1 (labels in French)."
+      fr: "Point d'injection PDL-02, Sidel 1."
+  - image: "@assets/projects/ifri-pv/11-ac-feeders-recap.jpg"
+    alt:
+      en: "Table of the main 400 V AC feeders, giving for each cabinet the AC power, number of inverters, design current, busbar rating, main breaker and connection board (labels in French)"
+      fr: "Tableau des départs principaux AC 400 V, donnant pour chaque armoire la puissance AC, le nombre d'onduleurs, le courant d'emploi, le calibre du jeu de barres, le disjoncteur principal et le tableau de raccordement"
+    caption:
+      en: "Recap of the main AC feeders: 5 400 kW, 36 inverters (labels in French)."
+      fr: "Récapitulatif des départs principaux AC : 5 400 kW, 36 onduleurs."
 cvAnchor: ifri-pv
 ---
 
@@ -106,10 +152,17 @@ I worked on the electrical design and the energy study, from the roof layout to 
 - Analysis of the site load profile and power quality.
 - Yield study with Archelios Pro for each zone, with P50 and P90 values and the performance ratio.
 
+## Production
+
+The Archelios Pro reports give the following first-year results for the two zones studied (AC output, east-west orientation at 5° tilt, 635 Wp modules):
+
+- **Tetra and Canette zone:** 605.79 kWp, 954 modules, 4 inverters. Specific yield 1 404 kWh/kWp at P50 and 1 288 kWh/kWp at P90, annual AC energy 850.5 MWh, performance ratio 83.18 %.
+- **KSB zone:** 1 280.16 kWp, 2 016 modules, 8 inverters. Specific yield 1 397 kWh/kWp at P50 and 1 281 kWh/kWp at P90, annual AC energy 1 789 MWh, performance ratio 82.90 %.
+
 ## Result
 
 The design set was issued as a dossier of 17 single-line diagram sheets (revision D, 27 July 2026): general diagram, typical 150 kW block, one sheet per injection point and the recap of the AC feeders.
 
-The yield study of one zone of about 600 kWp (954 modules, four inverters, east-west at 5°) gives a first-year AC yield of 1 404 kWh/kWp at P50 and 1 288 kWh/kWp at P90, with a performance ratio of 83.18 %.
+The yield studies of the Tetra and Canette zone and of the KSB zone are summarised in the Production section above.
 
 The photos show the installation under way on the roofs in August and September 2026.
