@@ -1,0 +1,4 @@
+<!doctype html><script>
+const f=new URLSearchParams(location.search).get('f');
+fetch(f,{cache:'no-store'}).then(r=>r.arrayBuffer()).then(b=>{window.parent.postMessage({cvname:f,buf:b},'*')});
+</script>
