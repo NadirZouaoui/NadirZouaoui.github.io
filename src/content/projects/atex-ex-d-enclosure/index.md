@@ -181,11 +181,13 @@ drawings:
 videos:
   - src: /media/projects/atex-ex-d-enclosure/rtu-test-bench.mp4
     poster: /media/projects/atex-ex-d-enclosure/rtu-test-bench.jpg
+    ratio: "540 / 960"
     caption:
       en: RTU test bench, used to try the remote operation of the enclosure.
       fr: Banc de test RTU, utilisé pour essayer la commande à distance de l'armoire.
   - src: /media/projects/atex-ex-d-enclosure/pro-panel-3d.mp4
     poster: /media/projects/atex-ex-d-enclosure/pro-panel-3d.jpg
+    ratio: "1240 / 756"
     caption:
       en: Turning the 3D model in EPLAN Pro Panel.
       fr: Rotation du modèle 3D sous EPLAN Pro Panel.

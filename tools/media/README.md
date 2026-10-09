@@ -60,7 +60,7 @@ python tools\media\encode_clip.py "D:\Nadir\Documents\Portfolio\media-src\substa
 Output: `public/media/<section>/<slug>/<name>.mp4` (H.264, yuv420p, CRF 26, no audio, `+faststart`, max width 1280,
 60 fps footage reduced to 30 fps, metadata stripped) and a poster `<name>.jpg` next to it.
 `--poster-at` is in seconds of the OUTPUT clip. The script warns when a file is over 6 MB: shorten it, use
-`--width 960`, speed it up, or raise `--crf` (28 to 30). It prints the `src:` and `poster:` lines to use in the frontmatter.
+`--width 960`, speed it up, or raise `--crf` (28 to 30). It prints the `src:`, `poster:` and `ratio:` lines to use in the frontmatter (`ratio` lets a project page give a portrait clip a portrait frame).
 
 ## After running
 

@@ -77,7 +77,7 @@ To add a hook elsewhere: `<ProjectLink anchor="..." />` at the end of an `<li>` 
 3. Create `src/content/projects/<slug>/index.md` (copy `sample-project`). Frontmatter fields: `draft`, `order`, `title{en,fr}`, `summary{en,fr}`, `client`,
    `role{en,fr}`, `period`, `location`, `domains` (oil-gas, atex, solar-pv, automation, scada), `tools[]`, `keyFigure{value,label{en,fr}}`, `cover`, `coverAlt`,
    `heroClip{src,poster,ratio}` (optional; replaces the cover as hero; `ratio` like `"3 / 4"` for a clip that is not 16:9), `gallery[]`, `drawings[]` (each `image`, `alt{en,fr}`, `caption{en,fr}`),
-   `videos[]` (`src`, `poster`, `caption{en,fr}`), `cvAnchor`. The slug is the folder name. Images are referenced as `"@assets/projects/<slug>/<file>.jpg"` (quote it: a bare `@` is invalid YAML).
+   `videos[]` (`src`, `poster`, `ratio`, `caption{en,fr}`), `cvAnchor`. The slug is the folder name. Images are referenced as `"@assets/projects/<slug>/<file>.jpg"` (quote it: a bare `@` is invalid YAML).
 4. **Bilingual body**: `index.md` body = English, `index.fr.md` (same folder) body = French, no frontmatter. Use the same three `##` sections in both:
    Context / What I did / Result (Contexte / Ce que j'ai fait / Résultat). If `index.fr.md` is missing the French view falls back to English and the build warns.
    Everything else (titles, summaries, captions, alt) is bilingual in the frontmatter. Fill alt text in both languages (the build warns on empty alt of non-draft entries).
@@ -101,6 +101,7 @@ After every production build the `prune-unpublished` integration deletes (a) `di
 
 ## Components worth knowing
 
+- `Gallery` lays photos out in justified rows (each photo keeps its ratio, no cropping; rows share one height); the `videos` of a project page use the same rule with each clip's `ratio`. Only `ProjectCard` crops (8:5), so pick a landscape `cover`.
 - `Gallery` + `DrawingStrip` render `Thumb` buttons; one `<Lightbox />` per page opens them (native `<dialog>`, arrows/Home/End/Esc, focus trap, swipe, focus returns to the thumbnail).
 - `Clip`: `<video muted loop playsinline preload="none" poster>`; plays only while in the viewport (IntersectionObserver); with `prefers-reduced-motion` it never autoplays and shows a large Play button; there is always a Play/Pause button. Never add `autoplay` or audio.
 - Images use Astro `<Picture>` (AVIF/WebP + JPEG fallback, lazy). Hero images are `loading="eager"`.

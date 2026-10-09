@@ -31,8 +31,10 @@ Last updated 2026-10-09.
 3. **Period:** August to October 2024. No FAT/SAT, commissioning, delivery or site installation is claimed.
 4. **Proud of:** everything planned in EPLAN (Electric P8 + Pro Panel 3D layout) before the enclosure arrived; did everything alone, from sourcing to design to wiring. He also built a test-bench enclosure playing the RTU to test the remote operation (photos at the end of the gallery, video in `videos[]`).
 
+Confirmed by Nadir on review (2026-10-09): the period 08/2024 - 10/2024; naming Chimec in the copy; the "PLC" labels and instrument tags visible in the hero's EPLAN frames are fine.
+
 Still open, for Nadir to confirm (listed in the build report):
-- The period shown (08/2024 - 10/2024) against the dates in the documents and photos (revisions from 2023, photos and EPLAN files up to Nov-Dec 2024), and the location "Algeria" (no document states it).
+- The location "Algeria" (no document states it).
 - Enclosure dimensions differ between the supplier documents (CCF16G 550x800x245 in the technical sheet, CCF16BG 500x800x360 in the quotation), and the isolator rating differs (S0 16 A in the schematic, 32 A in the technical sheet). Neither is used in the copy.
 - Whether naming the enclosure maker is wanted (not named in the copy).
 - Photos 14 to 16 show a leg in trousers (no face). Photo 16 is a workshop shot, cropped to the enclosure and the test bench (background signage and the pump removed). Photo 01 is cropped above the title block of the printed drawing.
@@ -46,7 +48,7 @@ Schematics used: `D:\Nadir\Documents\Work\Proskid\NZO\2202\SCHEMAS ELECTRIQUES\2
 - Python 3.13 with Pillow and PyMuPDF. Use `python -I -X utf8` when printing PDF text (accents otherwise raise UnicodeEncodeError). For multi-line files, use the editor tools instead of shell heredocs.
 - Screenshots: headless Microsoft Edge (`--screenshot`, `--window-size`), served from a local `http.server`. Stop the server afterwards.
 - Raw material is staged outside the repo in `D:\Nadir\Documents\Portfolio\media-src\<slug>\` and only the processed output is written into the repo.
-- Portrait media: `Clip` uses a 16/9 frame unless the entry gives `ratio` (set on the ATEX hero, `"3 / 4"`; without it a portrait video is pillarboxed). `Gallery` and `ProjectCard` crop to 4:3 and 8:5, so pick a landscape photo as `cover`.
+- Portrait media: `Clip` uses a 16/9 frame unless the entry gives `ratio` (printed by `encode_clip.py`; without it a portrait video is pillarboxed). `Gallery` and the project `videos` are justified rows that keep each item's ratio. `ProjectCard` crops to 8:5, so pick a landscape photo as `cover`.
 - Local preview: a plain `http.server` lets the browser replay an old clip from its cache when a file is re-encoded under the same name. Serve with `Cache-Control: no-store` or hard-reload.
 
 ## Media locations (Nadir's PC)
