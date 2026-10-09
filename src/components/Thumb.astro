@@ -19,8 +19,10 @@ export interface Props {
   /** thumbnail intrinsic size (CSS decides the displayed size) */
   width: number;
   height: number;
+  /** above the fold (hero): load at once instead of lazily */
+  eager?: boolean;
 }
-const { image, alt, caption, group, index, total, widths, sizes, width, height } = Astro.props;
+const { image, alt, caption, group, index, total, widths, sizes, width, height, eager = false } = Astro.props;
 const full = await getImage({ src: image, width: Math.min(1800, image.width), format: 'webp', quality: 82 });
 const n = index + 1;
 ---
@@ -48,7 +50,7 @@ const n = index + 1;
     height={height}
     formats={['avif', 'webp']}
     fallbackFormat="jpg"
-    loading="lazy"
+    loading={eager ? 'eager' : 'lazy'}
     decoding="async"
   />
 </button>

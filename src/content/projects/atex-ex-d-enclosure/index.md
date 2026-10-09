@@ -29,6 +29,21 @@ heroClip:
   src: /media/projects/atex-ex-d-enclosure/hero.mp4
   poster: /media/projects/atex-ex-d-enclosure/hero.jpg
   ratio: "3 / 4"
+heroSide:
+  - image: "@assets/projects/atex-ex-d-enclosure/01-empty-enclosure-and-drawing.jpg"
+    alt:
+      en: Open flameproof enclosure with the door devices fitted and an empty mounting plate, with a printed drawing held in front
+      fr: Armoire antidéflagrante ouverte, appareils de porte posés et platine vide, avec un plan imprimé tenu devant
+    caption:
+      en: The enclosure as it started, with the drawing it was built from.
+      fr: L'armoire au départ, avec le plan qui a servi à la réaliser.
+  - image: "@assets/projects/atex-ex-d-enclosure/01-door-layout-2d.jpg"
+    alt:
+      en: Labelled 2D drawing of the enclosure door and of its cable-gland face, with the name of every light, pushbutton, selector and the emergency stop (labels in French)
+      fr: Dessin 2D étiqueté de la porte de l'armoire et de sa face à presse-étoupes, avec le nom de chaque voyant, bouton, sélecteur et de l'arrêt d'urgence
+    caption:
+      en: Door layout drawn in EPLAN (labels in French).
+      fr: Implantation de la porte dessinée sous EPLAN.
 gallery:
   - image: "@assets/projects/atex-ex-d-enclosure/01-empty-enclosure-and-drawing.jpg"
     alt:
@@ -93,13 +108,6 @@ gallery:
     caption:
       en: Door devices with the first ducts mounted.
       fr: Appareils de porte avec les premières goulottes posées.
-  - image: "@assets/projects/atex-ex-d-enclosure/10-door-wiring-closeup.jpg"
-    alt:
-      en: Close-up behind the door of device wiring running between two wire ducts
-      fr: Gros plan à l'arrière de la porte, câblage des appareils entre deux goulottes
-    caption:
-      en: Wiring behind the door.
-      fr: Câblage à l'arrière de la porte.
   - image: "@assets/projects/atex-ex-d-enclosure/11-door-harness.jpg"
     alt:
       en: Inside of the door with wires bundled and tied, three columns of devices and small white labels
