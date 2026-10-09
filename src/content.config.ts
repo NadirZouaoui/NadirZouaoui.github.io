@@ -59,7 +59,7 @@ export const collections = {
         hero: image().optional(),
         heroAlt: biLoose,
         heroClip: videoRef.optional(),
-        /** Up to two landscape pictures stacked beside a portrait `heroClip`, so that the hero reads as one landscape block. */
+        /** Up to two landscape pictures stacked beside a portrait `heroClip`, so that the hero reads as one landscape block. With a still `hero`/`cover` (no clip), one technical picture (a plan) shown beside it at its own ratio. */
         heroSide: z.array(picture).max(2).default([]),
         gallery: z.array(picture).default([]),
         drawings: z.array(picture).default([]),

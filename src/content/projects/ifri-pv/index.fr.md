@@ -21,13 +21,13 @@ J'ai travaillé sur l'étude électrique et l'étude énergétique, du calepinag
 
 Les rapports Archelios Pro donnent les résultats suivants de première année pour les deux zones étudiées (production AC, orientation est-ouest à 5° d'inclinaison, modules de 635 Wc) :
 
-- **Zone Tetra et Canette :** 605,79 kWc, 954 modules, 4 onduleurs. Productible spécifique de 1 404 kWh/kWc en P50 et de 1 288 kWh/kWc en P90, énergie AC annuelle de 850,5 MWh, ratio de performance de 83,18 %.
-- **Zone KSB :** 1 280,16 kWc, 2 016 modules, 8 onduleurs. Productible spécifique de 1 397 kWh/kWc en P50 et de 1 281 kWh/kWc en P90, énergie AC annuelle de 1 789 MWh, ratio de performance de 82,90 %.
+- **Zone d'environ 600 kWc (AR-01) :** 605,79 kWc, 954 modules, 4 onduleurs. Productible spécifique de 1 404 kWh/kWc en P50 et de 1 288 kWh/kWc en P90, énergie AC annuelle de 850,5 MWh, ratio de performance de 83,18 %.
+- **Zone d'environ 1 280 kWc :** 1 280,16 kWc, 2 016 modules, 8 onduleurs. Productible spécifique de 1 397 kWh/kWc en P50 et de 1 281 kWh/kWc en P90, énergie AC annuelle de 1 789 MWh, ratio de performance de 82,90 %.
 
 ## Résultat
 
 Le dossier d'étude a été émis sous forme de 17 feuilles de schémas unifilaires (indice D, 27 juillet 2026) : schéma général, bloc type de 150 kW, une feuille par point d'injection et le récapitulatif des départs AC.
 
-Les études de productible de la zone Tetra et Canette et de la zone KSB sont résumées dans la section Production ci-dessus.
+Les études de productible de ces deux zones sont résumées dans la section Production ci-dessus.
 
 Les photos montrent l'installation en cours sur les toitures en août et septembre 2026.
