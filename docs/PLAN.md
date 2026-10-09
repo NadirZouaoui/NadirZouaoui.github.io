@@ -20,7 +20,7 @@ Last updated 2026-10-09.
 - [x] **Phase 1: scaffold + CV port.** Draft PR #1 (`astro-site`). CV verified 1:1 (screen EN/FR at 1280/390 px, print PDF; only the portrait re-encode differs).
 - [x] **Phase 2: content model, components, media tools.** In the same PR. Draft samples: `sample-project`, `sample-simulator`.
 - [ ] **Go live:** Settings → Pages → Source: **GitHub Actions**, THEN merge PR #1. (Merging first would serve the raw Astro source.)
-- [~] **Phase 3: ATEX Ex "d" case study.** Built as draft (`draft: true`), awaiting Nadir's review. Content in `src/content/projects/atex-ex-d-enclosure/`, media in `src/assets/projects/atex-ex-d-enclosure/` and `public/media/projects/atex-ex-d-enclosure/`. Branch `phase-3-atex`, draft PR into `astro-site`.
+- [~] **Phase 3: ATEX Ex "d" case study (the pilot).** Reviewed in five rounds; Nadir approved the result on 2026-10-09 ("Pilot looks good"). Still `draft: true` in draft PR #2 (`phase-3-atex` into `astro-site`): setting `draft: false` and merging are the next steps, on his go-ahead. Content in `src/content/projects/atex-ex-d-enclosure/`, media in `src/assets/projects/atex-ex-d-enclosure/` and `public/media/projects/atex-ex-d-enclosure/`. Branch `phase-3-atex`, draft PR into `astro-site`.
 - [ ] **Phase 4: Simulators.** Waiting for clips.
 - [ ] **Phase 5: more case studies** as media arrives.
 - [ ] **Phase 6: polish.** Per-page OG images, sitemap, performance pass, link check.
@@ -43,13 +43,25 @@ Still open, for Nadir to confirm (listed in the build report):
 Schematics used: `D:\Nadir\Documents\Work\Proskid\NZO\2202\SCHEMAS ELECTRIQUES\2202 SKID GCB.pdf` (p.12 power, p.13-15 control, p.16-17 layout). Page 15 mentions a PLC and a site tag, so it is not published.
 
 ## Building on Nadir's PC
-- Shell is Git Bash. Node 24 comes first in PATH; run npm as `node "$NPMCLI" run <script>`.
+- Shell is Git Bash. The system Node is 22.11, too old for Astro. Put Node 24 first: `export PATH="/c/Users/Nadir/AppData/Local/ms-playwright-go/1.57.0:$PATH"`, set `NPMCLI="C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js"`, and run npm as `node "$NPMCLI" run <script>`. Shell state does not persist between commands, so start every command with these.
+- `gh` is logged in as NadirZouaoui.
 - `ffmpeg`/`ffprobe` are not on PATH. They live in `/c/Program Files/Shutter Encoder/Library/`; run `export PATH="/c/Program Files/Shutter Encoder/Library:$PATH"` before `encode_clip.py`.
 - Python 3.13 with Pillow and PyMuPDF. Use `python -I -X utf8` when printing PDF text (accents otherwise raise UnicodeEncodeError). For multi-line files, use the editor tools instead of shell heredocs.
 - Screenshots: headless Microsoft Edge (`--screenshot`, `--window-size`), served from a local `http.server`. Stop the server afterwards.
 - Raw material is staged outside the repo in `D:\Nadir\Documents\Portfolio\media-src\<slug>\` and only the processed output is written into the repo.
 - Portrait media: `Clip` uses a 16/9 frame unless the entry gives `ratio` (printed by `encode_clip.py`; without it a portrait video is pillarboxed). `Gallery` is a strict grid whose tile shape follows the majority of the photos (portrait tiles here; landscape photos span two columns). Nadir tried justified rows (commit `b5122e9`) and found the strict grid more professional. The project `videos` keep each clip's ratio at one shared height. `ProjectCard` crops to 8:5, so pick a landscape photo as `cover`.
 - Local preview: a plain `http.server` lets the browser replay an old clip from its cache when a file is re-encoded under the same name. Serve with `Cache-Control: no-store` or hard-reload.
+
+## Lessons from the pilot review (apply to every later case study)
+What Nadir asked for while reviewing the ATEX page. Follow these from the first draft.
+- **Copy:** factual and sober. No sales wording ("the client needed one enclosure"), no boasting ("I did the whole job alone"): state the scope as a plain list of what he did. Say what the equipment is for in one sentence.
+- **Key figure:** something an engineer finds meaningful (a rating, a power, a standard), not a count of parts.
+- **Hero:** prefer a video Nadir edited himself when one exists (here his LinkedIn edit). The poster is the clip's first frame. A portrait clip gets two landscape pictures stacked beside it (`heroSide`) so the hero reads as one landscape block.
+- **Order of sections:** drawings before photos.
+- **Card cover:** a landscape photo (the card crops to 8:5).
+- **Photos:** strict grid with aligned tiles (he found justified rows less professional); a row that is not full is centred. Keep the selection tight; he removed a close-up that added nothing.
+- **Preview:** serve `dist-drafts` with `Cache-Control: no-store` and give him the local URL after each change; he reviews in the browser and answers in short rounds.
+- **Process:** show him the first draft early. Ask about facts no document states (location, dates, whether a name may be published) instead of guessing; list what is still open in the PR.
 
 ## Media locations (Nadir's PC)
 | Project | Where | Notes |
