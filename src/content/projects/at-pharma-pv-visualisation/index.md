@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 order: 40
 title:
   en: 3D visualisation of a rooftop PV and battery storage installation
@@ -17,10 +17,10 @@ location:
   fr: Algérie
 domains: [solar-pv]
 tools: [Blender]
-cover: "@assets/projects/at-pharma-pv-visualisation/01-roof-mounting-clamps.jpg"
+cover: "@assets/projects/at-pharma-pv-visualisation/04-roof-inverter.jpg"
 coverAlt:
-  en: Render of PV modules on a sandwich-panel roof, held by aluminium clamps on aluminium rails
-  fr: Rendu de modules photovoltaïques sur une toiture en panneaux sandwich, fixés par des clames aluminium sur des profilés aluminium
+  en: Render of a string inverter on a roof, standing under a small canopy next to PV modules, with its overall dimensions annotated
+  fr: Rendu d'un onduleur string en toiture, placé sous un petit auvent à côté de modules photovoltaïques, avec ses dimensions d'encombrement annotées
 drawings:
   - image: "@assets/projects/at-pharma-pv-visualisation/07-mounting-section.jpg"
     alt:
@@ -65,6 +65,20 @@ gallery:
     caption:
       en: Technical room, variant A.
       fr: Local technique, variante A.
+  - image: "@assets/projects/at-pharma-pv-visualisation/08-technical-room-interior-batteries.jpg"
+    alt:
+      en: Interior render of the technical room, with four battery cabinets in a row along the left wall and a wall-mounted inverter next to the door, dimensions annotated
+      fr: Rendu intérieur du local technique, avec quatre armoires batteries alignées le long du mur de gauche et un onduleur mural à côté de la porte, cotes annotées
+    caption:
+      en: Inside the technical room, variant A, battery cabinets and inverter with dimensions.
+      fr: Intérieur du local technique, variante A, armoires batteries et onduleur avec les cotes.
+  - image: "@assets/projects/at-pharma-pv-visualisation/09-technical-room-interior-cabinets.jpg"
+    alt:
+      en: Interior render of the technical room, with two wall-mounted electrical cabinets, two air-conditioning units on the end wall, and the room dimensions annotated
+      fr: Rendu intérieur du local technique, avec deux armoires électriques murales, deux climatiseurs sur le mur du fond et les dimensions du local annotées
+    caption:
+      en: Inside the technical room, variant A, electrical cabinets and air conditioning, with the room dimensions.
+      fr: Intérieur du local technique, variante A, armoires électriques et climatisation, avec les dimensions du local.
   - image: "@assets/projects/at-pharma-pv-visualisation/06-technical-room-variant-b.jpg"
     alt:
       en: Render of the technical room seen through its open door, with one large battery cabinet on the left and an electrical cabinet on the right
@@ -72,6 +86,13 @@ gallery:
     caption:
       en: Technical room, variant B.
       fr: Local technique, variante B.
+  - image: "@assets/projects/at-pharma-pv-visualisation/10-technical-room-interior-variant-b.jpg"
+    alt:
+      en: Interior render of the technical room, with one large floor-standing battery cabinet on the right, two wall-mounted electrical cabinets on the left and two air-conditioning units on the end wall
+      fr: Rendu intérieur du local technique, avec une grande armoire batterie au sol à droite, deux armoires électriques murales à gauche et deux climatiseurs sur le mur du fond
+    caption:
+      en: Inside the technical room, variant B.
+      fr: Intérieur du local technique, variante B.
 ---
 
 ## Context
