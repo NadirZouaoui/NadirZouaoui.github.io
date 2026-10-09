@@ -225,3 +225,5 @@ I handled the enclosure from specification to testing:
 ## Result
 
 The enclosure was assembled and wired to the EPLAN model, then powered up and tested, including remote operation through the RTU test bench. From the door, the operator starts and stops each pump, selects local or remote control, and reads phase presence, pump running, pump fault and low liquid level.
+
+The cable trays and the cable routing from this enclosure to the pumps are described in [the skid cabling case study](/projects/gcb-skid-cabling/).

@@ -20,3 +20,5 @@ J'ai pris en charge l'armoire de la spécification aux essais :
 ## Résultat
 
 L'armoire a été montée et câblée conformément au modèle EPLAN, puis mise sous tension et testée, y compris la commande à distance à l'aide du banc de test RTU. Depuis la porte, l'opérateur démarre et arrête chaque pompe, choisit la commande locale ou distante, et lit la présence de chaque phase, la marche et le défaut de chaque pompe ainsi que le niveau de liquide bas.
+
+Les chemins de câbles et le cheminement des câbles de cette armoire vers les pompes sont décrits dans [l'étude de cas du câblage du skid](/projects/gcb-skid-cabling/).
