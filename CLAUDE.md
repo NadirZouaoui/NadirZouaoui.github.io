@@ -4,6 +4,8 @@ Personal portfolio of Nadir Zouaoui (electrical engineer), live at https://nadir
 Astro (static output) deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`.
 Bilingual EN/FR on the same URL. Plain, white, professional design; no heavy client JS (vanilla scripts only).
 
+**Plan, status, open questions and media locations for the ongoing upgrade: `docs/PLAN.md`. Read it at the start of every session.**
+
 ## Hard rules (read first)
 
 1. **Never push to `main`.** Work on a branch, open a PR (draft if unfinished). Before pushing from a shallow clone run `git fetch origin main`.
