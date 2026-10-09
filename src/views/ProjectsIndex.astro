@@ -4,11 +4,14 @@ import Base from '../layouts/Base.astro';
 import Lang from '../components/Lang.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { getProjects, DOMAINS, DOMAIN_LABELS } from '../lib/content';
+import { ogImageProps } from '../lib/og';
 import '../styles/content.css';
 
 const projects = await getProjects();
 const used = DOMAINS.filter((d) => projects.some((p) => p.data.domains.includes(d)));
 const anyDraft = projects.some((p) => p.data.draft);
+const first = projects[0]?.data;
+const og = await ogImageProps(first?.cover, first ? first.coverAlt.en || first.title.en : '', Astro.site);
 ---
 <Base
   current="projects"
@@ -16,6 +19,7 @@ const anyDraft = projects.some((p) => p.data.draft);
   titles={{ en: 'Projects, Nadir Zouaoui', fr: 'Projets, Nadir Zouaoui' }}
   description="Selected electrical engineering projects: Oil & Gas skids, ATEX equipment, SCADA, industrial automation and solar PV. / Projets d'ingénierie électrique sélectionnés : skids Oil & Gas, équipements ATEX, SCADA, automatisation industrielle et solaire PV."
   ogType="website"
+  {...og}
   noindex={anyDraft}
 >
   <main class="wrap">
@@ -34,7 +38,7 @@ const anyDraft = projects.some((p) => p.data.draft);
     <p class="vh" role="status" aria-live="polite" data-filter-status></p>
 
     <ul class="grid" data-grid>
-      {projects.map((p) => <ProjectCard project={p} />)}
+      {projects.map((p, i) => <ProjectCard project={p} eager={i < 3} priority={i === 0} />)}
     </ul>
   </main>
 </Base>

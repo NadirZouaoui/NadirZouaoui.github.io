@@ -13,7 +13,8 @@
     "astro": "astro",
     "check": "astro check",
     "build:drafts": "node tools/dev/with-drafts.mjs",
-    "preview:drafts": "node tools/dev/with-drafts.mjs --preview"
+    "preview:drafts": "node tools/dev/with-drafts.mjs --preview",
+    "check:links": "node tools/dev/check-links.mjs"
   },
   "dependencies": {
     "astro": "^7.3.8",

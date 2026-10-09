@@ -23,6 +23,7 @@ Bilingual EN/FR on the same URL. Plain, white, professional design; no heavy cli
 src/
   pages/index.astro            the CV (1:1 port of the original page; its CSS is `<style is:global>` in that file)
   pages/404.astro
+  pages/sitemap.xml.ts         /sitemap.xml: CV + published sections/entries only (same draft filter and "section only if visible entry" rule as the routes)
   pages/projects/[...slug].astro     /projects/ AND /projects/<slug>/ from one route; returns NO paths when there is
   pages/simulators/[...slug].astro   no visible entry, so no empty section page is ever built
   views/                       ProjectsIndex, ProjectDetail, SimulatorsIndex, SimulatorDetail (page templates)
@@ -33,11 +34,13 @@ src/
   content/projects/<slug>/{index.md,index.fr.md}
   content/simulators/<slug>/{index.md,index.fr.md}
   lib/content.ts               getProjects/getSimulators (draft filter), renderBilingual, labels
+  lib/og.ts                    ogImageProps(): 1200x630 JPEG from an entry's cover (getImage, build time) for Base's ogImage/ogImageAlt
   assets/                      images processed by Astro (portrait.jpg, projects/<slug>/, simulators/<slug>/)
   styles/site.css              shared tokens/base (loaded everywhere); styles/content.css for Projects/Simulators pages
-public/                        copied as-is: the two CV PDFs, og.png, media/<section>/<slug>/ (encoded clips + posters)
+public/                        copied as-is: the two CV PDFs, og.png, robots.txt (allow all + sitemap), media/<section>/<slug>/ (encoded clips + posters)
 tools/media/                   prep_images.py, encode_clip.py (+ README)
 tools/dev/with-drafts.mjs      cross-platform "build/preview with drafts"
+tools/dev/check-links.mjs      `npm run check:links [-- dist --external]`: internal link/#fragment check of a build folder (exit 1 on broken internal links); --external also requests external URLs and reports (bot-blocked 999/403 listed as "check by hand")
 astro.config.mjs               also holds the `prune-unpublished` integration (see "Drafts" below)
 ```
 
@@ -99,6 +102,14 @@ The page ends with "Request a live demo" (mailto nadir.zouaoui@hotmail.com).
 After every production build the `prune-unpublished` integration deletes (a) `dist/media/<section>/<slug>/` of every entry that is not explicitly
 `draft: false`, and (b) unreferenced image files in `dist/_astro/` (Astro emits the original of every content `image()` even for drafts).
 
+## SEO and sharing
+
+- `/sitemap.xml` lists every built page with absolute URLs (never drafts or the 404); `public/robots.txt` points to it.
+- Open Graph: the CV and the 404 keep `/og.png`. Project pages, `/projects/` (first project's cover), simulator pages and `/simulators/` (first cover) get a generated 1200x630 JPEG in `_astro/`
+  plus `og:image:alt`, `twitter:image` and `twitter:image:alt` (Base props `ogImage`/`ogImageAlt`, set with `ogImageProps` from `src/lib/og.ts`). A simulator without `cover` keeps the default.
+  The prune step keeps these files because it only deletes `_astro/` images whose file name appears in no built HTML/CSS/JS/XML.
+- The 404 page has no canonical / `og:url`. A project with a `heroClip` preloads its poster (Base `head` slot) because the poster is the LCP element.
+
 ## Components worth knowing
 
 - `Gallery` is a strict grid of equal tiles. The tile shape follows the majority of the photos (portrait 3:4 or landscape 4:3); in a portrait grid a landscape photo spans two columns. Thumbnails are cropped to the tile, the lightbox shows the whole photo. Photos stay in order; a row that is not full is centred.
@@ -114,6 +125,7 @@ npm install
 npm run check          # astro check (types)
 npm run build          # production build; must list only /index.html and /404.html while nothing is published
 npm run build:drafts   # includes drafts -> dist-drafts/
+npm run check:links -- dist --external   # after a build: broken internal links fail, external ones are a report
 ```
 Then compare with Playwright (Chromium is preinstalled in the agent sandbox at /opt/pw-browsers; `PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers`, do not run `playwright install`):
 - CV regression: serve the original page (`git show 0c05d84:index.html`, plus the PDFs and og.png) and the new `dist/` on two ports; screenshot `/?lang=en` and `/?lang=fr` at 1280 and 390 px, run `page.pdf()` with print media for both, and pixel-diff. Only the portrait pixels may differ (re-encoded JPEG). Check `scrollWidth <= 375` at 375 px and no console errors.
