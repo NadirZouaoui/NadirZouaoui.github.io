@@ -21,6 +21,10 @@ cover: "@assets/projects/at-pharma-pv-visualisation/04-roof-inverter.jpg"
 coverAlt:
   en: Render of a string inverter on a roof, standing under a small canopy next to PV modules, with its overall dimensions annotated
   fr: Rendu d'un onduleur string en toiture, placé sous un petit auvent à côté de modules photovoltaïques, avec ses dimensions d'encombrement annotées
+hero: "@assets/projects/at-pharma-pv-visualisation/01-roof-mounting-clamps.jpg"
+heroAlt:
+  en: Render of PV modules on a sandwich-panel roof, held by aluminium clamps on aluminium rails
+  fr: Rendu de modules photovoltaïques sur une toiture en panneaux sandwich, fixés par des clames aluminium sur des profilés aluminium
 drawings:
   - image: "@assets/projects/at-pharma-pv-visualisation/07-mounting-section.jpg"
     alt:

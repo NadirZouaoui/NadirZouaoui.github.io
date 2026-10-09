@@ -1,7 +1,7 @@
 ---
 /**
  * /projects/<slug>/ template:
- * hero (clip, clip + two side pictures, or image) -> at a glance -> body (Context / What I did / Result, from the Markdown)
+ * hero (clip, clip + two side pictures, image, or image + one picture beside it) -> at a glance -> body (Context / What I did / Result, from the Markdown)
  * -> drawings strip -> gallery (lightbox) -> videos -> back link.
  */
 import type { CollectionEntry } from 'astro:content';
@@ -35,7 +35,10 @@ const coverAltFr = d.coverAlt.fr || d.title.fr;
 const heroImage = d.hero ?? d.cover;
 const heroAlt = d.hero ? d.heroAlt.en || coverAlt : coverAlt;
 const heroAltFr = d.hero ? d.heroAlt.fr || coverAltFr : coverAltFr;
-const side = d.heroClip ? d.heroSide : [];
+const side = d.heroSide;
+// still hero + technical picture beside it (no clip): the picture's own ratio sets the frame, so a plan is never cropped
+const stillSide = !d.heroClip && side.length > 0;
+const sideRatio = stillSide ? side[0].image.width / side[0].image.height : 0;
 const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0 || side.length > 0;
 ---
 <Base
@@ -59,7 +62,7 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0 || side.length
       <p class="lead"><Lang en={d.summary.en} fr={d.summary.fr} /></p>
     </header>
 
-    <div class:list={['hero', side.length > 0 ? 'split' : d.heroClip?.ratio && 'fit']} style={d.heroClip ? `--ratio:${d.heroClip.ratio ?? '16 / 9'}` : undefined}>
+    <div class:list={['hero', side.length > 0 ? 'split' : d.heroClip?.ratio && 'fit', stillSide && 'still']} style={d.heroClip ? `--ratio:${d.heroClip.ratio ?? '16 / 9'}` : stillSide ? `--side-ratio:${sideRatio}` : undefined}>
       {d.heroClip ? (
         <Fragment>
           <Clip src={d.heroClip.src} poster={d.heroClip.poster} ratio={d.heroClip.ratio} />
@@ -75,20 +78,45 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0 || side.length
           )}
         </Fragment>
       ) : (
-        <Picture
-          src={heroImage}
-          alt={heroAlt}
-          data-alt-en={heroAlt}
-          data-alt-fr={heroAltFr}
-          widths={[800, 1200, 1600, 2000]}
-          sizes="(min-width: 72rem) 69rem, 100vw"
-          width={1600}
-          height={900}
-          formats={['avif', 'webp']}
-          fallbackFormat="jpg"
-          loading="eager"
-          fetchpriority="high"
-        />
+        <Fragment>
+          {stillSide ? <div class="main"><Picture
+            src={heroImage}
+            alt={heroAlt}
+            data-alt-en={heroAlt}
+            data-alt-fr={heroAltFr}
+            widths={[800, 1200, 1600, 2000]}
+            sizes="(min-width: 72rem) 33rem, 100vw"
+            width={1600}
+            height={900}
+            formats={['avif', 'webp']}
+            fallbackFormat="jpg"
+            loading="eager"
+            fetchpriority="high"
+          /></div> : <Picture
+            src={heroImage}
+            alt={heroAlt}
+            data-alt-en={heroAlt}
+            data-alt-fr={heroAltFr}
+            widths={[800, 1200, 1600, 2000]}
+            sizes="(min-width: 72rem) 69rem, 100vw"
+            width={1600}
+            height={900}
+            formats={['avif', 'webp']}
+            fallbackFormat="jpg"
+            loading="eager"
+            fetchpriority="high"
+          />}
+          {stillSide && (
+            <ul class="side">
+              {side.map((it, i) => (
+                <li>
+                  <Thumb image={it.image} alt={it.alt} caption={it.caption} group="hero" index={i} total={side.length}
+                    widths={[480, 960, 1200, 1600]} sizes="(min-width: 40rem) 36rem, 100vw" width={1600} height={Math.round(1600 / sideRatio)} eager />
+                </li>
+              ))}
+            </ul>
+          )}
+        </Fragment>
       )}
     </div>
 
@@ -149,6 +177,18 @@ const hasLightbox = d.gallery.length > 0 || d.drawings.length > 0 || side.length
     .hero.split :global(.clip),.side{flex:none}
     .side{flex-direction:row;gap:.75rem}
     .side li{aspect-ratio:3/2}
+  }
+  /* still hero + one picture (a plan) beside it: same height, widths in proportion to the two ratios; stacked on phones */
+  .hero.split.still{max-width:none;align-items:stretch}
+  .hero.still .main{flex:1.5 1 0;min-width:0;position:relative}
+  .hero.still .main :global(img){position:absolute;inset:0;height:100%;aspect-ratio:auto}
+  .hero.still .side{flex:var(--side-ratio) 1 0}
+  .hero.still .side li{flex:none;aspect-ratio:var(--side-ratio)}
+  .hero.still .side :global(img){aspect-ratio:auto;height:100%;object-fit:contain}
+  @media (max-width:40rem){
+    .hero.still .main{flex:none;aspect-ratio:3/2}
+    .hero.still .side{flex:none;flex-direction:column}
+    .hero.still .side li{width:100%}
   }
   /* videos in justified rows, like the Gallery: each clip keeps its ratio and the clips of a row share one height */
   .clips{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;--h:16rem;--hmax:22rem}
