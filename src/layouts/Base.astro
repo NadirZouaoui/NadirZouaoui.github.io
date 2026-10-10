@@ -2,6 +2,7 @@
 import '../styles/site.css';
 import LangScript from '../components/LangScript.astro';
 import SiteNav from '../components/SiteNav.astro';
+import Reveal from '../components/Reveal.astro';
 
 export interface Props {
   /** Page title in each language. The <title> element is the English one; the shared script switches it. */
@@ -72,6 +73,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 {customOg && <meta name="twitter:image" content={ogImageUrl}>}
 {customOg && ogImageAlt && <meta name="twitter:image:alt" content={ogImageAlt}>}
 <LangScript titles={titles} />
+<Reveal />
 <slot name="head" />
 </head>
 <body>

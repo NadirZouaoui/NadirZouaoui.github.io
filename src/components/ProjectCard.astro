@@ -16,7 +16,7 @@ const d = project.data;
 const coverAlt = d.coverAlt.en || d.title.en;
 const coverAltFr = d.coverAlt.fr || d.title.fr;
 ---
-<li class="card" data-domains={d.domains.join(' ')}>
+<li class="card" data-reveal data-domains={d.domains.join(' ')}>
   <div class="img">
     <Picture
       src={d.cover}
@@ -48,11 +48,15 @@ const coverAltFr = d.coverAlt.fr || d.title.fr;
 </li>
 
 <style>
-  .card{position:relative;display:flex;flex-direction:column;border:1px solid var(--rule);background:#fff;margin:0}
-  .card:hover{border-color:var(--accent)}
+  .card{position:relative;display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#fff;margin:0;transition:border-color .15s,box-shadow .2s,transform .2s}
+  .card:hover{border-color:var(--accent);box-shadow:var(--lift)}
   .card[hidden]{display:none}
   .img{aspect-ratio:8/5;background:#f3f4f6;overflow:hidden;line-height:0}
-  .img :global(img){width:100%;height:100%;object-fit:cover;display:block}
+  .img :global(img){width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+  @media (prefers-reduced-motion:no-preference){
+    .card:hover{transform:translateY(-3px)}
+    .card:hover .img :global(img){transform:scale(1.04)}
+  }
   .body{padding:1rem 1.1rem 1.1rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
   h2{font-size:1.1rem;font-weight:600;line-height:1.3;margin:0}
   h2 a{color:var(--ink);text-decoration:none}

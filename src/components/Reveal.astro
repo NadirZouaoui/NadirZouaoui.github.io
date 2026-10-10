@@ -1,0 +1,39 @@
+---
+/**
+ * Scroll reveal (screen only, motion allowed only). Elements with `data-reveal` fade in and rise once when they
+ * enter the viewport; the CSS in site.css hides them only under `html.js-reveal`, which this script adds
+ * synchronously from <head> (no flash) and only when IntersectionObserver exists and motion is allowed.
+ * Without JS or with reduced motion nothing is ever hidden. Elements already on screen at load show at once;
+ * a timeout reveals everything if the observer never fires; `beforeprint` reveals everything too.
+ */
+---
+<script is:inline>
+(function(){
+  var d = document, h = d.documentElement, Q = "[data-reveal]";
+  if (!window.IntersectionObserver || !matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+  h.classList.add("js-reveal");
+  var fired = 0;
+  function all(){ d.querySelectorAll(Q).forEach(function(e){ e.classList.add("in", "now"); }); }
+  addEventListener("beforeprint", all);
+  d.addEventListener("DOMContentLoaded", function(){
+    try {
+      var io = new IntersectionObserver(function(es){
+        var n = 0; fired = 1;
+        es.forEach(function(x){
+          if (!x.isIntersecting) return;
+          // stagger the elements revealed together (a row of cards), capped
+          x.target.style.setProperty("--d", Math.min(n++, 4) * 60 + "ms");
+          x.target.classList.add("in");
+          io.unobserve(x.target);
+        });
+      });
+      d.querySelectorAll(Q).forEach(function(e){
+        var r = e.getBoundingClientRect();
+        // already in the first screen: no animation, no blank. Hidden cards (filter) have an empty rect and get observed.
+        if (r.top < innerHeight && r.bottom > 0) e.classList.add("in", "now"); else io.observe(e);
+      });
+      setTimeout(function(){ if (!fired) all(); }, 2500);
+    } catch (err) { all(); h.classList.remove("js-reveal"); }
+  });
+})();
+</script>

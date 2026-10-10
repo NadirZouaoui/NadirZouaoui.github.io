@@ -19,7 +19,7 @@ const { items, group = 'drawings' } = Astro.props;
     const ratio = it.image.width / it.image.height;
     const h = 360;
     return (
-      <li style={`--r:${ratio.toFixed(4)}`}>
+      <li style={`--r:${ratio.toFixed(4)}`} data-reveal>
         <div class="frame">
           <Thumb image={it.image} alt={it.alt} caption={it.caption} group={group} index={i} total={items.length}
             widths={[480, 960]} sizes="(min-width: 40rem) 30rem, 85vw" width={Math.round(h * ratio)} height={h} />

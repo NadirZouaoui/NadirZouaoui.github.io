@@ -6,7 +6,8 @@
 </div>
 
 <style>
-  .sw button{font:inherit;background:none;border:1px solid var(--rule);color:var(--muted);padding:.2rem .65rem;cursor:pointer}
+  .sw button{transition:background-color .15s,border-color .15s,color .15s;font:inherit;background:none;border:1px solid var(--rule);color:var(--muted);padding:.2rem .65rem;cursor:pointer}
   .sw button:first-child{border-radius:4px 0 0 4px}.sw button:last-child{border-radius:0 4px 4px 0;border-left:0}
+  .sw button:not([aria-pressed="true"]):hover{background:#f3f4f6;color:var(--ink)}
   .sw button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
 </style>
