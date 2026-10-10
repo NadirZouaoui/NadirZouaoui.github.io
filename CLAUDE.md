@@ -29,7 +29,7 @@ src/
   views/                       ProjectsIndex, ProjectDetail, SimulatorsIndex, SimulatorDetail (page templates)
   layouts/Base.astro           <head> (title, description, canonical, OG/Twitter; defaults = the CV's), SiteNav, LangScript
   components/                  Lang, LangScript, LangSwitch, SiteNav, ProjectLink, ProjectCard, SimulatorCard, Facts,
-                               Gallery, DrawingStrip, Thumb, Lightbox, Clip, Prose
+                               Gallery, DrawingStrip, ShotGrid, SimulatorOffer, Thumb, Lightbox, Clip, Prose
   content.config.ts            collection schemas (projects, simulators + their French bodies)
   content/projects/<slug>/{index.md,index.fr.md}
   content/simulators/<slug>/{index.md,index.fr.md}
@@ -88,10 +88,13 @@ To add a hook elsewhere: `<ProjectLink anchor="..." />` at the end of an `<li>` 
 
 ## Adding a simulator
 
-Same flow with `src/content/simulators/<slug>/`: `status` (delivered | in-development), `tech[]`, `learningGoal{en,fr}`,
-`clips[]` (`slug`, `title`, `caption`, `src`, `poster`, `duration`), `underTheHood[]` (each `{en, fr}`), optional `cover`
-(otherwise the first clip poster is the card image). `index.md` / `index.fr.md` bodies are the introduction. Clips: `encode_clip.py <raw> simulators/<slug>/<clip-name>`.
-The page ends with "Request a live demo" (mailto nadir.zouaoui@hotmail.com).
+Same flow with `src/content/simulators/<slug>/`. Simulator pages are image-heavy (clips and screenshots first, little text). Fields: `status` (delivered | in-development),
+`tech[]`, `learningGoal{en,fr}`, optional `cover` (otherwise the first clip poster is the card image), `heroClip{src,poster,ratio}` (large clip at the top),
+`clips[]` (`slug`, `title`, `caption`, `src`, `poster`, `duration`, `ratio`), `grading{points[{en,fr}], pictures[]}` ("Scoring and LMS reporting": UI screenshots + bullets),
+`gallery[]` ("Screens"), `underTheHood[]` (each `{en, fr}`). `pictures[]` and `gallery[]` items are `image` (`"@assets/simulators/<slug>/<file>.png"`), `alt{en,fr}`, `caption{en,fr}`.
+`index.md` / `index.fr.md` bodies are the short "About this module" text. Clips: `encode_clip.py <raw> simulators/<slug>/<clip-name>`; screenshots: `prep_images.py`.
+Page order: hero clip -> In action (2-column clip grid) -> Scoring and LMS reporting -> About + Learning goal (two columns) -> Screens -> Under the hood -> Built to order (`SimulatorOffer`) -> Status + "Request a live demo".
+`/simulators/` ends with the same `SimulatorOffer` plus the demo button (`cta`).
 
 ## Drafts
 
@@ -114,7 +117,8 @@ After every production build the `prune-unpublished` integration deletes (a) `di
 
 - `Gallery` is a strict grid of equal tiles. The tile shape follows the majority of the photos (portrait 3:4 or landscape 4:3); in a portrait grid a landscape photo spans two columns. Thumbnails are cropped to the tile, the lightbox shows the whole photo. Photos stay in order; a row that is not full is centred.
 - The `videos` of a project page sit in one row, each clip with its own `ratio`, at one shared height; a row that is not full is centred too. `ProjectCard` crops to 8:5, so pick a landscape `cover`.
-- `Gallery` + `DrawingStrip` render `Thumb` buttons; one `<Lightbox />` per page opens them (native `<dialog>`, arrows/Home/End/Esc, focus trap, swipe, focus returns to the thumbnail).
+- `ShotGrid`: uncropped screenshot grid (2 columns on desktop, each tile at the picture's own ratio) used by the simulator `grading.pictures` and `gallery`. `SimulatorOffer`: the "Built to order" definition grid (all strings inline `Lang`).
+- `Gallery`, `DrawingStrip` + `ShotGrid` render `Thumb` buttons; each group name (`grading`, `screens`) has its own arrows; one `<Lightbox />` per page opens them (native `<dialog>`, arrows/Home/End/Esc, focus trap, swipe, focus returns to the thumbnail).
 - `Clip`: `<video muted loop playsinline preload="none" poster>`; plays only while in the viewport (IntersectionObserver); with `prefers-reduced-motion` it never autoplays and shows a large Play button; there is always a Play/Pause button. Never add `autoplay` or audio.
 - Images use Astro `<Picture>` (AVIF/WebP + JPEG fallback, lazy). Hero images are `loading="eager"`.
 

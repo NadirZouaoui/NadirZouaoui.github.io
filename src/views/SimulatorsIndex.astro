@@ -3,6 +3,7 @@
 import Base from '../layouts/Base.astro';
 import Lang from '../components/Lang.astro';
 import SimulatorCard from '../components/SimulatorCard.astro';
+import SimulatorOffer from '../components/SimulatorOffer.astro';
 import { getSimulators } from '../lib/content';
 import { ogImageProps } from '../lib/og';
 import '../styles/content.css';
@@ -16,7 +17,7 @@ const og = await ogImageProps(firstCover?.cover, firstCover ? firstCover.coverAl
   current="simulators"
   wide
   titles={{ en: 'Simulators, Nadir Zouaoui', fr: 'Simulateurs, Nadir Zouaoui' }}
-  description="3D training simulators for electrical competency: interactive first-person exercises built with Blender and Godot. / Simulateurs de formation 3D pour les compétences électriques : exercices interactifs à la première personne, réalisés avec Blender et Godot."
+  description="Procedure trainers for electrical work: 3D scenes graded step by step and reported to the LMS. / Simulateurs de procédures pour les travaux électriques : scènes 3D notées étape par étape et transmises au LMS."
   ogType="website"
   {...og}
   noindex={anyDraft}
@@ -24,13 +25,14 @@ const og = await ogImageProps(firstCover?.cover, firstCover ? firstCover.coverAl
   <main class="wrap">
     {anyDraft && <p class="draft-banner noprint">Preview: includes draft simulators (not published).</p>}
     <h1><Lang en="Simulators" fr="Simulateurs" /></h1>
-    <p class="lead"><Lang en="Interactive 3D training exercises for electrical competency. Each module is shown as short clips of the real simulation." fr="Exercices de formation 3D interactifs pour les compétences électriques. Chaque module est présenté par de courts extraits de la simulation réelle." /></p>
+    <p class="lead"><Lang en="Procedure trainers for electrical work. The trainee carries out the task in a 3D scene, every step is graded against the procedure, and the result is reported to the LMS. Each module is shown as short clips of the real simulation." fr="Simulateurs de procédures pour les travaux électriques. Le stagiaire exécute la tâche dans une scène 3D, chaque étape est notée par rapport à la procédure et le résultat est transmis au LMS. Chaque module est présenté par de courts extraits de la simulation réelle." /></p>
     <ul class="grid">
       {sims.map((s) => <SimulatorCard simulator={s} />)}
     </ul>
+    <SimulatorOffer cta />
   </main>
 </Base>
 
 <style>
-  .grid{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(18rem,1fr));gap:1.5rem}
+  .grid{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,24rem),1fr));gap:1.5rem}
 </style>

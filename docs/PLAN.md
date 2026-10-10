@@ -21,7 +21,7 @@ Last updated 2026-10-10.
 - [x] **Phase 2: content model, components, media tools.** In the same PR. Draft samples: `sample-project`, `sample-simulator`.
 - [x] **Go live:** done 2026-10-09. Pages source set to **GitHub Actions**, then PR #1 merged into `main`. Live checks passed: `/`, `/?lang=fr`, both CV PDFs and `/og.png` (byte-identical to the build), `/projects/`, the ATEX page and its media; sample pages and source files return 404. New work now branches from `main`, one PR per change.
 - [x] **Phase 3: ATEX Ex "d" case study (the pilot).** Reviewed in five rounds; Nadir approved the result on 2026-10-09. Published (`draft: false`) and PR #2 (`phase-3-atex`) merged into `astro-site` on 2026-10-09; live since PR #1 was merged the same day. Content in `src/content/projects/atex-ex-d-enclosure/`, media in `src/assets/projects/atex-ex-d-enclosure/` and `public/media/projects/atex-ex-d-enclosure/`. Branch `phase-3-atex`, draft PR into `astro-site`.
-- [ ] **Phase 4: Simulators.** Waiting for clips.
+- [ ] **Phase 4: Simulators.** Two drafts built 2026-10-10 on branch `phase-4-simulators`, waiting for Nadir's review: `lv-rescue-cpr` and `hv-substation-switching`. See "Phase 4 notes" below.
 - [ ] **Phase 5: more case studies.** Four published besides the ATEX pilot (IFRI, GCB cabling, At Pharma, Milton Roy skids); PR #7 stays a draft. One PR each, entries stay `draft: true` until Nadir has read them. See "Phase 5 queue" below.
 - [x] **Phase 6: polish.** PR #4 merged 2026-10-09 and verified live: `/sitemap.xml` (published pages only), `/robots.txt`, per-page share image (1200x630, from the cover), preload of the hero poster, `npm run check:links`. The CV page stayed byte-identical. Lighthouse on the local build: CV and `/projects/` 100 on all four, ATEX page 89 for performance (the 4.9 MB hero clip is the largest paint). Not done: no favicon (adding one changes the CV head); the Fiverr and LinkedIn links refuse automated checks, test them by hand.
 
@@ -107,6 +107,26 @@ Recording: OBS at 1080p, clean UI, no ROAR branding, one action per clip, 8–20
 - **2D HV switching exercises:** MCC exercise, HV ABS assessment, Exercise 3
 - "Under the hood": Blender → Godot 4 (Compatibility renderer), procedure-driven weighted scoring, SCORM 1.2 reporting, headless regression tests.
 Source notes: `LVR CPR\lvr-cpr\PROJECT_STATUS.md`, `3D Substation\substation-3d-training\behance_project.md`.
+
+## Phase 4 notes (2026-10-10)
+Decisions by Nadir:
+- Clips and pictures only, each page ends with "Request a live demo". Pages are image-heavy (clips and screenshots first, little text), with the scoring and LMS reporting as the main message.
+- Both modules are delivered and in production. The client is named only as "an Australian registered training organisation". The substation and its diagram are a training layout, so the diagram may be shown.
+- Offer stated on every page (`SimulatorOffer`): any scenario, grading to the client's procedure, web/SCORM in the LMS, Windows desktop, tablet, VR/AR; the web modules shown have light graphics, desktop and VR builds can use more advanced render engines; modules are modular (the CPR part of the LV rescue scenario also exists as a standalone module).
+- The 2D HV switching exercises are skipped. `Exercice 3\3.png` is a real mine drawing and the documents name the site: never publish them.
+- No LMS access at the moment, so there is no recording of the LMS side; the grading section uses the in-module result screens.
+
+What was built:
+- Template: schema fields `heroClip`, `clips[].ratio`, `gallery[]`, `grading{points[], pictures[]}`; new `ShotGrid` and `SimulatorOffer` components; new page order (see `CLAUDE.md`, "Adding a simulator").
+- `lv-rescue-cpr`: hero montage (59 s: the incident as the opening, then the exercise from the start, slow parts sped up), 12 clips, 7 stills. The source recordings have a flashing line at the top and recorder icons at the bottom right: every clip is cropped first (`crop=1872:1053:0:4`, then 30 fps) in staging, then encoded with `encode_clip.py`. The first 3.5 s of the walkthrough recording carry a recorder notification and are not used.
+- `hv-substation-switching`: hero (54 s) cut from Nadir's own edit (walking at 2x to 3x, duplicate shots dropped), 7 clips, 10 stills.
+- Staging: `media-src\lv-rescue-cpr\` (`hero_edl.txt`) and `media-src\hv-substation-switching\` (`edl.txt`) hold the cut lists and intermediates.
+
+Open points for Nadir:
+- Confirm the figures and claims in the copy. LV rescue: 26 graded steps, 80 % pass mark, seven critical steps, "checked against a test LMS before delivery". Substation: switching without a signed permit is recorded and assessed; status, score and log go to the LMS through SCORM 1.2.
+- The substation hero ends on an "Assessment failed" result (one part failed), as in Nadir's edit.
+- In the `mimic-panel` still the trainee's sheet uses BT1 while the correct-sequence still uses BT2: captions must not present them as the same sequence.
+- On publishing: the "Simulators" nav link appears on every page, including the CV (one extra `<li>` in `dist/index.html`; the PDFs and `og.png` must stay identical). Decide whether to delete `sample-simulator`.
 
 ## Phase 3 brief (ATEX Ex "d" case study)
 1. Branch from `astro-site` (or `main` after merge).

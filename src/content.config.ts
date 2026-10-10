@@ -77,8 +77,9 @@ export const collections = {
 
   simulators: defineCollection({
     loader: glob({ pattern: '*/index.md', base: './src/content/simulators', generateId: slugFromFolder }),
-    schema: ({ image }) =>
-      z.object({
+    schema: ({ image }) => {
+      const picture = z.object({ image: image(), alt: biLoose, caption: biLoose });
+      return z.object({
         draft: z.boolean().default(true),
         order: z.number().default(100),
         title: bi,
@@ -89,6 +90,8 @@ export const collections = {
         cover: image().optional(),
         coverAlt: biLoose,
         learningGoal: bi,
+        /** Large clip at the top of the page (same fields as a project heroClip). */
+        heroClip: videoRef.optional(),
         clips: z
           .array(
             z.object({
@@ -99,12 +102,19 @@ export const collections = {
               poster: z.string().startsWith('/media/'),
               /** Free text, e.g. "0:12". */
               duration: z.string().optional(),
+              /** Width / height of the encoded clip, e.g. "4 / 3". Default: 16 / 9. */
+              ratio: videoRef.shape.ratio,
             }),
           )
           .default([]),
         /** Bilingual bullets: how it is built / what is technically interesting. */
         underTheHood: z.array(bi).default([]),
-      }),
+        /** "Screens": uncropped screenshots with lightbox. */
+        gallery: z.array(picture).default([]),
+        /** "Scoring and LMS reporting": UI screenshots + short bullets. */
+        grading: z.object({ points: z.array(bi).default([]), pictures: z.array(picture).default([]) }).optional(),
+      });
+    },
   }),
 
   simulatorsFr: defineCollection({
