@@ -15,7 +15,7 @@ Bilingual EN/FR on the same URL. Plain, white, professional design; no heavy cli
 5. **Critical infrastructure (for example Sonatrach sites)**: show equipment close-ups only. No station names, no identifying wide shots, no coordinates, no signage or tags that name the site.
 6. **Crop client title blocks** (cartouches) out of drawings before adding them.
 7. **Drafts never go to production.** `draft: true` is the default. A production build contains only published entries; with zero published entries the site is the CV plus the 404 page, and no nav links appear.
-8. Keep the design tokens exactly: `--ink:#1b2430; --muted:#5d6874; --rule:#dde1e6; --accent:#1f3a5f` and the system font stack. Content pages use a wider container (72rem) than the CV (46rem).
+8. Keep the design tokens exactly: `--ink:#1b2430; --muted:#5d6874; --rule:#dde1e6; --accent:#1f3a5f` and the system font stack. Content pages use a wider container (72rem) than the CV (60rem on screen; the print layout is unchanged).
 
 ## Architecture
 
