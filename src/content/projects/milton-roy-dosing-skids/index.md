@@ -46,13 +46,6 @@ gallery:
     caption:
       en: "A dosing skid on its pad: 400 L stainless tank with level gauge, Ex d control box and pump frame."
       fr: "Un skid de dosage sur son socle : cuve inox de 400 L avec indicateur de niveau, coffret de commande Ex d et châssis des pompes."
-  - image: "@assets/projects/milton-roy-dosing-skids/17-skid-tank-side.jpg"
-    alt:
-      en: A dosing skid seen from the tank side, with a stainless steel tank, a level gauge, a grey Ex d control box and a galvanised frame on its grating
-      fr: Un skid de dosage vu côté cuve, avec une cuve inox, un indicateur de niveau, un coffret de commande Ex d gris et un châssis galvanisé sur son caillebotis
-    caption:
-      en: "Skid seen from the tank side: stainless tank, level gauge and Ex d control box on the grating."
-      fr: "Skid vu côté cuve : cuve inox, indicateur de niveau et coffret de commande Ex d sur le caillebotis."
   - image: "@assets/projects/milton-roy-dosing-skids/03-pumps-and-gauges.jpg"
     alt:
       en: Front of a skid seen from below the sun shelter, with gauges and stainless tubing at the top, the stainless tank in the middle and two metering pumps at the bottom
@@ -62,11 +55,11 @@ gallery:
       fr: "Face avant d'un skid : manomètres et tuyauterie en haut, les deux pompes doseuses en bas."
   - image: "@assets/projects/milton-roy-dosing-skids/04-engineer-at-control-box.jpg"
     alt:
-      en: The engineer, in a black hat and navy polo shirt, leaning on the frame beside the open Ex d control box under the sun shelter
-      fr: L'ingénieur, en chapeau noir et polo bleu marine, appuyé au châssis à côté du coffret de commande Ex d ouvert sous le pare-soleil
+      en: Nadir Zouaoui, in a black hat and navy polo shirt, leaning on the frame beside the open Ex d control box under the sun shelter
+      fr: Nadir Zouaoui, en chapeau noir et polo bleu marine, appuyé au châssis à côté du coffret de commande Ex d ouvert sous le pare-soleil
     caption:
-      en: "The engineer beside the open Ex d control box of a skid."
-      fr: "L'ingénieur à côté du coffret de commande Ex d ouvert d'un skid."
+      en: "At the open Ex d control box of a skid, during commissioning."
+      fr: "Devant le coffret de commande Ex d ouvert d'un skid, pendant la mise en service."
   - image: "@assets/projects/milton-roy-dosing-skids/05-ex-d-panel-open.jpg"
     alt:
       en: Open Ex d enclosure showing contactors, relays, green intrinsic safety barriers and terminal blocks, with wiring entering from the bottom
@@ -74,13 +67,6 @@ gallery:
     caption:
       en: "Inside the Ex d control box: motor contactors, relays, barriers and terminal blocks."
       fr: "Dans le coffret de commande Ex d : contacteurs moteur, relais, barrières et borniers."
-  - image: "@assets/projects/milton-roy-dosing-skids/07-control-box-door-wiring.jpg"
-    alt:
-      en: Inside of the control box door, with red pilot light and selector switch blocks wired with blue and orange wires in white cable ducts
-      fr: Intérieur de la porte du coffret de commande, avec des blocs de voyants et de sélecteurs rouges câblés en fils bleus et orange dans des goulottes blanches
-    caption:
-      en: "Inside of the control box door: wiring of the pilot lights and selector switches."
-      fr: "Intérieur de la porte du coffret de commande : câblage des voyants et des sélecteurs."
   - image: "@assets/projects/milton-roy-dosing-skids/18-control-box-front.jpg"
     alt:
       en: Front of the grey Ex d control box, with the emergency stop, the main switch, rows of red pilot lights with their labels, push buttons and two selector switches
@@ -97,18 +83,11 @@ gallery:
       fr: "Contrôle de l'alimentation 24 V DC aux bornes du skid : 24,62 V."
   - image: "@assets/projects/milton-roy-dosing-skids/19-engineer-at-skid.jpg"
     alt:
-      en: The engineer, in a black hat and navy polo shirt, with one hand on the frame at the front of a skid under its sun shelter
-      fr: L'ingénieur, en chapeau noir et polo bleu marine, une main sur le châssis à l'avant d'un skid sous son pare-soleil
+      en: Nadir Zouaoui, in a black hat and navy polo shirt, with one hand on the frame at the front of a skid under its sun shelter
+      fr: Nadir Zouaoui, en chapeau noir et polo bleu marine, une main sur le châssis à l'avant d'un skid sous son pare-soleil
     caption:
-      en: "The engineer at the front of a skid, under its sun shelter."
-      fr: "L'ingénieur devant un skid, sous son pare-soleil."
-  - image: "@assets/projects/milton-roy-dosing-skids/08-pump-head.jpg"
-    alt:
-      en: Side view of the head of a metering pump with a stainless steel body and a red cap, under the sun shelter
-      fr: Vue de côté de la tête d'une pompe doseuse à corps inox avec un capuchon rouge, sous le pare-soleil
-    caption:
-      en: "Head of a metering pump."
-      fr: "Tête d'une pompe doseuse."
+      en: "At one of the 27 skids, under its sun shelter."
+      fr: "Devant l'un des 27 skids, sous son pare-soleil."
   - image: "@assets/projects/milton-roy-dosing-skids/09-calibration-pot.jpg"
     alt:
       en: Transparent calibration pot, a vertical glass column holding amber liquid, next to the stainless tank
@@ -123,20 +102,6 @@ gallery:
     caption:
       en: "First filling of a tank with corrosion inhibitor: operator in a chemical suit, mask and gloves handling the hose from the tanker truck."
       fr: "Premier remplissage d'une cuve en inhibiteur de corrosion : opérateur en combinaison chimique, masque et gants manipulant le flexible depuis le camion-citerne."
-  - image: "@assets/projects/milton-roy-dosing-skids/10-start-up-hose.jpg"
-    alt:
-      en: Braided flexible hose looping between a flanged connection and the skid piping, under the sun shelter
-      fr: Flexible tressé formant une boucle entre un raccord à bride et la tuyauterie du skid, sous le pare-soleil
-    caption:
-      en: "Flexible hose and flange of the start-up kit, used to fill the circuit and bleed the air."
-      fr: "Flexible et bride du kit de démarrage, utilisés pour remplir le circuit et purger l'air."
-  - image: "@assets/projects/milton-roy-dosing-skids/11-start-up-relief-valve.jpg"
-    alt:
-      en: Hand holding a small relief valve with a pink label and a hose barb, above the grating of the skid
-      fr: Main tenant une petite soupape de sécurité avec une étiquette rose et un embout cannelé, au-dessus du caillebotis du skid
-    caption:
-      en: "Relief valve of the start-up kit, set before the pump is run up to test pressure."
-      fr: "Soupape de sécurité du kit de démarrage, réglée avant la montée de la pompe à la pression d'essai."
   - image: "@assets/projects/milton-roy-dosing-skids/12-pressure-build-up.jpg"
     alt:
       en: Close view of a 0 to 160 barg pressure gauge with its needle partway up the scale, in front of a yellow hose
@@ -144,27 +109,6 @@ gallery:
     caption:
       en: "Discharge pressure gauge while the pressure builds up."
       fr: "Manomètre de refoulement pendant la montée en pression."
-  - image: "@assets/projects/milton-roy-dosing-skids/13-two-gauges.jpg"
-    alt:
-      en: Two 0 to 160 barg pressure gauges mounted on stainless tubing, with the stainless tank behind and a yellow hose across the frame
-      fr: Deux manomètres 0 à 160 barg montés sur de la tuyauterie inox, avec la cuve inox derrière et un flexible jaune en travers du châssis
-    caption:
-      en: "Two pressure gauges, 0 to 160 barg, on the discharge lines."
-      fr: "Deux manomètres de 0 à 160 barg sur les lignes de refoulement."
-  - image: "@assets/projects/milton-roy-dosing-skids/14-isolating-barriers.jpg"
-    alt:
-      en: Three green and blue intrinsic safety barrier modules and a narrower fourth module, labelled KR01 to KR04, with displays showing currents in mA
-      fr: Trois modules de barrières de sécurité intrinsèque verts et bleus et un quatrième plus étroit, repérés KR01 à KR04, avec des afficheurs indiquant des courants en mA
-    caption:
-      en: "Intrinsic safety barriers for the field instruments, with the loop current in mA on their displays."
-      fr: "Barrières de sécurité intrinsèque des instruments de terrain, avec le courant de boucle en mA sur leurs afficheurs."
-  - image: "@assets/projects/milton-roy-dosing-skids/15-pressure-transmitter-display.jpg"
-    alt:
-      en: Front of a dark green pressure transmitter with a screen showing 0 and a bar graph scale
-      fr: Face avant d'un transmetteur de pression vert foncé dont l'écran affiche 0 avec une échelle en barre graphe
-    caption:
-      en: "Display of the pressure transmitter, reading 0."
-      fr: "Afficheur du transmetteur de pression, à 0."
   - image: "@assets/projects/milton-roy-dosing-skids/16-earth-resistance-test.jpg"
     alt:
       en: Yellow earth resistance tester held open on a concrete edge, its screen showing 2.38 ohms, with test leads connected and a finger on the test button
@@ -172,13 +116,6 @@ gallery:
     caption:
       en: "Earth resistance measurement, tester reading 2.38 Ω."
       fr: "Mesure de résistance de terre, le testeur indique 2,38 Ω."
-  - image: "@assets/projects/milton-roy-dosing-skids/21-engineer-at-panel.jpg"
-    alt:
-      en: The engineer, in a black hat with arms crossed, standing beside the closed grey control box of a skid under a corrugated sun shelter
-      fr: L'ingénieur, en chapeau noir et bras croisés, debout à côté du coffret de commande gris fermé d'un skid sous un pare-soleil en tôle ondulée
-    caption:
-      en: "The engineer beside the closed control box of a skid."
-      fr: "L'ingénieur à côté du coffret de commande fermé d'un skid."
   - image: "@assets/projects/milton-roy-dosing-skids/22-solar-array.jpg"
     alt:
       en: A solar array seen from below on two galvanised steel masts with a lightning rod, with a fence and a pickup truck in the foreground
