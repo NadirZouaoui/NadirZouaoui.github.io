@@ -1,5 +1,6 @@
 /* Screen-only polish of the CV page. Everything is inside @media screen: the printed CV is untouched. */
 @media screen{
+  div.page{max-width:60rem}
   .dl{transition:background-color .15s,color .15s}
   .dl:hover,.dl:focus-visible{background:var(--accent);color:#fff}
   .contact a{text-underline-offset:.2em;text-decoration-thickness:1px;transition:color .15s,text-decoration-color .15s}
