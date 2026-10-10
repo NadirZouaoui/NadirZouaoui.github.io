@@ -17,8 +17,8 @@ const altFr = d.coverAlt.fr || d.title.fr;
 <li class="card">
   <div class="img">
     {d.cover ? (
-      <Picture src={d.cover} alt={alt} data-alt-en={alt} data-alt-fr={altFr} widths={[400, 800]}
-        sizes="(min-width: 72rem) 22rem, (min-width: 40rem) 33vw, 100vw" width={800} height={500}
+      <Picture src={d.cover} alt={alt} data-alt-en={alt} data-alt-fr={altFr} widths={[480, 800, 1200]}
+        sizes="(min-width: 72rem) 35rem, (min-width: 52rem) 50vw, 100vw" width={1200} height={750}
         formats={['avif', 'webp']} fallbackFormat="jpg" loading="lazy" decoding="async" />
     ) : poster ? (
       <img src={poster} alt={alt} data-alt-en={alt} data-alt-fr={altFr} width="800" height="450" loading="lazy" decoding="async" />

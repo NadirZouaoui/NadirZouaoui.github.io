@@ -20,6 +20,18 @@ heroClip:
   src: /media/simulators/lv-rescue-cpr/hero.mp4
   poster: /media/simulators/lv-rescue-cpr/hero.jpg
 clips:
+  - slug: kit-naming
+    title: { en: "Naming the rescue kit", fr: "Identification du kit de sauvetage" }
+    caption: { en: "The trainee selects each item of the rescue kit on the bench and names it from a menu.", fr: "Le stagiaire sélectionne chaque élément du kit de sauvetage sur l'établi et le nomme à partir d'un menu." }
+    src: /media/simulators/lv-rescue-cpr/kit-naming.mp4
+    poster: /media/simulators/lv-rescue-cpr/kit-naming.jpg
+    duration: "0:17"
+  - slug: aed-pads
+    title: { en: "Defibrillator pads", fr: "Électrodes du défibrillateur" }
+    caption: { en: "The two pads are placed on the chest.", fr: "Les deux électrodes sont posées sur le thorax." }
+    src: /media/simulators/lv-rescue-cpr/aed-pads.mp4
+    poster: /media/simulators/lv-rescue-cpr/aed-pads.jpg
+    duration: "0:14"
   - slug: incident
     title: { en: "The incident", fr: "L'accident" }
     caption: { en: "The worker is in contact with the live board. A clock counts the contact time until the trainee breaks it with the insulated rescue hook.", fr: "L'opérateur est en contact avec le tableau sous tension. Un chronomètre compte la durée du contact jusqu'à ce que le stagiaire le dégage avec la perche isolante." }
@@ -31,12 +43,6 @@ clips:
     caption: { en: "Touching the casualty bare-handed while still in contact ends the exercise, and the failure is recorded.", fr: "Toucher la victime à mains nues alors qu'elle est encore en contact met fin à l'exercice, et l'échec est enregistré." }
     src: /media/simulators/lv-rescue-cpr/fatal-error.mp4
     poster: /media/simulators/lv-rescue-cpr/fatal-error.jpg
-    duration: "0:15"
-  - slug: drag-isolate
-    title: { en: "Drag clear and isolate", fr: "Dégagement et coupure" }
-    caption: { en: "The casualty is dragged to a safe area and the supply is isolated at the breaker.", fr: "La victime est tirée vers une zone sûre et l'alimentation est coupée au disjoncteur." }
-    src: /media/simulators/lv-rescue-cpr/drag-isolate.mp4
-    poster: /media/simulators/lv-rescue-cpr/drag-isolate.jpg
     duration: "0:15"
   - slug: compressions
     title: { en: "Chest compressions", fr: "Compressions thoraciques" }
@@ -50,12 +56,6 @@ clips:
     src: /media/simulators/lv-rescue-cpr/aed-shock.mp4
     poster: /media/simulators/lv-rescue-cpr/aed-shock.jpg
     duration: "0:17"
-  - slug: debrief
-    title: { en: "Debrief", fr: "Débriefing" }
-    caption: { en: "Score, measurements and the step-by-step record of the attempt.", fr: "Note, mesures et relevé étape par étape de la tentative." }
-    src: /media/simulators/lv-rescue-cpr/debrief.mp4
-    poster: /media/simulators/lv-rescue-cpr/debrief.jpg
-    duration: "0:14"
 grading:
   pictures:
     - image: "@assets/simulators/lv-rescue-cpr/debrief-score.jpg"
@@ -100,12 +100,24 @@ grading:
     - en: "Completion status, score and the step record are sent to the LMS through SCORM 1.2."
       fr: "Le statut, la note et le relevé des étapes sont transmis au LMS par SCORM 1.2."
 gallery:
-  - image: "@assets/simulators/lv-rescue-cpr/kit-naming.jpg"
-    alt: { en: "Rescue kit laid out on a bench with a menu to name the selected item", fr: "Kit de sauvetage disposé sur un établi, avec un menu pour nommer l'élément sélectionné" }
-    caption: { en: "Naming the items of the rescue kit.", fr: "Identification des éléments du kit de sauvetage." }
-  - image: "@assets/simulators/lv-rescue-cpr/aed-pads.jpg"
-    alt: { en: "Defibrillator beside the casualty with the first pad attached and the second site to select", fr: "Défibrillateur à côté de la victime, première électrode posée et second emplacement à choisir" }
-    caption: { en: "Placing the defibrillator pads.", fr: "Pose des électrodes du défibrillateur." }
+  - image: "@assets/simulators/lv-rescue-cpr/hazard-check.jpg"
+    alt: { en: "Hazard checklist with eight statements, four of them ticked, and a Submit assessment button", fr: "Liste de contrôle des dangers de huit propositions dont quatre sont cochées, et un bouton de validation" }
+    caption: { en: "Identifying the hazards from a list.", fr: "Identification des dangers dans une liste." }
+  - image: "@assets/simulators/lv-rescue-cpr/isolation-sign.jpg"
+    alt: { en: "Open breaker panel with an orange isolation sign hung above the breaker and a message confirming the isolation point is marked", fr: "Panneau de disjoncteur ouvert avec un panneau de coupure orange accroché au-dessus du disjoncteur et un message confirmant le repérage du point de coupure" }
+    caption: { en: "Marking the isolation point on the breaker.", fr: "Repérage du point de coupure sur le disjoncteur." }
+  - image: "@assets/simulators/lv-rescue-cpr/drag-isolate.jpg"
+    alt: { en: "Casualty lying on the floor of the switchroom with the labels Drag the casualty to the safe area and Isolate the circuit at the breaker", fr: "Victime allongée sur le sol du local électrique avec les étiquettes Tirer la victime vers la zone sûre et Couper le circuit au disjoncteur" }
+    caption: { en: "Dragging the casualty clear.", fr: "Dégagement de la victime." }
+  - image: "@assets/simulators/lv-rescue-cpr/isolate-breaker.jpg"
+    alt: { en: "Open board with the isolation sign, the label Isolate the circuit at the breaker highlighted and the option Isolate at Breaker Handle", fr: "Tableau ouvert avec le panneau de coupure, l'étiquette Couper le circuit au disjoncteur en surbrillance et l'option Couper à la poignée du disjoncteur" }
+    caption: { en: "Isolating the circuit at the breaker.", fr: "Coupure du circuit au disjoncteur." }
+  - image: "@assets/simulators/lv-rescue-cpr/primary-survey.jpg"
+    alt: { en: "Casualty seen from the head with three action labels on the body: Check for a response, Start compressions, Check the casualty is not on fire", fr: "Victime vue depuis la tête avec trois étiquettes d'action sur le corps : vérifier la réponse, commencer les compressions, vérifier que la victime ne brûle pas" }
+    caption: { en: "Primary survey: actions chosen on the casualty.", fr: "Bilan primaire : les actions se choisissent sur la victime." }
+  - image: "@assets/simulators/lv-rescue-cpr/breathing-check.jpg"
+    alt: { en: "Casualty's face seen from above with the label Check for breathing highlighted on the mouth", fr: "Visage de la victime vu de dessus avec l'étiquette Contrôler la respiration en surbrillance sur la bouche" }
+    caption: { en: "Checking for breathing.", fr: "Contrôle de la respiration." }
 underTheHood:
   - en: "Modelled in Blender and built in Godot 4 with the Compatibility renderer, so the same project runs in a browser (WebGL 2) and on Windows."
     fr: "Modélisé dans Blender et réalisé avec Godot 4 et son moteur de rendu Compatibility : le même projet fonctionne dans un navigateur (WebGL 2) et sous Windows."
