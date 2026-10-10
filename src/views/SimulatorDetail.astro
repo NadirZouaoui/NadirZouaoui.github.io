@@ -1,14 +1,18 @@
 ---
 /**
  * /simulators/<slug>/ template:
- * intro + learning goal -> clip grid -> under the hood -> status -> "Request a live demo".
+ * hero clip -> clip grid (large) -> scoring and LMS reporting -> about + learning goal -> screens -> under the hood
+ * -> built to order -> status -> "Request a live demo". Image-heavy: clips and screenshots dominate.
  */
 import type { CollectionEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Lang from '../components/Lang.astro';
 import Clip from '../components/Clip.astro';
+import ShotGrid from '../components/ShotGrid.astro';
+import Lightbox from '../components/Lightbox.astro';
+import SimulatorOffer from '../components/SimulatorOffer.astro';
 import Prose from '../components/Prose.astro';
-import { renderBilingual, STATUS_LABELS, CONTACT_EMAIL } from '../lib/content';
+import { renderBilingual, warnMissingAlt, STATUS_LABELS, CONTACT_EMAIL } from '../lib/content';
 import { ogImageProps } from '../lib/og';
 import '../styles/content.css';
 
@@ -18,6 +22,9 @@ export interface Props {
 const { simulator } = Astro.props;
 const d = simulator.data;
 const { En, Fr, frFallback } = await renderBilingual('simulators', simulator.id);
+warnMissingAlt(`simulators/${simulator.id} gallery`, d.gallery, d.draft);
+warnMissingAlt(`simulators/${simulator.id} grading`, d.grading?.pictures ?? [], d.draft);
+const hasLightbox = d.gallery.length > 0 || (d.grading?.pictures.length ?? 0) > 0;
 const og = await ogImageProps(d.cover, d.coverAlt.en || d.title.en, Astro.site);
 const demoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Live demo request: ' + d.title.en)}`;
 ---
@@ -32,6 +39,7 @@ const demoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Live dem
   {...og}
   noindex={d.draft}
 >
+  {d.heroClip && <link slot="head" rel="preload" as="image" href={d.heroClip.poster} fetchpriority="high" />}
   <main class="wrap">
     {d.draft && <p class="draft-banner noprint">Draft preview: this simulator is not published.</p>}
     <p class="crumb noprint"><a href="/simulators/"><Lang en="← All simulators" fr="← Tous les simulateurs" /></a></p>
@@ -42,24 +50,53 @@ const demoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Live dem
       <p class="status-line"><Lang en={STATUS_LABELS[d.status].en} fr={STATUS_LABELS[d.status].fr} />{d.tech.length > 0 && ` · ${d.tech.join(', ')}`}</p>
     </header>
 
-    <section class="section" aria-labelledby="intro">
-      <h2 class="sec-h" id="intro"><Lang en="About this module" fr="À propos de ce module" /></h2>
-      <div lang="en"><Prose><En /></Prose></div>
-      <div lang="fr" data-fallback={frFallback ? 'en' : undefined}><Prose><Fr /></Prose></div>
-      <aside class="goal" aria-labelledby="goal">
-        <h3 id="goal"><Lang en="Learning goal" fr="Objectif pédagogique" /></h3>
-        <p><Lang en={d.learningGoal.en} fr={d.learningGoal.fr} /></p>
-      </aside>
-    </section>
+    {d.heroClip && (
+      <div class:list={['hero', d.heroClip.ratio && 'fit']} style={`--ratio:${d.heroClip.ratio ?? '16 / 9'}`}>
+        <Clip src={d.heroClip.src} poster={d.heroClip.poster} ratio={d.heroClip.ratio} />
+      </div>
+    )}
 
     {d.clips.length > 0 && (
       <section class="section" aria-labelledby="clips">
         <h2 class="sec-h" id="clips"><Lang en="In action" fr="En action" /></h2>
         <div class="clips">
           {d.clips.map((c) => (
-            <Clip id={`clip-${c.slug}`} src={c.src} poster={c.poster} title={c.title} caption={c.caption} duration={c.duration} />
+            <Clip id={`clip-${c.slug}`} src={c.src} poster={c.poster} title={c.title} caption={c.caption} duration={c.duration} ratio={c.ratio} />
           ))}
         </div>
+      </section>
+    )}
+
+    {d.grading && (d.grading.pictures.length > 0 || d.grading.points.length > 0) && (
+      <section class="section" aria-labelledby="grading">
+        <h2 class="sec-h" id="grading"><Lang en="Scoring and LMS reporting" fr="Notation et suivi LMS" /></h2>
+        {d.grading.pictures.length > 0 && <ShotGrid items={d.grading.pictures} group="grading" />}
+        {d.grading.points.length > 0 && (
+          <ul class="points">
+            {d.grading.points.map((b) => <li><Lang en={b.en} fr={b.fr} /></li>)}
+          </ul>
+        )}
+      </section>
+    )}
+
+    <section class="section" aria-labelledby="intro">
+      <h2 class="sec-h" id="intro"><Lang en="About this module" fr="À propos de ce module" /></h2>
+      <div class="about">
+        <div class="text">
+          <div lang="en"><Prose><En /></Prose></div>
+          <div lang="fr" data-fallback={frFallback ? 'en' : undefined}><Prose><Fr /></Prose></div>
+        </div>
+        <aside class="goal" aria-labelledby="goal">
+          <h3 id="goal"><Lang en="Learning goal" fr="Objectif pédagogique" /></h3>
+          <p><Lang en={d.learningGoal.en} fr={d.learningGoal.fr} /></p>
+        </aside>
+      </div>
+    </section>
+
+    {d.gallery.length > 0 && (
+      <section class="section" aria-labelledby="screens">
+        <h2 class="sec-h" id="screens"><Lang en="Screens" fr="Écrans" /></h2>
+        <ShotGrid items={d.gallery} group="screens" />
       </section>
     )}
 
@@ -72,6 +109,8 @@ const demoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Live dem
       </section>
     )}
 
+    <SimulatorOffer />
+
     <section class="section" aria-labelledby="status">
       <h2 class="sec-h" id="status"><Lang en="Status" fr="Statut" /></h2>
       <p><strong><Lang en={STATUS_LABELS[d.status].en} fr={STATUS_LABELS[d.status].fr} /></strong></p>
@@ -80,14 +119,24 @@ const demoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Live dem
 
     <p class="backlink noprint"><a href="/simulators/"><Lang en="← Back to all simulators" fr="← Retour à tous les simulateurs" /></a></p>
   </main>
+  {hasLightbox && <Lightbox />}
 </Base>
 
 <style>
   .status-line{margin-top:.5rem;font-size:.95rem;color:var(--muted)}
-  .goal{margin-top:1.5rem;max-width:46rem;padding:.75rem 1rem;border-left:3px solid var(--accent);background:#f7f8fa}
+  .hero{margin-top:1.75rem}
+  .hero.fit :global(.clip){max-width:calc(min(80vh,44rem) * var(--ratio));margin-inline:auto}
+  .clips{display:grid;grid-template-columns:minmax(0,1fr);gap:2rem 1.5rem;align-items:start}
+  .points{margin:1.5rem 0 0;padding-left:1.15rem;max-width:46rem}
+  .points li{margin:.35rem 0}
+  .about{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem}
+  .goal{align-self:start;padding:.75rem 1rem;border-left:3px solid var(--accent);background:#f7f8fa}
   .goal h3{font-size:.95rem;font-weight:600;color:var(--accent);margin:0 0 .25rem}
-  .clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(20rem,1fr));gap:1.5rem}
   .hood{margin:0;padding-left:1.15rem;max-width:46rem}
   .hood li{margin:.35rem 0}
   .demo{margin-top:1rem!important}
+  @media (min-width:52rem){
+    .clips{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .about{grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:2rem}
+  }
 </style>

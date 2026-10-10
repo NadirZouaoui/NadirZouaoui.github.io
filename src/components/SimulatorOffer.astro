@@ -1,0 +1,70 @@
+---
+/** "Built to order" block: what can be made. Shared by /simulators/ (with the demo button) and each simulator page. */
+import Lang from './Lang.astro';
+import { CONTACT_EMAIL } from '../lib/content';
+
+export interface Props {
+  /** show the "Request a live demo" button (index page) */
+  cta?: boolean;
+}
+const { cta = false } = Astro.props;
+const demoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Live demo request: simulators')}`;
+const items = [
+  {
+    label: { en: 'Scenario', fr: 'Scénario' },
+    text: {
+      en: 'Any procedure or scenario, built from your own documents: switching programmes, rescue procedures, permits, site rules.',
+      fr: 'Toute procédure ou tout scénario, réalisé à partir de vos propres documents : programmes de manœuvres, procédures de sauvetage, permis, règles du site.',
+    },
+  },
+  {
+    label: { en: 'Grading and LMS', fr: 'Notation et LMS' },
+    text: {
+      en: 'Each step is graded against your procedure, with the weights, critical steps and pass mark you set. Status, score and the step log are reported to your LMS through SCORM.',
+      fr: 'Chaque étape est notée par rapport à votre procédure, avec les pondérations, les étapes critiques et le seuil de réussite que vous fixez. Le statut, la note et le journal des étapes sont transmis à votre LMS par SCORM.',
+    },
+  },
+  {
+    label: { en: 'Platform', fr: 'Plateforme' },
+    text: {
+      en: 'Web browser inside the LMS, Windows desktop, tablet, or VR/AR headset.',
+      fr: 'Navigateur web dans le LMS, poste Windows, tablette ou casque VR/AR.',
+    },
+  },
+  {
+    label: { en: 'Graphics level', fr: 'Niveau graphique' },
+    text: {
+      en: 'The modules shown here run in a web browser, so their graphics are kept light to load on any office PC. Desktop and VR builds can use more advanced render engines for higher visual fidelity.',
+      fr: "Les modules présentés ici s'exécutent dans un navigateur web : leurs graphismes sont donc allégés pour se charger sur n'importe quel PC de bureau. Les versions bureau et VR peuvent utiliser des moteurs de rendu plus avancés pour une fidélité visuelle supérieure.",
+    },
+  },
+  {
+    label: { en: 'Modular', fr: 'Modulaire' },
+    text: {
+      en: 'Modules are assembled from reusable parts, so a scenario can be delivered whole or as shorter standalone modules.',
+      fr: "Les modules sont assemblés à partir d'éléments réutilisables : un scénario peut être livré en entier ou en modules autonomes plus courts.",
+    },
+  },
+];
+---
+<section class="section offer" aria-labelledby="offer">
+  <h2 class="sec-h" id="offer"><Lang en="Built to order" fr="Réalisé sur mesure" /></h2>
+  <dl>
+    {items.map((it) => (
+      <div>
+        <dt><Lang en={it.label.en} fr={it.label.fr} /></dt>
+        <dd><Lang en={it.text.en} fr={it.text.fr} /></dd>
+      </div>
+    ))}
+  </dl>
+  {cta && <p class="demo noprint"><a class="btn" href={demoHref}><Lang en="Request a live demo" fr="Demander une démonstration en direct" /></a></p>}
+</section>
+
+<style>
+  dl{margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:1.1rem 2rem}
+  dl div{padding:.75rem 1rem;border-left:3px solid var(--accent);background:#f7f8fa;min-width:0}
+  dt{font-weight:600;color:var(--ink);margin:0 0 .2rem}
+  dd{margin:0;font-size:.95rem}
+  .demo{margin-top:1.5rem!important}
+  @media (min-width:52rem){dl{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>

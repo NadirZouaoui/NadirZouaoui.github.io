@@ -1,0 +1,38 @@
+---
+/**
+ * Grid of UI screenshots, shown whole (never cropped, each tile follows the picture's own ratio) and opened in the
+ * page's <Lightbox>. 2 columns on desktop, 1 on phones. Used by the simulator "Scoring and LMS reporting" and "Screens" sections.
+ */
+import type { ImageMetadata } from 'astro';
+import Thumb from './Thumb.astro';
+import Lang from './Lang.astro';
+
+export interface Props {
+  items: { image: ImageMetadata; alt: { en: string; fr: string }; caption: { en: string; fr: string } }[];
+  /** lightbox group name; one per grid on a page */
+  group: string;
+}
+const { items, group } = Astro.props;
+---
+<ul class="shots">
+  {items.map((it, i) => {
+    const ratio = it.image.width / it.image.height;
+    return (
+      <li>
+        <div class="frame" style={`aspect-ratio:${ratio.toFixed(4)}`}>
+          <Thumb image={it.image} alt={it.alt} caption={it.caption} group={group} index={i} total={items.length}
+            widths={[480, 800, 1200]} sizes="(min-width: 52rem) 34rem, 100vw" width={1200} height={Math.round(1200 / ratio)} />
+        </div>
+        {(it.caption.en || it.caption.fr) && <p class="cap"><Lang en={it.caption.en} fr={it.caption.fr} /></p>}
+      </li>
+    );
+  })}
+</ul>
+
+<style>
+  .shots{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;align-items:start}
+  li{margin:0;min-width:0}
+  .frame{--thumb-fit:contain;width:100%}
+  .cap{margin:.4rem 0 0;font-size:.9rem;color:var(--muted)}
+  @media (min-width:52rem){.shots{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
