@@ -81,13 +81,13 @@ gallery:
     caption:
       en: "Checking the 24 V DC supply at the skid terminals: 24.62 V."
       fr: "Contrôle de l'alimentation 24 V DC aux bornes du skid : 24,62 V."
-  - image: "@assets/projects/milton-roy-dosing-skids/19-engineer-at-skid.jpg"
+  - image: "@assets/projects/milton-roy-dosing-skids/19-start-up-hose-connection.jpg"
     alt:
-      en: Nadir Zouaoui, in a black hat and navy polo shirt, with one hand on the frame at the front of a skid under its sun shelter
-      fr: Nadir Zouaoui, en chapeau noir et polo bleu marine, une main sur le châssis à l'avant d'un skid sous son pare-soleil
+      en: Nadir Zouaoui, in blue coveralls, cap, safety glasses and gloves, holding a braided hose connected to the top of a skid, beside its pressure gauges
+      fr: Nadir Zouaoui, en combinaison bleue, casquette, lunettes de sécurité et gants, tenant un flexible tressé raccordé en haut d'un skid, à côté de ses manomètres
     caption:
-      en: "At one of the 27 skids, under its sun shelter."
-      fr: "Devant l'un des 27 skids, sous son pare-soleil."
+      en: "Connecting the start-up hose on a skid, next to the discharge pressure gauges."
+      fr: "Raccordement du flexible de démarrage sur un skid, à côté des manomètres de refoulement."
   - image: "@assets/projects/milton-roy-dosing-skids/09-calibration-pot.jpg"
     alt:
       en: Transparent calibration pot, a vertical glass column holding amber liquid, next to the stainless tank
