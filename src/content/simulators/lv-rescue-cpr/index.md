@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 order: 10
 title:
   en: "Low-voltage rescue and CPR"
