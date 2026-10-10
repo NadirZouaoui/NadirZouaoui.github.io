@@ -118,13 +118,12 @@ Decisions by Nadir:
 
 What was built:
 - Template: schema fields `heroClip`, `clips[].ratio`, `gallery[]`, `grading{points[], pictures[]}`; new `ShotGrid` and `SimulatorOffer` components; new page order (see `CLAUDE.md`, "Adding a simulator").
-- `lv-rescue-cpr`: hero montage (59 s: the incident as the opening, then the exercise from the start, slow parts sped up), 12 clips, 7 stills. The source recordings have a flashing line at the top and recorder icons at the bottom right: every clip is cropped first (`crop=1872:1053:0:4`, then 30 fps) in staging, then encoded with `encode_clip.py`. The first 3.5 s of the walkthrough recording carry a recorder notification and are not used.
-- `hv-substation-switching`: hero (54 s) cut from Nadir's own edit (walking at 2x to 3x, duplicate shots dropped), 7 clips, 10 stills.
+- `lv-rescue-cpr`: hero montage (59 s: the incident as the opening, then the exercise from the start, slow parts sped up), 6 clips, 7 stills. Nadir cut the clips from 12 to 6 (2026-10-10: they looked alike, keep the high-impact ones); the six removed clips are in `media-src\lv-rescue-cpr\unused-clips\`. The source recordings have a flashing line at the top and recorder icons at the bottom right: every clip is cropped first (`crop=1872:1053:0:4`, then 30 fps) in staging, then encoded with `encode_clip.py`. The first 3.5 s of the walkthrough recording carry a recorder notification and are not used.
+- `hv-substation-switching`: the hero is Nadir's LinkedIn edit (57 s, opens on the yard, ends on a passed assessment), used whole. He had no local copy, so it was saved from his own post (720p stream) into `media-src\hv-substation-switching\linkedin\`. 7 clips, 10 stills.
 - Staging: `media-src\lv-rescue-cpr\` (`hero_edl.txt`) and `media-src\hv-substation-switching\` (`edl.txt`) hold the cut lists and intermediates.
 
 Open points for Nadir:
 - Confirm the figures and claims in the copy. LV rescue: 26 graded steps, 80 % pass mark, seven critical steps, "checked against a test LMS before delivery". Substation: switching without a signed permit is recorded and assessed; status, score and log go to the LMS through SCORM 1.2.
-- The substation hero ends on an "Assessment failed" result (one part failed), as in Nadir's edit.
 - In the `mimic-panel` still the trainee's sheet uses BT1 while the correct-sequence still uses BT2: captions must not present them as the same sequence.
 - On publishing: the "Simulators" nav link appears on every page, including the CV (one extra `<li>` in `dist/index.html`; the PDFs and `og.png` must stay identical). Decide whether to delete `sample-simulator`.
 

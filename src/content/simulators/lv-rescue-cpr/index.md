@@ -32,54 +32,18 @@ clips:
     src: /media/simulators/lv-rescue-cpr/fatal-error.mp4
     poster: /media/simulators/lv-rescue-cpr/fatal-error.jpg
     duration: "0:15"
-  - slug: kit-check
-    title: { en: "Checking the rescue kit", fr: "Contrôle du kit de sauvetage" }
-    caption: { en: "The trainee picks out the items that belong in the kit and names each one.", fr: "Le stagiaire sélectionne les éléments du kit et nomme chacun d'eux." }
-    src: /media/simulators/lv-rescue-cpr/kit-check.mp4
-    poster: /media/simulators/lv-rescue-cpr/kit-check.jpg
-    duration: "0:17"
-  - slug: hazard-check
-    title: { en: "Identifying the hazards", fr: "Identification des dangers" }
-    caption: { en: "Before work starts, the hazards at the board are ticked from a list.", fr: "Avant le début des travaux, les dangers présents au tableau sont cochés dans une liste." }
-    src: /media/simulators/lv-rescue-cpr/hazard-check.mp4
-    poster: /media/simulators/lv-rescue-cpr/hazard-check.jpg
-    duration: "0:13"
-  - slug: isolation-sign
-    title: { en: "Marking the isolation point", fr: "Repérage du point de coupure" }
-    caption: { en: "The emergency isolation sign is hung on the breaker.", fr: "Le panneau de coupure d'urgence est accroché sur le disjoncteur." }
-    src: /media/simulators/lv-rescue-cpr/isolation-sign.mp4
-    poster: /media/simulators/lv-rescue-cpr/isolation-sign.jpg
-    duration: "0:12"
   - slug: drag-isolate
     title: { en: "Drag clear and isolate", fr: "Dégagement et coupure" }
     caption: { en: "The casualty is dragged to a safe area and the supply is isolated at the breaker.", fr: "La victime est tirée vers une zone sûre et l'alimentation est coupée au disjoncteur." }
     src: /media/simulators/lv-rescue-cpr/drag-isolate.mp4
     poster: /media/simulators/lv-rescue-cpr/drag-isolate.jpg
     duration: "0:15"
-  - slug: primary-survey
-    title: { en: "Primary survey", fr: "Bilan primaire" }
-    caption: { en: "Actions are chosen on the casualty's body. The order is left to the trainee and is recorded.", fr: "Les actions se choisissent sur le corps de la victime. L'ordre est laissé au stagiaire et il est enregistré." }
-    src: /media/simulators/lv-rescue-cpr/primary-survey.mp4
-    poster: /media/simulators/lv-rescue-cpr/primary-survey.jpg
-    duration: "0:18"
-  - slug: breathing-check
-    title: { en: "Breathing check", fr: "Contrôle de la respiration" }
-    caption: { en: "The trainee holds the check for the required time.", fr: "Le stagiaire maintient le contrôle pendant la durée requise." }
-    src: /media/simulators/lv-rescue-cpr/breathing-check.mp4
-    poster: /media/simulators/lv-rescue-cpr/breathing-check.jpg
-    duration: "0:13"
   - slug: compressions
     title: { en: "Chest compressions", fr: "Compressions thoraciques" }
     caption: { en: "Thirty compressions, each one measured for depth and rate.", fr: "Trente compressions, chacune mesurée en profondeur et en cadence." }
     src: /media/simulators/lv-rescue-cpr/compressions.mp4
     poster: /media/simulators/lv-rescue-cpr/compressions.jpg
     duration: "0:17"
-  - slug: aed-pads
-    title: { en: "Defibrillator pads", fr: "Électrodes du défibrillateur" }
-    caption: { en: "The two pads are placed on the chest.", fr: "Les deux électrodes sont posées sur le thorax." }
-    src: /media/simulators/lv-rescue-cpr/aed-pads.mp4
-    poster: /media/simulators/lv-rescue-cpr/aed-pads.jpg
-    duration: "0:14"
   - slug: aed-shock
     title: { en: "Stand clear and shock", fr: "Écartez-vous, choc" }
     caption: { en: "The trainee stands clear and delivers the shock.", fr: "Le stagiaire s'écarte et délivre le choc." }
