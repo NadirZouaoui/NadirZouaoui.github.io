@@ -21,7 +21,7 @@ Last updated 2026-10-10.
 - [x] **Phase 2: content model, components, media tools.** In the same PR. Draft samples: `sample-project`, `sample-simulator`.
 - [x] **Go live:** done 2026-10-09. Pages source set to **GitHub Actions**, then PR #1 merged into `main`. Live checks passed: `/`, `/?lang=fr`, both CV PDFs and `/og.png` (byte-identical to the build), `/projects/`, the ATEX page and its media; sample pages and source files return 404. New work now branches from `main`, one PR per change.
 - [x] **Phase 3: ATEX Ex "d" case study (the pilot).** Reviewed in five rounds; Nadir approved the result on 2026-10-09. Published (`draft: false`) and PR #2 (`phase-3-atex`) merged into `astro-site` on 2026-10-09; live since PR #1 was merged the same day. Content in `src/content/projects/atex-ex-d-enclosure/`, media in `src/assets/projects/atex-ex-d-enclosure/` and `public/media/projects/atex-ex-d-enclosure/`. Branch `phase-3-atex`, draft PR into `astro-site`.
-- [x] **Phase 4: Simulators.** **Published 2026-10-10** (PR #18, branch `phase-4-simulators`): `lv-rescue-cpr` and `hv-substation-switching`. The "Simulators" nav link now shows on every page; on the CV page this is the only change (one `<li>` in the nav), the PDFs and `og.png` are unchanged. `sample-simulator` is kept as a draft fixture. See "Phase 4 notes" below.
+- [x] **Phase 4: Simulators.** **Published 2026-10-10** (PR #18, branch `phase-4-simulators`): `lv-rescue-cpr` and `hv-substation-switching`. The "Simulators" nav link now shows on every page; on the CV page this is the only change (one `<li>` in the nav), the PDFs and `og.png` are unchanged. `sample-simulator` (draft fixture) was removed afterwards. See "Phase 4 notes" below.
 - [ ] **Phase 5: more case studies.** Four published besides the ATEX pilot (IFRI, GCB cabling, At Pharma, Milton Roy skids); PR #7 stays a draft. One PR each, entries stay `draft: true` until Nadir has read them. See "Phase 5 queue" below.
 - [x] **Phase 6: polish.** PR #4 merged 2026-10-09 and verified live: `/sitemap.xml` (published pages only), `/robots.txt`, per-page share image (1200x630, from the cover), preload of the hero poster, `npm run check:links`. The CV page stayed byte-identical. Lighthouse on the local build: CV and `/projects/` 100 on all four, ATEX page 89 for performance (the 4.9 MB hero clip is the largest paint). Not done: no favicon (adding one changes the CV head); the Fiverr and LinkedIn links refuse automated checks, test them by hand.
 
@@ -125,7 +125,7 @@ What was built:
 Open points for Nadir:
 - Confirm the figures and claims in the copy. LV rescue: 26 graded steps, 80 % pass mark, seven critical steps, "checked against a test LMS before delivery". Substation: switching without a signed permit is recorded and assessed; status, score and log go to the LMS through SCORM 1.2.
 - In the `mimic-panel` still the trainee's sheet uses BT1 while the correct-sequence still uses BT2: captions must not present them as the same sequence.
-- On publishing: the "Simulators" nav link appears on every page, including the CV (one extra `<li>` in `dist/index.html`; the PDFs and `og.png` must stay identical). Decide whether to delete `sample-simulator`.
+- On publishing: the "Simulators" nav link appears on every page, including the CV (one extra `<li>` in `dist/index.html`; the PDFs and `og.png` must stay identical). `sample-simulator` has been deleted.
 
 ## Phase 3 brief (ATEX Ex "d" case study)
 1. Branch from `astro-site` (or `main` after merge).

@@ -100,8 +100,8 @@ Page order: hero clip -> In action (2-column clip grid) -> Scoring and LMS repor
 
 `draft` defaults to `true`. Drafts are visible in `npm run dev`, and in `npm run build:drafts` / `npm run preview:drafts`
 (these build into `dist-drafts/`, which is git-ignored; never deploy it). Draft pages carry `noindex` and a banner.
-`sample-project` and `sample-simulator` are placeholder drafts that exercise every template block: delete them (folder in `src/content`,
-`src/assets/<section>/<slug>`, `public/media/<section>/<slug>`) once real content exists, or keep them as a regression fixture.
+`sample-project` is a placeholder draft that exercises every template block: delete it (folder in `src/content`,
+`src/assets/<section>/<slug>`, `public/media/<section>/<slug>`) once real content exists, or keep it as a regression fixture.
 After every production build the `prune-unpublished` integration deletes (a) `dist/media/<section>/<slug>/` of every entry that is not explicitly
 `draft: false`, and (b) unreferenced image files in `dist/_astro/` (Astro emits the original of every content `image()` even for drafts).
 
