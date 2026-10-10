@@ -45,7 +45,7 @@ const og = await ogImageProps(first?.cover, first ? first.coverAlt.en || first.t
 
 <style>
   .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.5rem}
-  .chips button{font:inherit;font-size:.9rem;background:none;border:1px solid var(--rule);color:var(--muted);padding:.2rem .75rem;border-radius:4px;cursor:pointer}
+  .chips button{transition:background-color .15s,border-color .15s,color .15s;font:inherit;font-size:.9rem;background:none;border:1px solid var(--rule);color:var(--muted);padding:.2rem .75rem;border-radius:4px;cursor:pointer}
   .chips button:hover{border-color:var(--accent);color:var(--ink)}
   .chips button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
   .grid{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(18rem,1fr));gap:1.5rem}

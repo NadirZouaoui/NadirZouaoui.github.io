@@ -1,0 +1,16 @@
+/* Screen-only polish of the CV page. Everything is inside @media screen: the printed CV is untouched. */
+@media screen{
+  .dl{transition:background-color .15s,color .15s}
+  .dl:hover,.dl:focus-visible{background:var(--accent);color:#fff}
+  .contact a{text-underline-offset:.2em;text-decoration-thickness:1px;transition:color .15s,text-decoration-color .15s}
+  .contact a:hover,.contact a:focus-visible{color:var(--accent)}
+  .photo{box-shadow:0 0 0 2px #fff,var(--lift)}
+  /* the CV's own EN/FR switch (visible only when the tab bar is absent) */
+  .sw button{transition:background-color .15s,border-color .15s,color .15s}
+  .sw button:not([aria-pressed="true"]):hover{background:#f3f4f6;color:var(--ink)}
+}
+@media screen and (prefers-reduced-motion:no-preference){
+  /* first paint: the header fades in (opacity only); a load-time CSS animation does not replay on a language switch */
+  .page>header{animation:cv-fade .4s ease backwards}
+  @keyframes cv-fade{from{opacity:0}}
+}

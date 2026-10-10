@@ -8,7 +8,9 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ProjectLink from '../components/ProjectLink.astro';
+import SectionHub from '../components/SectionHub.astro';
 import portrait from '../assets/portrait.jpg';
+import '../styles/cv-polish.css';
 ---
 <Base current="cv">
 <div class="page">
@@ -34,12 +36,14 @@ import portrait from '../assets/portrait.jpg';
   <Image class="photo" src={portrait} width={120} height={120} densities={[2, 3]} format="jpeg" quality={85} loading="eager" decoding="sync" alt="Nadir Zouaoui" />
 </header>
 
-<section>
+<SectionHub />
+
+<section id="cv" data-reveal>
   <h2><span lang="en">Profile</span><span lang="fr">Profil</span></h2>
   <p><span lang="en">State engineer in electrical engineering with four years of multidisciplinary experience across Oil &amp; Gas, industrial automation and renewable energy. Covers the full project cycle, from design and engineering to wiring, commissioning and site work: chemical dosing skids, gas-pipeline SCADA, ATEX equipment, machine rehabilitation and PV installations (over 1 MWp delivered).</span><span lang="fr">Ingénieur d'État en génie électrique, avec quatre ans d'expérience pluridisciplinaire dans l'Oil &amp; Gas, l'automatisation industrielle et les énergies renouvelables. Intervient sur tout le cycle projet, de l'étude et de la conception au câblage et à la mise en service : skids de dosage chimique, SCADA de gazoducs, équipements ATEX, réhabilitation de machines industrielles et installations PV (plus de 1 MWp réalisés).</span></p>
 </section>
 
-<section>
+<section data-reveal>
   <h2><span lang="en">Certifications</span><span lang="fr">Certifications</span></h2>
   <div class="entry">
     <div class="head"><h3><span lang="en">Electrical Equipment in Hazardous Areas (EEHA)</span><span lang="fr">Équipements électriques en zones dangereuses (EEHA)</span></h3><span class="when">2026</span></div>
@@ -56,7 +60,7 @@ import portrait from '../assets/portrait.jpg';
   </div>
 </section>
 
-<section>
+<section data-reveal>
   <h2><span lang="en">Professional experience</span><span lang="fr">Expérience professionnelle</span></h2>
 
   <div class="entry">
@@ -90,7 +94,7 @@ import portrait from '../assets/portrait.jpg';
 
 </section>
 
-<section>
+<section data-reveal>
   <h2><span lang="en">Freelance</span><span lang="fr">Freelance</span></h2>
 
   <div class="entry">
@@ -117,7 +121,7 @@ import portrait from '../assets/portrait.jpg';
   </div>
 </section>
 
-<section>
+<section data-reveal>
   <h2><span lang="en">Thesis project</span><span lang="fr">Projet de fin d'études</span></h2>
   <div class="entry">
     <div class="head"><h3><span lang="en">5 kW autonomous photovoltaic microgrid</span><span lang="fr">Micro-réseau photovoltaïque autonome de 5 kW</span></h3><span class="when"><span lang="en">May – Jul 2021</span><span lang="fr">Mai – Juil. 2021</span></span></div>
@@ -128,7 +132,7 @@ import portrait from '../assets/portrait.jpg';
   </div>
 </section>
 
-<section>
+<section data-reveal>
   <h2><span lang="en">Education</span><span lang="fr">Formation</span></h2>
   <div class="entry">
     <div class="head"><h3><span lang="en">State Engineer + Master II</span><span lang="fr">Ingénieur d'État + Master II</span></h3><span class="when">2018 – 2021</span></div>
@@ -140,7 +144,7 @@ import portrait from '../assets/portrait.jpg';
   </div>
 </section>
 
-<section>
+<section data-reveal>
   <h2><span lang="en">Earlier experience</span><span lang="fr">Parcours antérieur</span></h2>
   <div class="brief">
     <div class="head"><h3><span lang="en">Document Controller, CEVIELEC SPA: ALRAR gas complex re-instrumentation</span><span lang="fr">Contrôleur documentaire, CEVIELEC SPA : réinstrumentation du complexe gazier ALRAR</span></h3><small>2022</small></div>
@@ -151,7 +155,7 @@ import portrait from '../assets/portrait.jpg';
   </div>
 </section>
 
-<section>
+<section data-reveal>
   <h2><span lang="en">Skills and tools</span><span lang="fr">Compétences et outils</span></h2>
   <dl class="facts">
     <dt><span lang="en">Tools</span><span lang="fr">Outils</span></dt>

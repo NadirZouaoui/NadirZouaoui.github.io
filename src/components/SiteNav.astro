@@ -1,9 +1,12 @@
 ---
 /**
- * Top navigation: CV · Projects · Simulators. Hidden in print.
+ * Top navigation: a tab bar CV · Projects · Simulators. Hidden in print, sticky on screen.
  * An item is shown only when its collection has at least one visible (non-draft) entry,
- * and the whole row is omitted when nothing but the CV exists. So with no published
+ * and the whole bar is omitted when nothing but the CV exists. So with no published
  * content the CV page is exactly what it was before.
+ * Projects and Simulators carry a count pill (aria-hidden); the link's accessible name
+ * ("Projects, 5 entries") is switched with the data-label-en/-fr mechanism of LangScript.
+ * The outermost element keeps the class `nav-row`: index.astro relies on `.nav-row ~ .page`.
  */
 import { getProjects, getSimulators } from '../lib/content';
 import Lang from './Lang.astro';
@@ -16,36 +19,91 @@ export interface Props {
 }
 const { current, wide, langSwitch } = Astro.props;
 
-const hasProjects = (await getProjects()).length > 0;
-const hasSimulators = (await getSimulators()).length > 0;
-const show = hasProjects || hasSimulators;
+const nProjects = (await getProjects()).length;
+const nSimulators = (await getSimulators()).length;
+const show = nProjects > 0 || nSimulators > 0;
+const entries = (n: number) => ({
+  en: `${n} ${n === 1 ? 'entry' : 'entries'}`,
+  fr: `${n} ${n === 1 ? 'entrée' : 'entrées'}`,
+});
 const items = [
-  { key: 'cv', href: '/', en: 'CV', fr: 'CV', on: true },
-  { key: 'projects', href: '/projects/', en: 'Projects', fr: 'Projets', on: hasProjects },
-  { key: 'simulators', href: '/simulators/', en: 'Simulators', fr: 'Simulateurs', on: hasSimulators },
+  { key: 'cv', href: '/', en: 'CV', fr: 'CV', on: true, count: 0 },
+  { key: 'projects', href: '/projects/', en: 'Projects', fr: 'Projets', on: nProjects > 0, count: nProjects },
+  { key: 'simulators', href: '/simulators/', en: 'Simulators', fr: 'Simulateurs', on: nSimulators > 0, count: nSimulators },
 ].filter((i) => i.on);
 ---
 {show && (
-  <div class:list={['nav-row', 'noprint', { wide }]}>
-    <nav aria-label="Main / Principale">
-      <ul>
-        {items.map((i) => (
-          <li>
-            <a href={i.href} aria-current={i.key === current ? 'page' : undefined}><Lang en={i.en} fr={i.fr} /></a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-    {langSwitch && <LangSwitch />}
+  <div class="nav-row noprint">
+    <div class:list={['nav-inner', { wide }]}>
+      <nav aria-label="Main / Principale">
+        <ul>
+          {items.map((i) => (
+            <li>
+              <a
+                href={i.href}
+                aria-current={i.key === current ? 'page' : undefined}
+                aria-label={i.count ? `${i.en}, ${entries(i.count).en}` : undefined}
+                data-label-en={i.count ? `${i.en}, ${entries(i.count).en}` : undefined}
+                data-label-fr={i.count ? `${i.fr}, ${entries(i.count).fr}` : undefined}
+              >
+                <Lang en={i.en} fr={i.fr} />
+                {i.count > 0 && <span class="count" aria-hidden="true">{i.count}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      {langSwitch && <div class="lang"><LangSwitch /></div>}
+    </div>
   </div>
 )}
 
+{show && (
+  <script is:inline>
+  // soft shadow under the bar once the page is scrolled (class only: no layout change)
+  (function(){
+    var r = document.querySelector(".nav-row");
+    if (!r) return;
+    function f(){ r.classList.toggle("stuck", (window.scrollY || 0) > 4); }
+    addEventListener("scroll", f, { passive: true }); f();
+  })();
+  </script>
+)}
+
 <style>
-  .nav-row{max-width:46rem;margin:0 auto;padding:1rem 1.5rem 0;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-size:.9rem}
-  .nav-row.wide{max-width:72rem}
-  ul{list-style:none;margin:0;padding:0;display:flex;gap:1.5rem;flex-wrap:wrap}
-  li{margin:0}
-  a{color:var(--muted);text-decoration:none;padding:.15rem 0;border-bottom:2px solid transparent}
+  .nav-row{position:sticky;top:0;z-index:50;background:#fff;font-size:1rem;transition:box-shadow .2s}
+  .nav-row.stuck{box-shadow:0 6px 16px -8px rgba(27,36,48,.22)}
+  @supports (backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)){
+    .nav-row{background:rgba(255,255,255,.92);-webkit-backdrop-filter:saturate(1.2) blur(8px);backdrop-filter:saturate(1.2) blur(8px)}
+  }
+  /* the 1px rule sits under the tabs, so the active tab's 3px border covers it */
+  .nav-row::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--rule);z-index:-1}
+  .nav-inner{max-width:46rem;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:stretch;gap:1rem}
+  .nav-inner.wide{max-width:72rem}
+  nav{min-width:0;flex:0 1 auto;display:flex}
+  ul{list-style:none;margin:0 0 0 -1rem;padding:0;display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none}
+  ul::-webkit-scrollbar{display:none}
+  li{margin:0;flex:none}
+  a{position:relative;display:flex;align-items:center;gap:.5rem;height:100%;white-space:nowrap;padding:.8rem 1rem;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:3px solid transparent;transition:color .15s}
   a:hover{color:var(--ink)}
+  /* non-current tabs: a bar grows from the centre on hover/focus */
+  a::after{content:"";position:absolute;left:1rem;right:1rem;bottom:-3px;height:3px;background:#aab3bd;transform:scaleX(0);transition:transform .2s}
+  a:hover::after,a:focus-visible::after{transform:scaleX(1)}
   a[aria-current="page"]{color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+  a[aria-current="page"]::after{display:none}
+  .count{font-size:.75rem;font-weight:500;line-height:1;color:var(--muted);border:1px solid var(--rule);border-radius:999px;padding:.2rem .5rem;background:#fff;transition:color .15s,border-color .15s,background-color .15s}
+  a:hover .count{color:var(--ink);border-color:var(--muted)}
+  a[aria-current="page"] .count{background:var(--accent);border-color:var(--accent);color:#fff}
+  .lang{flex:none;display:flex;align-items:center;font-size:.9rem}
+  /* the bar keeps its place while the page crossfades between pages (cross-document view transition) */
+  @media screen and (prefers-reduced-motion:no-preference){
+    .nav-row{view-transition-name:site-nav}
+  }
+  @media (max-width:560px){
+    .nav-inner{padding:0 1rem;gap:.5rem}
+    ul{margin-left:-.6rem;gap:0}
+    a{padding:.75rem .6rem;gap:.35rem;font-size:.95rem}
+    a::after{left:.6rem;right:.6rem}
+    .count{padding:.15rem .4rem}
+  }
 </style>

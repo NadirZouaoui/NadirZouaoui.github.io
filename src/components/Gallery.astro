@@ -28,7 +28,7 @@ const sizes = {
     const wide = portrait && it.image.width / it.image.height > 1.2;
     const [w, h] = wide ? [900, 600] : portrait ? [600, 800] : [800, 600];
     return (
-      <li class:list={[wide && 'wide']}>
+      <li class:list={[wide && 'wide']} data-reveal>
         <div class="frame">
           <Thumb image={it.image} alt={it.alt} caption={it.caption} group={group} index={i} total={items.length}
             widths={[400, 800]} sizes={wide ? sizes.wide : portrait ? sizes.portrait : sizes.landscape} width={w} height={h} />

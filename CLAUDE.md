@@ -9,7 +9,7 @@ Bilingual EN/FR on the same URL. Plain, white, professional design; no heavy cli
 ## Hard rules (read first)
 
 1. **Never push to `main`.** Work on a branch, open a PR (draft if unfinished). Before pushing from a shallow clone run `git fetch origin main`.
-2. **The production CV must not change**: `/`, `/?lang=fr`, `/Nadir-Zouaoui-CV-EN.pdf`, `/Nadir-Zouaoui-CV-FR.pdf`, `/og.png` keep working. The CV print output (`@media print`, `@page`) must stay identical; printed CVs carry a QR code to `/`.
+2. **The production CV must not break**: `/`, `/?lang=fr`, `/Nadir-Zouaoui-CV-EN.pdf`, `/Nadir-Zouaoui-CV-FR.pdf`, `/og.png` keep working at the same URLs. The print output of the web CV (`@media print`, `@page`) must stay identical; printed CVs carry a QR code to `/`. Since 2026-10-10 the two downloadable PDFs in `public/` are the ATS CV (EN from `Nadir_Zouaoui_CV_ATS_O.pdf`, FR its translation), no longer a print of the web CV.
 3. **No ROAR Training Solutions logos or branding** in any image. Text mentions that the CV already makes are fine.
 4. **Strip metadata (EXIF/GPS) from every photo.** The repo is public. Always process photos with `tools/media/prep_images.py`; never commit originals.
 5. **Critical infrastructure (for example Sonatrach sites)**: show equipment close-ups only. No station names, no identifying wide shots, no coordinates, no signage or tags that name the site.
@@ -27,8 +27,8 @@ src/
   pages/projects/[...slug].astro     /projects/ AND /projects/<slug>/ from one route; returns NO paths when there is
   pages/simulators/[...slug].astro   no visible entry, so no empty section page is ever built
   views/                       ProjectsIndex, ProjectDetail, SimulatorsIndex, SimulatorDetail (page templates)
-  layouts/Base.astro           <head> (title, description, canonical, OG/Twitter; defaults = the CV's), SiteNav, LangScript
-  components/                  Lang, LangScript, LangSwitch, SiteNav, ProjectLink, ProjectCard, SimulatorCard, Facts,
+  layouts/Base.astro           <head> (title, description, canonical, OG/Twitter; defaults = the CV's), SiteNav, LangScript, Reveal
+  components/                  Lang, LangScript, LangSwitch, SiteNav, SectionHub, Reveal, ProjectLink, ProjectCard, SimulatorCard, Facts,
                                Gallery, DrawingStrip, ShotGrid, SimulatorOffer, Thumb, Lightbox, Clip, Prose
   content.config.ts            collection schemas (projects, simulators + their French bodies)
   content/projects/<slug>/{index.md,index.fr.md}
@@ -56,8 +56,11 @@ then `navigator.language`; it switches `<html lang>`, `document.title`, any `[da
 
 ### Nav and CV hook
 
-`SiteNav` lists CV / Projects / Simulators; an item shows only if its collection has a visible entry, and the whole row is omitted
-when only the CV exists. `ProjectLink` renders nothing unless a published project matches. It is already placed on the CV bullets:
+`SiteNav` is a sticky, full-width tab bar (CV / Projects / Simulators; the current tab has a 3px accent underline; Projects and Simulators carry a count pill, and the link's `aria-label` is switched through `data-label-en/-fr`). An item shows only if its collection has a visible entry, and the whole bar is omitted
+when only the CV exists. Its outermost element keeps the class `nav-row` (the CV's CSS hides its own EN/FR switch with `.nav-row ~ .page .bar .sw`). In-page anchors get `scroll-margin-top:4rem` (site.css) so the sticky bar does not cover them.
+`SectionHub` (used in `index.astro`, between the CV header and the Profile section, which has `id="cv"`) renders three tiles CV / Projects / Training simulators under the same render rule: the Projects and Simulators tiles only when the collection has a visible entry, nothing at all when neither has.
+Hard rule 2 still holds: `/` is still the CV, and the tab bar and the hub are screen only (`noprint`), so the printed CV is identical. Use only `div`/`span`/`strong`/`a` inside the hub: `index.astro` has global bare element selectors. The Projects tile shows the cover of the project named by the constant `HUB_PROJECT` (`'ifri-pv'`) at the top of `SectionHub.astro`, falling back to the first project when it is absent.
+`ProjectLink` renders nothing unless a published project matches. It is already placed on the CV bullets:
 
 | `cvAnchor` value | CV entry |
 |---|---|
@@ -72,6 +75,15 @@ when only the CV exists. `ProjectLink` renders nothing unless a published projec
 
 Set `cvAnchor: <value>` in a project's frontmatter and publish it; the "See project" link appears on that CV bullet (screen only, never printed).
 To add a hook elsewhere: `<ProjectLink anchor="..." />` at the end of an `<li>` in `src/pages/index.astro` (or `slug="<project-slug>"`).
+
+## Motion and polish
+
+All of it is screen only; the printed CV must stay identical (check with the print regression below).
+- Every new visual or motion rule sits in `@media screen`, and movement also in `@media (prefers-reduced-motion: no-preference)`. Never edit `@page` / `@media print` or existing CV rules. CV-only polish lives in `src/styles/cv-polish.css`.
+- Nothing may depend on JS to be visible. Do not put `opacity`/`transform` animations or `display` on `[lang]` spans (use wrappers).
+- `--lift` (site.css `:root`) is the one shared hover shadow; tiles and cards rise 3px, scale their picture 1.04 to 1.05 and take `--lift` on hover.
+- Scroll reveal: mark a wrapper with `data-reveal` (project and simulator cards, gallery/drawing/shot `li`, CV `<section>`s). `Reveal.astro` (inline, in `<head>` through Base) adds `html.js-reveal` only when IntersectionObserver exists and motion is allowed; site.css hides `[data-reveal]` only under that class, then `.in` plays a one-shot rise, `.now` skips it. Elements in the first screen show at once, a 2.5 s timeout and `beforeprint` reveal everything.
+- Cross-page view transitions (`@view-transition` in site.css) need no JS; the tab bar has `view-transition-name: site-nav` so it stays put while the page crossfades. The landing entrance (CV header fade, hub tiles) is CSS only.
 
 ## Adding a project
 

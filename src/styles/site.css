@@ -1,9 +1,24 @@
 /* Shared by every page. Tokens and base rules are copied verbatim from the original CV page. */
 :root{--ink:#1b2430;--muted:#5d6874;--rule:#dde1e6;--accent:#1f3a5f;
+  --lift:0 8px 24px rgba(27,36,48,.10);
   --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
 *{box-sizing:border-box}
 html[data-lang="en"] [lang="fr"],html[data-lang="fr"] [lang="en"]{display:none}
 body{margin:0;background:#fff;color:var(--ink);font:400 16px/1.6 var(--font)}
 a{color:var(--accent)}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* the sticky tab bar (SiteNav) must not hide in-page anchor targets */
+[id]{scroll-margin-top:4rem}
 @media print{.noprint{display:none!important}}
+
+/* Motion (screen only, never with a reduced-motion preference; the printed CV stays identical). */
+@media screen and (prefers-reduced-motion:no-preference){
+  /* cross-page transitions without JS: the page crossfades, the tab bar (view-transition-name site-nav) stays put */
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.18s;animation-timing-function:ease}
+  html{scroll-behavior:smooth}
+  /* scroll reveal: Reveal.astro adds html.js-reveal, then .in (and .now = no animation) per [data-reveal] element */
+  html.js-reveal [data-reveal]:not(.in){opacity:0}
+  html.js-reveal [data-reveal].in:not(.now){animation:reveal .45s ease-out var(--d,0s) backwards}
+  @keyframes reveal{from{opacity:0;transform:translateY(10px)}}
+}

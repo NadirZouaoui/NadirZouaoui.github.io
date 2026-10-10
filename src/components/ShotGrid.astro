@@ -18,7 +18,7 @@ const { items, group } = Astro.props;
   {items.map((it, i) => {
     const ratio = it.image.width / it.image.height;
     return (
-      <li>
+      <li data-reveal>
         <div class="frame" style={`aspect-ratio:${ratio.toFixed(4)}`}>
           <Thumb image={it.image} alt={it.alt} caption={it.caption} group={group} index={i} total={items.length}
             widths={[480, 800, 1200]} sizes="(min-width: 52rem) 34rem, 100vw" width={1200} height={Math.round(1200 / ratio)} />
