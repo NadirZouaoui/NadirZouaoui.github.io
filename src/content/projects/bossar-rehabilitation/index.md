@@ -9,8 +9,8 @@ summary:
   fr: "Nouvelle commande pour une ensacheuse BOSSAR B-1600/D : l'armoire abîmée par la poussière remplacée par une armoire murale et un coffret de renvoi sur la machine, étudiée sous EPLAN, recâblée sur site et mise en service avec un Siemens S7-1200."
 client: GBFoods (Jumbo)
 role:
-  en: Electrical Engineer, RMBTECH
-  fr: Ingénieur électricien, RMBTECH
+  en: Electrical Engineer, RMBTECH SARL
+  fr: Ingénieur électricien, RMBTECH SARL
 period: "2025"
 location:
   en: Es Senia industrial zone, Oran, Algeria
