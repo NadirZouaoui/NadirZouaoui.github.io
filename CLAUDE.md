@@ -9,7 +9,7 @@ Bilingual EN/FR on the same URL. Plain, white, professional design; no heavy cli
 ## Hard rules (read first)
 
 1. **Never push to `main`.** Work on a branch, open a PR (draft if unfinished). Before pushing from a shallow clone run `git fetch origin main`.
-2. **The production CV must not break**: `/`, `/?lang=fr`, `/Nadir-Zouaoui-CV-EN.pdf`, `/Nadir-Zouaoui-CV-FR.pdf`, `/og.png` keep working at the same URLs. The print output of the web CV (`@media print`, `@page`) must stay identical; printed CVs carry a QR code to `/`. Since 2026-10-10 the two downloadable PDFs in `public/` are the ATS CV (EN from `Nadir_Zouaoui_CV_ATS_O.pdf`, FR its translation), no longer a print of the web CV.
+2. **The production CV must not break**: `/`, `/?lang=fr`, `/Nadir-Zouaoui-CV-EN.pdf`, `/Nadir-Zouaoui-CV-FR.pdf`, `/og.png` keep working at the same URLs. The print output of the web CV (`@media print`, `@page`) must stay identical; printed CVs carry a QR code to `/`. Since 2026-10-10 the two downloadable PDFs in `public/` are the ATS CV (EN from `Nadir_Zouaoui_CV_ATS_EN_Oran.pdf`, FR its translation), no longer a print of the web CV.
 3. **No ROAR Training Solutions logos or branding** in any image. Text mentions that the CV already makes are fine.
 4. **Strip metadata (EXIF/GPS) from every photo.** The repo is public. Always process photos with `tools/media/prep_images.py`; never commit originals.
 5. **Critical infrastructure (for example Sonatrach sites)**: show equipment close-ups only. No station names, no identifying wide shots, no coordinates, no signage or tags that name the site.
